@@ -1,0 +1,35 @@
+{%- for type in types %}
+{% for name, val in type.items() %}
+{%- set combinator, fields = val %}
+{%- if combinator.has_flags %}
+enum {{name}}Flags : int (bit_flags) {
+{%- for fname, (num, ftype) in combinator.flags %}
+    {{fname}} = 1 << {{num}},
+{%- endfor %}
+}
+{% endif %}
+table {{name}} {
+{%- if combinator.has_flags %}
+    flags: {{name}}Flags;
+{%- endif %}
+{%- for fname, (num, ftype) in combinator.flags %}
+{%- set fdef = fname ~ ": " ~ ftype ~ ";" %}
+{%- set comment = "// flag.{:2}".format(num) %}
+{%- if ftype != "true" %}
+    {{ "{:<45s} {:>20s}".format(fdef, comment) }}
+{%- endif %}
+{%- endfor %}
+{%- for fname, ftype in fields %}
+    {{fname}}: {{ftype}};
+{%- endfor %}
+}
+{%- endfor %}
+{%- endfor %}
+{%- for u in unions %}
+{% for name, subtypes in u.items() %}
+{%- set subtypes = ",\n    ".join(subtypes) %}
+union {{name}} {
+    {{subtypes}}
+}
+{%- endfor %}
+{%- endfor %}
