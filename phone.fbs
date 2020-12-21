@@ -1,0 +1,10 @@
+
+
+table PhoneCall {
+    phone_call: PhoneCall;
+    users: [User];
+}
+
+union PhoneCall {
+    phone.PhoneCall
+}

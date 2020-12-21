@@ -1,0 +1,117 @@
+
+
+enum SentCodeFlags : int (bit_flags) {
+    next_type = 1 << 1,
+    timeout = 1 << 2,
+}
+
+table SentCode {
+    flags: SentCodeFlags;
+    next_type: auth.CodeType;                               // flag.1 
+    timeout: int;                                           // flag.2 
+    type: auth.SentCodeType;
+    phone_code_hash: string;
+}
+
+enum AuthorizationFlags : int (bit_flags) {
+    tmp_sessions = 1 << 0,
+}
+
+table Authorization {
+    flags: AuthorizationFlags;
+    tmp_sessions: int;                                      // flag.0 
+    user: User;
+}
+
+enum AuthorizationSignUpRequiredFlags : int (bit_flags) {
+    terms_of_service = 1 << 0,
+}
+
+table AuthorizationSignUpRequired {
+    flags: AuthorizationSignUpRequiredFlags;
+    terms_of_service: help.TermsOfService;                  // flag.0 
+}
+
+table ExportedAuthorization {
+    id: int;
+    bytes: [byte];
+}
+
+table PasswordRecovery {
+    email_pattern: string;
+}
+
+table CodeTypeSms {
+}
+
+table CodeTypeCall {
+}
+
+table CodeTypeFlashCall {
+}
+
+table SentCodeTypeApp {
+    length: int;
+}
+
+table SentCodeTypeSms {
+    length: int;
+}
+
+table SentCodeTypeCall {
+    length: int;
+}
+
+table SentCodeTypeFlashCall {
+    pattern: string;
+}
+
+table LoginToken {
+    expires: int;
+    token: [byte];
+}
+
+table LoginTokenMigrateTo {
+    dc_id: int;
+    token: [byte];
+}
+
+table LoginTokenSuccess {
+    authorization: auth.Authorization;
+}
+
+union SentCode {
+    auth.SentCode
+}
+
+union Authorization {
+    auth.Authorization,
+    auth.AuthorizationSignUpRequired
+}
+
+union ExportedAuthorization {
+    auth.ExportedAuthorization
+}
+
+union PasswordRecovery {
+    auth.PasswordRecovery
+}
+
+union CodeType {
+    auth.CodeTypeSms,
+    auth.CodeTypeCall,
+    auth.CodeTypeFlashCall
+}
+
+union SentCodeType {
+    auth.SentCodeTypeApp,
+    auth.SentCodeTypeSms,
+    auth.SentCodeTypeCall,
+    auth.SentCodeTypeFlashCall
+}
+
+union LoginToken {
+    auth.LoginToken,
+    auth.LoginTokenMigrateTo,
+    auth.LoginTokenSuccess
+}

@@ -1,0 +1,44 @@
+
+
+table FileUnknown {
+}
+
+table FilePartial {
+}
+
+table FileJpeg {
+}
+
+table FileGif {
+}
+
+table FilePng {
+}
+
+table FilePdf {
+}
+
+table FileMp3 {
+}
+
+table FileMov {
+}
+
+table FileMp4 {
+}
+
+table FileWebp {
+}
+
+union FileType {
+    storage.FileUnknown,
+    storage.FilePartial,
+    storage.FileJpeg,
+    storage.FileGif,
+    storage.FilePng,
+    storage.FilePdf,
+    storage.FileMp3,
+    storage.FileMov,
+    storage.FileMp4,
+    storage.FileWebp
+}

@@ -1,0 +1,6113 @@
+
+
+table Int {
+}
+
+table Long {
+}
+
+table Double {
+}
+
+table String {
+}
+
+table Bytes {
+}
+
+table True {
+}
+
+table BoolFalse {
+}
+
+table BoolTrue {
+}
+
+table Error {
+    code: int;
+    text: string;
+}
+
+table IpPort {
+    ipv4: int;
+    port: int;
+}
+
+table IpPortSecret {
+    ipv4: int;
+    port: int;
+    secret: [byte];
+}
+
+table AccessPointRule {
+    phone_prefix_rules: string;
+    dc_id: int;
+    ips: [IpPort];
+}
+
+table InputPeerEmpty {
+}
+
+table InputPeerSelf {
+}
+
+table InputPeerChat {
+    chat_id: int;
+}
+
+table InputPeerUser {
+    user_id: int;
+    access_hash: long;
+}
+
+table InputPeerChannel {
+    channel_id: int;
+    access_hash: long;
+}
+
+table InputPeerUserFromMessage {
+    peer: InputPeer;
+    msg_id: int;
+    user_id: int;
+}
+
+table InputPeerChannelFromMessage {
+    peer: InputPeer;
+    msg_id: int;
+    channel_id: int;
+}
+
+table InputUserEmpty {
+}
+
+table InputUserSelf {
+}
+
+table InputUser {
+    user_id: int;
+    access_hash: long;
+}
+
+table InputUserFromMessage {
+    peer: InputPeer;
+    msg_id: int;
+    user_id: int;
+}
+
+table InputPhoneContact {
+    client_id: long;
+    phone: string;
+    first_name: string;
+    last_name: string;
+}
+
+table InputFile {
+    id: long;
+    parts: int;
+    name: string;
+    md5_checksum: string;
+}
+
+table InputFileBig {
+    id: long;
+    parts: int;
+    name: string;
+}
+
+table InputMediaEmpty {
+}
+
+enum InputMediaUploadedPhotoFlags : int (bit_flags) {
+    stickers = 1 << 0,
+    ttl_seconds = 1 << 1,
+}
+
+table InputMediaUploadedPhoto {
+    flags: InputMediaUploadedPhotoFlags;
+    stickers: [InputDocument];                              // flag.0 
+    ttl_seconds: int;                                       // flag.1 
+    file: InputFile;
+}
+
+enum InputMediaPhotoFlags : int (bit_flags) {
+    ttl_seconds = 1 << 0,
+}
+
+table InputMediaPhoto {
+    flags: InputMediaPhotoFlags;
+    ttl_seconds: int;                                       // flag.0 
+    id: InputPhoto;
+}
+
+table InputMediaGeoPoint {
+    geo_point: InputGeoPoint;
+}
+
+table InputMediaContact {
+    phone_number: string;
+    first_name: string;
+    last_name: string;
+    vcard: string;
+}
+
+enum InputMediaUploadedDocumentFlags : int (bit_flags) {
+    stickers = 1 << 0,
+    ttl_seconds = 1 << 1,
+    thumb = 1 << 2,
+    nosound_video = 1 << 3,
+    force_file = 1 << 4,
+}
+
+table InputMediaUploadedDocument {
+    flags: InputMediaUploadedDocumentFlags;
+    stickers: [InputDocument];                              // flag.0 
+    ttl_seconds: int;                                       // flag.1 
+    thumb: InputFile;                                       // flag.2 
+    nosound_video: bool;                                    // flag.3 
+    force_file: bool;                                       // flag.4 
+    file: InputFile;
+    mime_type: string;
+    attributes: [DocumentAttribute];
+}
+
+enum InputMediaDocumentFlags : int (bit_flags) {
+    ttl_seconds = 1 << 0,
+}
+
+table InputMediaDocument {
+    flags: InputMediaDocumentFlags;
+    ttl_seconds: int;                                       // flag.0 
+    id: InputDocument;
+}
+
+table InputMediaVenue {
+    geo_point: InputGeoPoint;
+    title: string;
+    address: string;
+    provider: string;
+    venue_id: string;
+    venue_type: string;
+}
+
+enum InputMediaPhotoExternalFlags : int (bit_flags) {
+    ttl_seconds = 1 << 0,
+}
+
+table InputMediaPhotoExternal {
+    flags: InputMediaPhotoExternalFlags;
+    ttl_seconds: int;                                       // flag.0 
+    url: string;
+}
+
+enum InputMediaDocumentExternalFlags : int (bit_flags) {
+    ttl_seconds = 1 << 0,
+}
+
+table InputMediaDocumentExternal {
+    flags: InputMediaDocumentExternalFlags;
+    ttl_seconds: int;                                       // flag.0 
+    url: string;
+}
+
+table InputMediaGame {
+    id: InputGame;
+}
+
+enum InputMediaInvoiceFlags : int (bit_flags) {
+    photo = 1 << 0,
+}
+
+table InputMediaInvoice {
+    flags: InputMediaInvoiceFlags;
+    photo: InputWebDocument;                                // flag.0 
+    title: string;
+    description: string;
+    invoice: Invoice;
+    payload: [byte];
+    provider: string;
+    provider_data: DataJSON;
+    start_param: string;
+}
+
+enum InputMediaGeoLiveFlags : int (bit_flags) {
+    stopped = 1 << 0,
+    period = 1 << 1,
+    heading = 1 << 2,
+    proximity_notification_radius = 1 << 3,
+}
+
+table InputMediaGeoLive {
+    flags: InputMediaGeoLiveFlags;
+    stopped: bool;                                          // flag.0 
+    period: int;                                            // flag.1 
+    heading: int;                                           // flag.2 
+    proximity_notification_radius: int;                     // flag.3 
+    geo_point: InputGeoPoint;
+}
+
+enum InputMediaPollFlags : int (bit_flags) {
+    correct_answers = 1 << 0,
+    solution = 1 << 1,
+    solution_entities = 1 << 1,
+}
+
+table InputMediaPoll {
+    flags: InputMediaPollFlags;
+    correct_answers: [[byte]];                              // flag.0 
+    solution: string;                                       // flag.1 
+    solution_entities: [MessageEntity];                     // flag.1 
+    poll: Poll;
+}
+
+table InputMediaDice {
+    emoticon: string;
+}
+
+table InputChatPhotoEmpty {
+}
+
+enum InputChatUploadedPhotoFlags : int (bit_flags) {
+    file = 1 << 0,
+    video = 1 << 1,
+    video_start_ts = 1 << 2,
+}
+
+table InputChatUploadedPhoto {
+    flags: InputChatUploadedPhotoFlags;
+    file: InputFile;                                        // flag.0 
+    video: InputFile;                                       // flag.1 
+    video_start_ts: double;                                 // flag.2 
+}
+
+table InputChatPhoto {
+    id: InputPhoto;
+}
+
+table InputGeoPointEmpty {
+}
+
+enum InputGeoPointFlags : int (bit_flags) {
+    accuracy_radius = 1 << 0,
+}
+
+table InputGeoPoint {
+    flags: InputGeoPointFlags;
+    accuracy_radius: int;                                   // flag.0 
+    lat: double;
+    long: double;
+}
+
+table InputPhotoEmpty {
+}
+
+table InputPhoto {
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+}
+
+table InputFileLocation {
+    volume_id: long;
+    local_id: int;
+    secret: long;
+    file_reference: [byte];
+}
+
+table InputEncryptedFileLocation {
+    id: long;
+    access_hash: long;
+}
+
+table InputDocumentFileLocation {
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+    thumb_size: string;
+}
+
+table InputSecureFileLocation {
+    id: long;
+    access_hash: long;
+}
+
+table InputTakeoutFileLocation {
+}
+
+table InputPhotoFileLocation {
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+    thumb_size: string;
+}
+
+table InputPhotoLegacyFileLocation {
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+    volume_id: long;
+    local_id: int;
+    secret: long;
+}
+
+enum InputPeerPhotoFileLocationFlags : int (bit_flags) {
+    big = 1 << 0,
+}
+
+table InputPeerPhotoFileLocation {
+    flags: InputPeerPhotoFileLocationFlags;
+    big: bool;                                              // flag.0 
+    peer: InputPeer;
+    volume_id: long;
+    local_id: int;
+}
+
+table InputStickerSetThumb {
+    stickerset: InputStickerSet;
+    volume_id: long;
+    local_id: int;
+}
+
+table PeerUser {
+    user_id: int;
+}
+
+table PeerChat {
+    chat_id: int;
+}
+
+table PeerChannel {
+    channel_id: int;
+}
+
+table UserEmpty {
+    id: int;
+}
+
+enum UserFlags : int (bit_flags) {
+    access_hash = 1 << 0,
+    first_name = 1 << 1,
+    last_name = 1 << 2,
+    username = 1 << 3,
+    phone = 1 << 4,
+    photo = 1 << 5,
+    status = 1 << 6,
+    is_self = 1 << 10,
+    contact = 1 << 11,
+    mutual_contact = 1 << 12,
+    deleted = 1 << 13,
+    bot = 1 << 14,
+    bot_info_version = 1 << 14,
+    bot_chat_history = 1 << 15,
+    bot_nochats = 1 << 16,
+    verified = 1 << 17,
+    restricted = 1 << 18,
+    restriction_reason = 1 << 18,
+    bot_inline_placeholder = 1 << 19,
+    min = 1 << 20,
+    bot_inline_geo = 1 << 21,
+    lang_code = 1 << 22,
+    support = 1 << 23,
+    scam = 1 << 24,
+    apply_min_photo = 1 << 25,
+}
+
+table User {
+    flags: UserFlags;
+    access_hash: long;                                      // flag.0 
+    first_name: string;                                     // flag.1 
+    last_name: string;                                      // flag.2 
+    username: string;                                       // flag.3 
+    phone: string;                                          // flag.4 
+    photo: UserProfilePhoto;                                // flag.5 
+    status: UserStatus;                                     // flag.6 
+    is_self: bool;                                          // flag.10
+    contact: bool;                                          // flag.11
+    mutual_contact: bool;                                   // flag.12
+    deleted: bool;                                          // flag.13
+    bot: bool;                                              // flag.14
+    bot_info_version: int;                                  // flag.14
+    bot_chat_history: bool;                                 // flag.15
+    bot_nochats: bool;                                      // flag.16
+    verified: bool;                                         // flag.17
+    restricted: bool;                                       // flag.18
+    restriction_reason: [RestrictionReason];                // flag.18
+    bot_inline_placeholder: string;                         // flag.19
+    min: bool;                                              // flag.20
+    bot_inline_geo: bool;                                   // flag.21
+    lang_code: string;                                      // flag.22
+    support: bool;                                          // flag.23
+    scam: bool;                                             // flag.24
+    apply_min_photo: bool;                                  // flag.25
+    id: int;
+}
+
+table UserProfilePhotoEmpty {
+}
+
+enum UserProfilePhotoFlags : int (bit_flags) {
+    has_video = 1 << 0,
+}
+
+table UserProfilePhoto {
+    flags: UserProfilePhotoFlags;
+    has_video: bool;                                        // flag.0 
+    photo_id: long;
+    photo_small: FileLocation;
+    photo_big: FileLocation;
+    dc_id: int;
+}
+
+table UserStatusEmpty {
+}
+
+table UserStatusOnline {
+    expires: int;
+}
+
+table UserStatusOffline {
+    was_online: int;
+}
+
+table UserStatusRecently {
+}
+
+table UserStatusLastWeek {
+}
+
+table UserStatusLastMonth {
+}
+
+table ChatEmpty {
+    id: int;
+}
+
+enum ChatFlags : int (bit_flags) {
+    creator = 1 << 0,
+    kicked = 1 << 1,
+    left = 1 << 2,
+    deactivated = 1 << 5,
+    migrated_to = 1 << 6,
+    admin_rights = 1 << 14,
+    default_banned_rights = 1 << 18,
+}
+
+table Chat {
+    flags: ChatFlags;
+    creator: bool;                                          // flag.0 
+    kicked: bool;                                           // flag.1 
+    left: bool;                                             // flag.2 
+    deactivated: bool;                                      // flag.5 
+    migrated_to: InputChannel;                              // flag.6 
+    admin_rights: ChatAdminRights;                          // flag.14
+    default_banned_rights: ChatBannedRights;                // flag.18
+    id: int;
+    title: string;
+    photo: ChatPhoto;
+    participants_count: int;
+    date: int;
+    version: int;
+}
+
+table ChatForbidden {
+    id: int;
+    title: string;
+}
+
+enum ChannelFlags : int (bit_flags) {
+    creator = 1 << 0,
+    left = 1 << 2,
+    broadcast = 1 << 5,
+    username = 1 << 6,
+    verified = 1 << 7,
+    megagroup = 1 << 8,
+    restricted = 1 << 9,
+    restriction_reason = 1 << 9,
+    signatures = 1 << 11,
+    min = 1 << 12,
+    access_hash = 1 << 13,
+    admin_rights = 1 << 14,
+    banned_rights = 1 << 15,
+    participants_count = 1 << 17,
+    default_banned_rights = 1 << 18,
+    scam = 1 << 19,
+    has_link = 1 << 20,
+    has_geo = 1 << 21,
+    slowmode_enabled = 1 << 22,
+}
+
+table Channel {
+    flags: ChannelFlags;
+    creator: bool;                                          // flag.0 
+    left: bool;                                             // flag.2 
+    broadcast: bool;                                        // flag.5 
+    username: string;                                       // flag.6 
+    verified: bool;                                         // flag.7 
+    megagroup: bool;                                        // flag.8 
+    restricted: bool;                                       // flag.9 
+    restriction_reason: [RestrictionReason];                // flag.9 
+    signatures: bool;                                       // flag.11
+    min: bool;                                              // flag.12
+    access_hash: long;                                      // flag.13
+    admin_rights: ChatAdminRights;                          // flag.14
+    banned_rights: ChatBannedRights;                        // flag.15
+    participants_count: int;                                // flag.17
+    default_banned_rights: ChatBannedRights;                // flag.18
+    scam: bool;                                             // flag.19
+    has_link: bool;                                         // flag.20
+    has_geo: bool;                                          // flag.21
+    slowmode_enabled: bool;                                 // flag.22
+    id: int;
+    title: string;
+    photo: ChatPhoto;
+    date: int;
+    version: int;
+}
+
+enum ChannelForbiddenFlags : int (bit_flags) {
+    broadcast = 1 << 5,
+    megagroup = 1 << 8,
+    until_date = 1 << 16,
+}
+
+table ChannelForbidden {
+    flags: ChannelForbiddenFlags;
+    broadcast: bool;                                        // flag.5 
+    megagroup: bool;                                        // flag.8 
+    until_date: int;                                        // flag.16
+    id: int;
+    access_hash: long;
+    title: string;
+}
+
+enum ChatFullFlags : int (bit_flags) {
+    chat_photo = 1 << 2,
+    bot_info = 1 << 3,
+    pinned_msg_id = 1 << 6,
+    can_set_username = 1 << 7,
+    has_scheduled = 1 << 8,
+    folder_id = 1 << 11,
+}
+
+table ChatFull {
+    flags: ChatFullFlags;
+    chat_photo: Photo;                                      // flag.2 
+    bot_info: [BotInfo];                                    // flag.3 
+    pinned_msg_id: int;                                     // flag.6 
+    can_set_username: bool;                                 // flag.7 
+    has_scheduled: bool;                                    // flag.8 
+    folder_id: int;                                         // flag.11
+    id: int;
+    about: string;
+    participants: ChatParticipants;
+    notify_settings: PeerNotifySettings;
+    exported_invite: ExportedChatInvite;
+}
+
+enum ChannelFullFlags : int (bit_flags) {
+    participants_count = 1 << 0,
+    admins_count = 1 << 1,
+    kicked_count = 1 << 2,
+    banned_count = 1 << 2,
+    can_view_participants = 1 << 3,
+    migrated_from_chat_id = 1 << 4,
+    migrated_from_max_id = 1 << 4,
+    pinned_msg_id = 1 << 5,
+    can_set_username = 1 << 6,
+    can_set_stickers = 1 << 7,
+    stickerset = 1 << 8,
+    available_min_id = 1 << 9,
+    hidden_prehistory = 1 << 10,
+    folder_id = 1 << 11,
+    stats_dc = 1 << 12,
+    online_count = 1 << 13,
+    linked_chat_id = 1 << 14,
+    location = 1 << 15,
+    can_set_location = 1 << 16,
+    slowmode_seconds = 1 << 17,
+    slowmode_next_send_date = 1 << 18,
+    has_scheduled = 1 << 19,
+    can_view_stats = 1 << 20,
+    blocked = 1 << 22,
+}
+
+table ChannelFull {
+    flags: ChannelFullFlags;
+    participants_count: int;                                // flag.0 
+    admins_count: int;                                      // flag.1 
+    kicked_count: int;                                      // flag.2 
+    banned_count: int;                                      // flag.2 
+    can_view_participants: bool;                            // flag.3 
+    migrated_from_chat_id: int;                             // flag.4 
+    migrated_from_max_id: int;                              // flag.4 
+    pinned_msg_id: int;                                     // flag.5 
+    can_set_username: bool;                                 // flag.6 
+    can_set_stickers: bool;                                 // flag.7 
+    stickerset: StickerSet;                                 // flag.8 
+    available_min_id: int;                                  // flag.9 
+    hidden_prehistory: bool;                                // flag.10
+    folder_id: int;                                         // flag.11
+    stats_dc: int;                                          // flag.12
+    online_count: int;                                      // flag.13
+    linked_chat_id: int;                                    // flag.14
+    location: ChannelLocation;                              // flag.15
+    can_set_location: bool;                                 // flag.16
+    slowmode_seconds: int;                                  // flag.17
+    slowmode_next_send_date: int;                           // flag.18
+    has_scheduled: bool;                                    // flag.19
+    can_view_stats: bool;                                   // flag.20
+    blocked: bool;                                          // flag.22
+    id: int;
+    about: string;
+    read_inbox_max_id: int;
+    read_outbox_max_id: int;
+    unread_count: int;
+    chat_photo: Photo;
+    notify_settings: PeerNotifySettings;
+    exported_invite: ExportedChatInvite;
+    bot_info: [BotInfo];
+    pts: int;
+}
+
+table ChatParticipant {
+    user_id: int;
+    inviter_id: int;
+    date: int;
+}
+
+table ChatParticipantCreator {
+    user_id: int;
+}
+
+table ChatParticipantAdmin {
+    user_id: int;
+    inviter_id: int;
+    date: int;
+}
+
+enum ChatParticipantsForbiddenFlags : int (bit_flags) {
+    self_participant = 1 << 0,
+}
+
+table ChatParticipantsForbidden {
+    flags: ChatParticipantsForbiddenFlags;
+    self_participant: ChatParticipant;                      // flag.0 
+    chat_id: int;
+}
+
+table ChatParticipants {
+    chat_id: int;
+    participants: [ChatParticipant];
+    version: int;
+}
+
+table ChatPhotoEmpty {
+}
+
+enum ChatPhotoFlags : int (bit_flags) {
+    has_video = 1 << 0,
+}
+
+table ChatPhoto {
+    flags: ChatPhotoFlags;
+    has_video: bool;                                        // flag.0 
+    photo_small: FileLocation;
+    photo_big: FileLocation;
+    dc_id: int;
+}
+
+table MessageEmpty {
+    id: int;
+}
+
+enum MessageFlags : int (bit_flags) {
+    out = 1 << 1,
+    fwd_from = 1 << 2,
+    reply_to = 1 << 3,
+    mentioned = 1 << 4,
+    media_unread = 1 << 5,
+    reply_markup = 1 << 6,
+    entities = 1 << 7,
+    from_id = 1 << 8,
+    media = 1 << 9,
+    views = 1 << 10,
+    forwards = 1 << 10,
+    via_bot_id = 1 << 11,
+    silent = 1 << 13,
+    post = 1 << 14,
+    edit_date = 1 << 15,
+    post_author = 1 << 16,
+    grouped_id = 1 << 17,
+    from_scheduled = 1 << 18,
+    legacy = 1 << 19,
+    edit_hide = 1 << 21,
+    restriction_reason = 1 << 22,
+    replies = 1 << 23,
+    pinned = 1 << 24,
+}
+
+table Message {
+    flags: MessageFlags;
+    out: bool;                                              // flag.1 
+    fwd_from: MessageFwdHeader;                             // flag.2 
+    reply_to: MessageReplyHeader;                           // flag.3 
+    mentioned: bool;                                        // flag.4 
+    media_unread: bool;                                     // flag.5 
+    reply_markup: ReplyMarkup;                              // flag.6 
+    entities: [MessageEntity];                              // flag.7 
+    from_id: Peer;                                          // flag.8 
+    media: MessageMedia;                                    // flag.9 
+    views: int;                                             // flag.10
+    forwards: int;                                          // flag.10
+    via_bot_id: int;                                        // flag.11
+    silent: bool;                                           // flag.13
+    post: bool;                                             // flag.14
+    edit_date: int;                                         // flag.15
+    post_author: string;                                    // flag.16
+    grouped_id: long;                                       // flag.17
+    from_scheduled: bool;                                   // flag.18
+    legacy: bool;                                           // flag.19
+    edit_hide: bool;                                        // flag.21
+    restriction_reason: [RestrictionReason];                // flag.22
+    replies: MessageReplies;                                // flag.23
+    pinned: bool;                                           // flag.24
+    id: int;
+    peer_id: Peer;
+    date: int;
+    message: string;
+}
+
+enum MessageServiceFlags : int (bit_flags) {
+    out = 1 << 1,
+    reply_to = 1 << 3,
+    mentioned = 1 << 4,
+    media_unread = 1 << 5,
+    from_id = 1 << 8,
+    silent = 1 << 13,
+    post = 1 << 14,
+    legacy = 1 << 19,
+}
+
+table MessageService {
+    flags: MessageServiceFlags;
+    out: bool;                                              // flag.1 
+    reply_to: MessageReplyHeader;                           // flag.3 
+    mentioned: bool;                                        // flag.4 
+    media_unread: bool;                                     // flag.5 
+    from_id: Peer;                                          // flag.8 
+    silent: bool;                                           // flag.13
+    post: bool;                                             // flag.14
+    legacy: bool;                                           // flag.19
+    id: int;
+    peer_id: Peer;
+    date: int;
+    action: MessageAction;
+}
+
+table MessageMediaEmpty {
+}
+
+enum MessageMediaPhotoFlags : int (bit_flags) {
+    photo = 1 << 0,
+    ttl_seconds = 1 << 2,
+}
+
+table MessageMediaPhoto {
+    flags: MessageMediaPhotoFlags;
+    photo: Photo;                                           // flag.0 
+    ttl_seconds: int;                                       // flag.2 
+}
+
+table MessageMediaGeo {
+    geo: GeoPoint;
+}
+
+table MessageMediaContact {
+    phone_number: string;
+    first_name: string;
+    last_name: string;
+    vcard: string;
+    user_id: int;
+}
+
+table MessageMediaUnsupported {
+}
+
+enum MessageMediaDocumentFlags : int (bit_flags) {
+    document = 1 << 0,
+    ttl_seconds = 1 << 2,
+}
+
+table MessageMediaDocument {
+    flags: MessageMediaDocumentFlags;
+    document: Document;                                     // flag.0 
+    ttl_seconds: int;                                       // flag.2 
+}
+
+table MessageMediaWebPage {
+    webpage: WebPage;
+}
+
+table MessageMediaVenue {
+    geo: GeoPoint;
+    title: string;
+    address: string;
+    provider: string;
+    venue_id: string;
+    venue_type: string;
+}
+
+table MessageMediaGame {
+    game: Game;
+}
+
+enum MessageMediaInvoiceFlags : int (bit_flags) {
+    photo = 1 << 0,
+    shipping_address_requested = 1 << 1,
+    receipt_msg_id = 1 << 2,
+    test = 1 << 3,
+}
+
+table MessageMediaInvoice {
+    flags: MessageMediaInvoiceFlags;
+    photo: WebDocument;                                     // flag.0 
+    shipping_address_requested: bool;                       // flag.1 
+    receipt_msg_id: int;                                    // flag.2 
+    test: bool;                                             // flag.3 
+    title: string;
+    description: string;
+    currency: string;
+    total_amount: long;
+    start_param: string;
+}
+
+enum MessageMediaGeoLiveFlags : int (bit_flags) {
+    heading = 1 << 0,
+    proximity_notification_radius = 1 << 1,
+}
+
+table MessageMediaGeoLive {
+    flags: MessageMediaGeoLiveFlags;
+    heading: int;                                           // flag.0 
+    proximity_notification_radius: int;                     // flag.1 
+    geo: GeoPoint;
+    period: int;
+}
+
+table MessageMediaPoll {
+    poll: Poll;
+    results: PollResults;
+}
+
+table MessageMediaDice {
+    value: int;
+    emoticon: string;
+}
+
+table MessageActionEmpty {
+}
+
+table MessageActionChatCreate {
+    title: string;
+    users: [int];
+}
+
+table MessageActionChatEditTitle {
+    title: string;
+}
+
+table MessageActionChatEditPhoto {
+    photo: Photo;
+}
+
+table MessageActionChatDeletePhoto {
+}
+
+table MessageActionChatAddUser {
+    users: [int];
+}
+
+table MessageActionChatDeleteUser {
+    user_id: int;
+}
+
+table MessageActionChatJoinedByLink {
+    inviter_id: int;
+}
+
+table MessageActionChannelCreate {
+    title: string;
+}
+
+table MessageActionChatMigrateTo {
+    channel_id: int;
+}
+
+table MessageActionChannelMigrateFrom {
+    title: string;
+    chat_id: int;
+}
+
+table MessageActionPinMessage {
+}
+
+table MessageActionHistoryClear {
+}
+
+table MessageActionGameScore {
+    game_id: long;
+    score: int;
+}
+
+enum MessageActionPaymentSentMeFlags : int (bit_flags) {
+    info = 1 << 0,
+    shipping_option_id = 1 << 1,
+}
+
+table MessageActionPaymentSentMe {
+    flags: MessageActionPaymentSentMeFlags;
+    info: PaymentRequestedInfo;                             // flag.0 
+    shipping_option_id: string;                             // flag.1 
+    currency: string;
+    total_amount: long;
+    payload: [byte];
+    charge: PaymentCharge;
+}
+
+table MessageActionPaymentSent {
+    currency: string;
+    total_amount: long;
+}
+
+enum MessageActionPhoneCallFlags : int (bit_flags) {
+    reason = 1 << 0,
+    duration = 1 << 1,
+    video = 1 << 2,
+}
+
+table MessageActionPhoneCall {
+    flags: MessageActionPhoneCallFlags;
+    reason: PhoneCallDiscardReason;                         // flag.0 
+    duration: int;                                          // flag.1 
+    video: bool;                                            // flag.2 
+    call_id: long;
+}
+
+table MessageActionScreenshotTaken {
+}
+
+table MessageActionCustomAction {
+    message: string;
+}
+
+table MessageActionBotAllowed {
+    domain: string;
+}
+
+table MessageActionSecureValuesSentMe {
+    values: [SecureValue];
+    credentials: SecureCredentialsEncrypted;
+}
+
+table MessageActionSecureValuesSent {
+    types: [SecureValueType];
+}
+
+table MessageActionContactSignUp {
+}
+
+table MessageActionGeoProximityReached {
+    from_id: Peer;
+    to_id: Peer;
+    distance: int;
+}
+
+enum DialogFlags : int (bit_flags) {
+    pts = 1 << 0,
+    draft = 1 << 1,
+    pinned = 1 << 2,
+    unread_mark = 1 << 3,
+    folder_id = 1 << 4,
+}
+
+table Dialog {
+    flags: DialogFlags;
+    pts: int;                                               // flag.0 
+    draft: DraftMessage;                                    // flag.1 
+    pinned: bool;                                           // flag.2 
+    unread_mark: bool;                                      // flag.3 
+    folder_id: int;                                         // flag.4 
+    peer: Peer;
+    top_message: int;
+    read_inbox_max_id: int;
+    read_outbox_max_id: int;
+    unread_count: int;
+    unread_mentions_count: int;
+    notify_settings: PeerNotifySettings;
+}
+
+enum DialogFolderFlags : int (bit_flags) {
+    pinned = 1 << 2,
+}
+
+table DialogFolder {
+    flags: DialogFolderFlags;
+    pinned: bool;                                           // flag.2 
+    folder: Folder;
+    peer: Peer;
+    top_message: int;
+    unread_muted_peers_count: int;
+    unread_unmuted_peers_count: int;
+    unread_muted_messages_count: int;
+    unread_unmuted_messages_count: int;
+}
+
+table PhotoEmpty {
+    id: long;
+}
+
+enum PhotoFlags : int (bit_flags) {
+    has_stickers = 1 << 0,
+    video_sizes = 1 << 1,
+}
+
+table Photo {
+    flags: PhotoFlags;
+    has_stickers: bool;                                     // flag.0 
+    video_sizes: [VideoSize];                               // flag.1 
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+    date: int;
+    sizes: [PhotoSize];
+    dc_id: int;
+}
+
+table PhotoSizeEmpty {
+    type: string;
+}
+
+table PhotoSize {
+    type: string;
+    location: FileLocation;
+    w: int;
+    h: int;
+    size: int;
+}
+
+table PhotoCachedSize {
+    type: string;
+    location: FileLocation;
+    w: int;
+    h: int;
+    bytes: [byte];
+}
+
+table PhotoStrippedSize {
+    type: string;
+    bytes: [byte];
+}
+
+table PhotoSizeProgressive {
+    type: string;
+    location: FileLocation;
+    w: int;
+    h: int;
+    sizes: [int];
+}
+
+table GeoPointEmpty {
+}
+
+enum GeoPointFlags : int (bit_flags) {
+    accuracy_radius = 1 << 0,
+}
+
+table GeoPoint {
+    flags: GeoPointFlags;
+    accuracy_radius: int;                                   // flag.0 
+    long: double;
+    lat: double;
+    access_hash: long;
+}
+
+table InputNotifyPeer {
+    peer: InputPeer;
+}
+
+table InputNotifyUsers {
+}
+
+table InputNotifyChats {
+}
+
+table InputNotifyBroadcasts {
+}
+
+enum InputPeerNotifySettingsFlags : int (bit_flags) {
+    show_previews = 1 << 0,
+    silent = 1 << 1,
+    mute_until = 1 << 2,
+    sound = 1 << 3,
+}
+
+table InputPeerNotifySettings {
+    flags: InputPeerNotifySettingsFlags;
+    show_previews: bool;                                    // flag.0 
+    silent: bool;                                           // flag.1 
+    mute_until: int;                                        // flag.2 
+    sound: string;                                          // flag.3 
+}
+
+enum PeerNotifySettingsFlags : int (bit_flags) {
+    show_previews = 1 << 0,
+    silent = 1 << 1,
+    mute_until = 1 << 2,
+    sound = 1 << 3,
+}
+
+table PeerNotifySettings {
+    flags: PeerNotifySettingsFlags;
+    show_previews: bool;                                    // flag.0 
+    silent: bool;                                           // flag.1 
+    mute_until: int;                                        // flag.2 
+    sound: string;                                          // flag.3 
+}
+
+enum PeerSettingsFlags : int (bit_flags) {
+    report_spam = 1 << 0,
+    add_contact = 1 << 1,
+    block_contact = 1 << 2,
+    share_contact = 1 << 3,
+    need_contacts_exception = 1 << 4,
+    report_geo = 1 << 5,
+    geo_distance = 1 << 6,
+    autoarchived = 1 << 7,
+}
+
+table PeerSettings {
+    flags: PeerSettingsFlags;
+    report_spam: bool;                                      // flag.0 
+    add_contact: bool;                                      // flag.1 
+    block_contact: bool;                                    // flag.2 
+    share_contact: bool;                                    // flag.3 
+    need_contacts_exception: bool;                          // flag.4 
+    report_geo: bool;                                       // flag.5 
+    geo_distance: int;                                      // flag.6 
+    autoarchived: bool;                                     // flag.7 
+}
+
+enum WallPaperFlags : int (bit_flags) {
+    creator = 1 << 0,
+    default = 1 << 1,
+    settings = 1 << 2,
+    pattern = 1 << 3,
+    dark = 1 << 4,
+}
+
+table WallPaper {
+    flags: WallPaperFlags;
+    creator: bool;                                          // flag.0 
+    default: bool;                                          // flag.1 
+    settings: WallPaperSettings;                            // flag.2 
+    pattern: bool;                                          // flag.3 
+    dark: bool;                                             // flag.4 
+    id: long;
+    access_hash: long;
+    slug: string;
+    document: Document;
+}
+
+enum WallPaperNoFileFlags : int (bit_flags) {
+    default = 1 << 1,
+    settings = 1 << 2,
+    dark = 1 << 4,
+}
+
+table WallPaperNoFile {
+    flags: WallPaperNoFileFlags;
+    default: bool;                                          // flag.1 
+    settings: WallPaperSettings;                            // flag.2 
+    dark: bool;                                             // flag.4 
+}
+
+table InputReportReasonSpam {
+}
+
+table InputReportReasonViolence {
+}
+
+table InputReportReasonPornography {
+}
+
+table InputReportReasonChildAbuse {
+}
+
+table InputReportReasonOther {
+    text: string;
+}
+
+table InputReportReasonCopyright {
+}
+
+table InputReportReasonGeoIrrelevant {
+}
+
+enum UserFullFlags : int (bit_flags) {
+    blocked = 1 << 0,
+    about = 1 << 1,
+    profile_photo = 1 << 2,
+    bot_info = 1 << 3,
+    phone_calls_available = 1 << 4,
+    phone_calls_private = 1 << 5,
+    pinned_msg_id = 1 << 6,
+    can_pin_message = 1 << 7,
+    folder_id = 1 << 11,
+    has_scheduled = 1 << 12,
+    video_calls_available = 1 << 13,
+}
+
+table UserFull {
+    flags: UserFullFlags;
+    blocked: bool;                                          // flag.0 
+    about: string;                                          // flag.1 
+    profile_photo: Photo;                                   // flag.2 
+    bot_info: BotInfo;                                      // flag.3 
+    phone_calls_available: bool;                            // flag.4 
+    phone_calls_private: bool;                              // flag.5 
+    pinned_msg_id: int;                                     // flag.6 
+    can_pin_message: bool;                                  // flag.7 
+    folder_id: int;                                         // flag.11
+    has_scheduled: bool;                                    // flag.12
+    video_calls_available: bool;                            // flag.13
+    user: User;
+    settings: PeerSettings;
+    notify_settings: PeerNotifySettings;
+    common_chats_count: int;
+}
+
+table Contact {
+    user_id: int;
+    mutual: bool;
+}
+
+table ImportedContact {
+    user_id: int;
+    client_id: long;
+}
+
+table ContactStatus {
+    user_id: int;
+    status: UserStatus;
+}
+
+table InputMessagesFilterEmpty {
+}
+
+table InputMessagesFilterPhotos {
+}
+
+table InputMessagesFilterVideo {
+}
+
+table InputMessagesFilterPhotoVideo {
+}
+
+table InputMessagesFilterDocument {
+}
+
+table InputMessagesFilterUrl {
+}
+
+table InputMessagesFilterGif {
+}
+
+table InputMessagesFilterVoice {
+}
+
+table InputMessagesFilterMusic {
+}
+
+table InputMessagesFilterChatPhotos {
+}
+
+enum InputMessagesFilterPhoneCallsFlags : int (bit_flags) {
+    missed = 1 << 0,
+}
+
+table InputMessagesFilterPhoneCalls {
+    flags: InputMessagesFilterPhoneCallsFlags;
+    missed: bool;                                           // flag.0 
+}
+
+table InputMessagesFilterRoundVoice {
+}
+
+table InputMessagesFilterRoundVideo {
+}
+
+table InputMessagesFilterMyMentions {
+}
+
+table InputMessagesFilterGeo {
+}
+
+table InputMessagesFilterContacts {
+}
+
+table InputMessagesFilterPinned {
+}
+
+table UpdateNewMessage {
+    message: Message;
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateMessageID {
+    id: int;
+    random_id: long;
+}
+
+table UpdateDeleteMessages {
+    messages: [int];
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateUserTyping {
+    user_id: int;
+    action: SendMessageAction;
+}
+
+table UpdateChatUserTyping {
+    chat_id: int;
+    user_id: int;
+    action: SendMessageAction;
+}
+
+table UpdateChatParticipants {
+    participants: ChatParticipants;
+}
+
+table UpdateUserStatus {
+    user_id: int;
+    status: UserStatus;
+}
+
+table UpdateUserName {
+    user_id: int;
+    first_name: string;
+    last_name: string;
+    username: string;
+}
+
+table UpdateUserPhoto {
+    user_id: int;
+    date: int;
+    photo: UserProfilePhoto;
+    previous: bool;
+}
+
+table UpdateNewEncryptedMessage {
+    message: EncryptedMessage;
+    qts: int;
+}
+
+table UpdateEncryptedChatTyping {
+    chat_id: int;
+}
+
+table UpdateEncryption {
+    chat: EncryptedChat;
+    date: int;
+}
+
+table UpdateEncryptedMessagesRead {
+    chat_id: int;
+    max_date: int;
+    date: int;
+}
+
+table UpdateChatParticipantAdd {
+    chat_id: int;
+    user_id: int;
+    inviter_id: int;
+    date: int;
+    version: int;
+}
+
+table UpdateChatParticipantDelete {
+    chat_id: int;
+    user_id: int;
+    version: int;
+}
+
+table UpdateDcOptions {
+    dc_options: [DcOption];
+}
+
+table UpdateNotifySettings {
+    peer: NotifyPeer;
+    notify_settings: PeerNotifySettings;
+}
+
+enum UpdateServiceNotificationFlags : int (bit_flags) {
+    popup = 1 << 0,
+    inbox_date = 1 << 1,
+}
+
+table UpdateServiceNotification {
+    flags: UpdateServiceNotificationFlags;
+    popup: bool;                                            // flag.0 
+    inbox_date: int;                                        // flag.1 
+    type: string;
+    message: string;
+    media: MessageMedia;
+    entities: [MessageEntity];
+}
+
+table UpdatePrivacy {
+    key: PrivacyKey;
+    rules: [PrivacyRule];
+}
+
+table UpdateUserPhone {
+    user_id: int;
+    phone: string;
+}
+
+enum UpdateReadHistoryInboxFlags : int (bit_flags) {
+    folder_id = 1 << 0,
+}
+
+table UpdateReadHistoryInbox {
+    flags: UpdateReadHistoryInboxFlags;
+    folder_id: int;                                         // flag.0 
+    peer: Peer;
+    max_id: int;
+    still_unread_count: int;
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateReadHistoryOutbox {
+    peer: Peer;
+    max_id: int;
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateWebPage {
+    webpage: WebPage;
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateReadMessagesContents {
+    messages: [int];
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdateChannelTooLongFlags : int (bit_flags) {
+    pts = 1 << 0,
+}
+
+table UpdateChannelTooLong {
+    flags: UpdateChannelTooLongFlags;
+    pts: int;                                               // flag.0 
+    channel_id: int;
+}
+
+table UpdateChannel {
+    channel_id: int;
+}
+
+table UpdateNewChannelMessage {
+    message: Message;
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdateReadChannelInboxFlags : int (bit_flags) {
+    folder_id = 1 << 0,
+}
+
+table UpdateReadChannelInbox {
+    flags: UpdateReadChannelInboxFlags;
+    folder_id: int;                                         // flag.0 
+    channel_id: int;
+    max_id: int;
+    still_unread_count: int;
+    pts: int;
+}
+
+table UpdateDeleteChannelMessages {
+    channel_id: int;
+    messages: [int];
+    pts: int;
+    pts_count: int;
+}
+
+table UpdateChannelMessageViews {
+    channel_id: int;
+    id: int;
+    views: int;
+}
+
+table UpdateChatParticipantAdmin {
+    chat_id: int;
+    user_id: int;
+    is_admin: bool;
+    version: int;
+}
+
+table UpdateNewStickerSet {
+    stickerset: messages.StickerSet;
+}
+
+enum UpdateStickerSetsOrderFlags : int (bit_flags) {
+    masks = 1 << 0,
+}
+
+table UpdateStickerSetsOrder {
+    flags: UpdateStickerSetsOrderFlags;
+    masks: bool;                                            // flag.0 
+    order: [long];
+}
+
+table UpdateStickerSets {
+}
+
+table UpdateSavedGifs {
+}
+
+enum UpdateBotInlineQueryFlags : int (bit_flags) {
+    geo = 1 << 0,
+}
+
+table UpdateBotInlineQuery {
+    flags: UpdateBotInlineQueryFlags;
+    geo: GeoPoint;                                          // flag.0 
+    query_id: long;
+    user_id: int;
+    query: string;
+    offset: string;
+}
+
+enum UpdateBotInlineSendFlags : int (bit_flags) {
+    geo = 1 << 0,
+    msg_id = 1 << 1,
+}
+
+table UpdateBotInlineSend {
+    flags: UpdateBotInlineSendFlags;
+    geo: GeoPoint;                                          // flag.0 
+    msg_id: InputBotInlineMessageID;                        // flag.1 
+    user_id: int;
+    query: string;
+    id: string;
+}
+
+table UpdateEditChannelMessage {
+    message: Message;
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdateBotCallbackQueryFlags : int (bit_flags) {
+    data = 1 << 0,
+    game_short_name = 1 << 1,
+}
+
+table UpdateBotCallbackQuery {
+    flags: UpdateBotCallbackQueryFlags;
+    data: [byte];                                           // flag.0 
+    game_short_name: string;                                // flag.1 
+    query_id: long;
+    user_id: int;
+    peer: Peer;
+    msg_id: int;
+    chat_instance: long;
+}
+
+table UpdateEditMessage {
+    message: Message;
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdateInlineBotCallbackQueryFlags : int (bit_flags) {
+    data = 1 << 0,
+    game_short_name = 1 << 1,
+}
+
+table UpdateInlineBotCallbackQuery {
+    flags: UpdateInlineBotCallbackQueryFlags;
+    data: [byte];                                           // flag.0 
+    game_short_name: string;                                // flag.1 
+    query_id: long;
+    user_id: int;
+    msg_id: InputBotInlineMessageID;
+    chat_instance: long;
+}
+
+table UpdateReadChannelOutbox {
+    channel_id: int;
+    max_id: int;
+}
+
+table UpdateDraftMessage {
+    peer: Peer;
+    draft: DraftMessage;
+}
+
+table UpdateReadFeaturedStickers {
+}
+
+table UpdateRecentStickers {
+}
+
+table UpdateConfig {
+}
+
+table UpdatePtsChanged {
+}
+
+table UpdateChannelWebPage {
+    channel_id: int;
+    webpage: WebPage;
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdateDialogPinnedFlags : int (bit_flags) {
+    pinned = 1 << 0,
+    folder_id = 1 << 1,
+}
+
+table UpdateDialogPinned {
+    flags: UpdateDialogPinnedFlags;
+    pinned: bool;                                           // flag.0 
+    folder_id: int;                                         // flag.1 
+    peer: DialogPeer;
+}
+
+enum UpdatePinnedDialogsFlags : int (bit_flags) {
+    order = 1 << 0,
+    folder_id = 1 << 1,
+}
+
+table UpdatePinnedDialogs {
+    flags: UpdatePinnedDialogsFlags;
+    order: [DialogPeer];                                    // flag.0 
+    folder_id: int;                                         // flag.1 
+}
+
+table UpdateBotWebhookJSON {
+    data: DataJSON;
+}
+
+table UpdateBotWebhookJSONQuery {
+    query_id: long;
+    data: DataJSON;
+    timeout: int;
+}
+
+table UpdateBotShippingQuery {
+    query_id: long;
+    user_id: int;
+    payload: [byte];
+    shipping_address: PostAddress;
+}
+
+enum UpdateBotPrecheckoutQueryFlags : int (bit_flags) {
+    info = 1 << 0,
+    shipping_option_id = 1 << 1,
+}
+
+table UpdateBotPrecheckoutQuery {
+    flags: UpdateBotPrecheckoutQueryFlags;
+    info: PaymentRequestedInfo;                             // flag.0 
+    shipping_option_id: string;                             // flag.1 
+    query_id: long;
+    user_id: int;
+    payload: [byte];
+    currency: string;
+    total_amount: long;
+}
+
+table UpdatePhoneCall {
+    phone_call: PhoneCall;
+}
+
+table UpdateLangPackTooLong {
+    lang_code: string;
+}
+
+table UpdateLangPack {
+    difference: LangPackDifference;
+}
+
+table UpdateFavedStickers {
+}
+
+table UpdateChannelReadMessagesContents {
+    channel_id: int;
+    messages: [int];
+}
+
+table UpdateContactsReset {
+}
+
+table UpdateChannelAvailableMessages {
+    channel_id: int;
+    available_min_id: int;
+}
+
+enum UpdateDialogUnreadMarkFlags : int (bit_flags) {
+    unread = 1 << 0,
+}
+
+table UpdateDialogUnreadMark {
+    flags: UpdateDialogUnreadMarkFlags;
+    unread: bool;                                           // flag.0 
+    peer: DialogPeer;
+}
+
+enum UpdateMessagePollFlags : int (bit_flags) {
+    poll = 1 << 0,
+}
+
+table UpdateMessagePoll {
+    flags: UpdateMessagePollFlags;
+    poll: Poll;                                             // flag.0 
+    poll_id: long;
+    results: PollResults;
+}
+
+table UpdateChatDefaultBannedRights {
+    peer: Peer;
+    default_banned_rights: ChatBannedRights;
+    version: int;
+}
+
+table UpdateFolderPeers {
+    folder_peers: [FolderPeer];
+    pts: int;
+    pts_count: int;
+}
+
+table UpdatePeerSettings {
+    peer: Peer;
+    settings: PeerSettings;
+}
+
+table UpdatePeerLocated {
+    peers: [PeerLocated];
+}
+
+table UpdateNewScheduledMessage {
+    message: Message;
+}
+
+table UpdateDeleteScheduledMessages {
+    peer: Peer;
+    messages: [int];
+}
+
+table UpdateTheme {
+    theme: Theme;
+}
+
+table UpdateGeoLiveViewed {
+    peer: Peer;
+    msg_id: int;
+}
+
+table UpdateLoginToken {
+}
+
+table UpdateMessagePollVote {
+    poll_id: long;
+    user_id: int;
+    options: [[byte]];
+}
+
+enum UpdateDialogFilterFlags : int (bit_flags) {
+    filter = 1 << 0,
+}
+
+table UpdateDialogFilter {
+    flags: UpdateDialogFilterFlags;
+    filter: DialogFilter;                                   // flag.0 
+    id: int;
+}
+
+table UpdateDialogFilterOrder {
+    order: [int];
+}
+
+table UpdateDialogFilters {
+}
+
+table UpdatePhoneCallSignalingData {
+    phone_call_id: long;
+    data: [byte];
+}
+
+enum UpdateChannelParticipantFlags : int (bit_flags) {
+    prev_participant = 1 << 0,
+    new_participant = 1 << 1,
+}
+
+table UpdateChannelParticipant {
+    flags: UpdateChannelParticipantFlags;
+    prev_participant: ChannelParticipant;                   // flag.0 
+    new_participant: ChannelParticipant;                    // flag.1 
+    channel_id: int;
+    date: int;
+    user_id: int;
+    qts: int;
+}
+
+table UpdateChannelMessageForwards {
+    channel_id: int;
+    id: int;
+    forwards: int;
+}
+
+enum UpdateReadChannelDiscussionInboxFlags : int (bit_flags) {
+    broadcast_id = 1 << 0,
+    broadcast_post = 1 << 0,
+}
+
+table UpdateReadChannelDiscussionInbox {
+    flags: UpdateReadChannelDiscussionInboxFlags;
+    broadcast_id: int;                                      // flag.0 
+    broadcast_post: int;                                    // flag.0 
+    channel_id: int;
+    top_msg_id: int;
+    read_max_id: int;
+}
+
+table UpdateReadChannelDiscussionOutbox {
+    channel_id: int;
+    top_msg_id: int;
+    read_max_id: int;
+}
+
+table UpdatePeerBlocked {
+    peer_id: Peer;
+    blocked: bool;
+}
+
+enum UpdateChannelUserTypingFlags : int (bit_flags) {
+    top_msg_id = 1 << 0,
+}
+
+table UpdateChannelUserTyping {
+    flags: UpdateChannelUserTypingFlags;
+    top_msg_id: int;                                        // flag.0 
+    channel_id: int;
+    user_id: int;
+    action: SendMessageAction;
+}
+
+enum UpdatePinnedMessagesFlags : int (bit_flags) {
+    pinned = 1 << 0,
+}
+
+table UpdatePinnedMessages {
+    flags: UpdatePinnedMessagesFlags;
+    pinned: bool;                                           // flag.0 
+    peer: Peer;
+    messages: [int];
+    pts: int;
+    pts_count: int;
+}
+
+enum UpdatePinnedChannelMessagesFlags : int (bit_flags) {
+    pinned = 1 << 0,
+}
+
+table UpdatePinnedChannelMessages {
+    flags: UpdatePinnedChannelMessagesFlags;
+    pinned: bool;                                           // flag.0 
+    channel_id: int;
+    messages: [int];
+    pts: int;
+    pts_count: int;
+}
+
+table UpdatesTooLong {
+}
+
+enum UpdateShortMessageFlags : int (bit_flags) {
+    out = 1 << 1,
+    fwd_from = 1 << 2,
+    reply_to = 1 << 3,
+    mentioned = 1 << 4,
+    media_unread = 1 << 5,
+    entities = 1 << 7,
+    via_bot_id = 1 << 11,
+    silent = 1 << 13,
+}
+
+table UpdateShortMessage {
+    flags: UpdateShortMessageFlags;
+    out: bool;                                              // flag.1 
+    fwd_from: MessageFwdHeader;                             // flag.2 
+    reply_to: MessageReplyHeader;                           // flag.3 
+    mentioned: bool;                                        // flag.4 
+    media_unread: bool;                                     // flag.5 
+    entities: [MessageEntity];                              // flag.7 
+    via_bot_id: int;                                        // flag.11
+    silent: bool;                                           // flag.13
+    id: int;
+    user_id: int;
+    message: string;
+    pts: int;
+    pts_count: int;
+    date: int;
+}
+
+enum UpdateShortChatMessageFlags : int (bit_flags) {
+    out = 1 << 1,
+    fwd_from = 1 << 2,
+    reply_to = 1 << 3,
+    mentioned = 1 << 4,
+    media_unread = 1 << 5,
+    entities = 1 << 7,
+    via_bot_id = 1 << 11,
+    silent = 1 << 13,
+}
+
+table UpdateShortChatMessage {
+    flags: UpdateShortChatMessageFlags;
+    out: bool;                                              // flag.1 
+    fwd_from: MessageFwdHeader;                             // flag.2 
+    reply_to: MessageReplyHeader;                           // flag.3 
+    mentioned: bool;                                        // flag.4 
+    media_unread: bool;                                     // flag.5 
+    entities: [MessageEntity];                              // flag.7 
+    via_bot_id: int;                                        // flag.11
+    silent: bool;                                           // flag.13
+    id: int;
+    from_id: int;
+    chat_id: int;
+    message: string;
+    pts: int;
+    pts_count: int;
+    date: int;
+}
+
+table UpdateShort {
+    update: Update;
+    date: int;
+}
+
+table UpdatesCombined {
+    updates: [Update];
+    users: [User];
+    chats: [Chat];
+    date: int;
+    seq_start: int;
+    seq: int;
+}
+
+table Updates {
+    updates: [Update];
+    users: [User];
+    chats: [Chat];
+    date: int;
+    seq: int;
+}
+
+enum UpdateShortSentMessageFlags : int (bit_flags) {
+    out = 1 << 1,
+    entities = 1 << 7,
+    media = 1 << 9,
+}
+
+table UpdateShortSentMessage {
+    flags: UpdateShortSentMessageFlags;
+    out: bool;                                              // flag.1 
+    entities: [MessageEntity];                              // flag.7 
+    media: MessageMedia;                                    // flag.9 
+    id: int;
+    pts: int;
+    pts_count: int;
+    date: int;
+}
+
+enum DcOptionFlags : int (bit_flags) {
+    ipv6 = 1 << 0,
+    media_only = 1 << 1,
+    tcpo_only = 1 << 2,
+    cdn = 1 << 3,
+    static = 1 << 4,
+    secret = 1 << 10,
+}
+
+table DcOption {
+    flags: DcOptionFlags;
+    ipv6: bool;                                             // flag.0 
+    media_only: bool;                                       // flag.1 
+    tcpo_only: bool;                                        // flag.2 
+    cdn: bool;                                              // flag.3 
+    static: bool;                                           // flag.4 
+    secret: [byte];                                         // flag.10
+    id: int;
+    ip_address: string;
+    port: int;
+}
+
+enum ConfigFlags : int (bit_flags) {
+    tmp_sessions = 1 << 0,
+    phonecalls_enabled = 1 << 1,
+    suggested_lang_code = 1 << 2,
+    lang_pack_version = 1 << 2,
+    base_lang_pack_version = 1 << 2,
+    default_p2p_contacts = 1 << 3,
+    preload_featured_stickers = 1 << 4,
+    ignore_phone_entities = 1 << 5,
+    revoke_pm_inbox = 1 << 6,
+    autoupdate_url_prefix = 1 << 7,
+    blocked_mode = 1 << 8,
+    gif_search_username = 1 << 9,
+    venue_search_username = 1 << 10,
+    img_search_username = 1 << 11,
+    static_maps_provider = 1 << 12,
+    pfs_enabled = 1 << 13,
+}
+
+table Config {
+    flags: ConfigFlags;
+    tmp_sessions: int;                                      // flag.0 
+    phonecalls_enabled: bool;                               // flag.1 
+    suggested_lang_code: string;                            // flag.2 
+    lang_pack_version: int;                                 // flag.2 
+    base_lang_pack_version: int;                            // flag.2 
+    default_p2p_contacts: bool;                             // flag.3 
+    preload_featured_stickers: bool;                        // flag.4 
+    ignore_phone_entities: bool;                            // flag.5 
+    revoke_pm_inbox: bool;                                  // flag.6 
+    autoupdate_url_prefix: string;                          // flag.7 
+    blocked_mode: bool;                                     // flag.8 
+    gif_search_username: string;                            // flag.9 
+    venue_search_username: string;                          // flag.10
+    img_search_username: string;                            // flag.11
+    static_maps_provider: string;                           // flag.12
+    pfs_enabled: bool;                                      // flag.13
+    date: int;
+    expires: int;
+    test_mode: bool;
+    this_dc: int;
+    dc_options: [DcOption];
+    dc_txt_domain_name: string;
+    chat_size_max: int;
+    megagroup_size_max: int;
+    forwarded_count_max: int;
+    online_update_period_ms: int;
+    offline_blur_timeout_ms: int;
+    offline_idle_timeout_ms: int;
+    online_cloud_timeout_ms: int;
+    notify_cloud_delay_ms: int;
+    notify_default_delay_ms: int;
+    push_chat_period_ms: int;
+    push_chat_limit: int;
+    saved_gifs_limit: int;
+    edit_time_limit: int;
+    revoke_time_limit: int;
+    revoke_pm_time_limit: int;
+    rating_e_decay: int;
+    stickers_recent_limit: int;
+    stickers_faved_limit: int;
+    channels_read_media_period: int;
+    pinned_dialogs_count_max: int;
+    pinned_infolder_count_max: int;
+    call_receive_timeout_ms: int;
+    call_ring_timeout_ms: int;
+    call_connect_timeout_ms: int;
+    call_packet_timeout_ms: int;
+    me_url_prefix: string;
+    caption_length_max: int;
+    message_length_max: int;
+    webfile_dc_id: int;
+}
+
+table NearestDc {
+    country: string;
+    this_dc: int;
+    nearest_dc: int;
+}
+
+table EncryptedChatEmpty {
+    id: int;
+}
+
+table EncryptedChatWaiting {
+    id: int;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+}
+
+enum EncryptedChatRequestedFlags : int (bit_flags) {
+    folder_id = 1 << 0,
+}
+
+table EncryptedChatRequested {
+    flags: EncryptedChatRequestedFlags;
+    folder_id: int;                                         // flag.0 
+    id: int;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    g_a: [byte];
+}
+
+table EncryptedChat {
+    id: int;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    g_a_or_b: [byte];
+    key_fingerprint: long;
+}
+
+table EncryptedChatDiscarded {
+    id: int;
+}
+
+table InputEncryptedChat {
+    chat_id: int;
+    access_hash: long;
+}
+
+table EncryptedFileEmpty {
+}
+
+table EncryptedFile {
+    id: long;
+    access_hash: long;
+    size: int;
+    dc_id: int;
+    key_fingerprint: int;
+}
+
+table InputEncryptedFileEmpty {
+}
+
+table InputEncryptedFileUploaded {
+    id: long;
+    parts: int;
+    md5_checksum: string;
+    key_fingerprint: int;
+}
+
+table InputEncryptedFile {
+    id: long;
+    access_hash: long;
+}
+
+table InputEncryptedFileBigUploaded {
+    id: long;
+    parts: int;
+    key_fingerprint: int;
+}
+
+table EncryptedMessage {
+    random_id: long;
+    chat_id: int;
+    date: int;
+    bytes: [byte];
+    file: EncryptedFile;
+}
+
+table EncryptedMessageService {
+    random_id: long;
+    chat_id: int;
+    date: int;
+    bytes: [byte];
+}
+
+table InputDocumentEmpty {
+}
+
+table InputDocument {
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+}
+
+table DocumentEmpty {
+    id: long;
+}
+
+enum DocumentFlags : int (bit_flags) {
+    thumbs = 1 << 0,
+    video_thumbs = 1 << 1,
+}
+
+table Document {
+    flags: DocumentFlags;
+    thumbs: [PhotoSize];                                    // flag.0 
+    video_thumbs: [VideoSize];                              // flag.1 
+    id: long;
+    access_hash: long;
+    file_reference: [byte];
+    date: int;
+    mime_type: string;
+    size: int;
+    dc_id: int;
+    attributes: [DocumentAttribute];
+}
+
+table NotifyPeer {
+    peer: Peer;
+}
+
+table NotifyUsers {
+}
+
+table NotifyChats {
+}
+
+table NotifyBroadcasts {
+}
+
+table SendMessageTypingAction {
+}
+
+table SendMessageCancelAction {
+}
+
+table SendMessageRecordVideoAction {
+}
+
+table SendMessageUploadVideoAction {
+    progress: int;
+}
+
+table SendMessageRecordAudioAction {
+}
+
+table SendMessageUploadAudioAction {
+    progress: int;
+}
+
+table SendMessageUploadPhotoAction {
+    progress: int;
+}
+
+table SendMessageUploadDocumentAction {
+    progress: int;
+}
+
+table SendMessageGeoLocationAction {
+}
+
+table SendMessageChooseContactAction {
+}
+
+table SendMessageGamePlayAction {
+}
+
+table SendMessageRecordRoundAction {
+}
+
+table SendMessageUploadRoundAction {
+    progress: int;
+}
+
+table InputPrivacyKeyStatusTimestamp {
+}
+
+table InputPrivacyKeyChatInvite {
+}
+
+table InputPrivacyKeyPhoneCall {
+}
+
+table InputPrivacyKeyPhoneP2P {
+}
+
+table InputPrivacyKeyForwards {
+}
+
+table InputPrivacyKeyProfilePhoto {
+}
+
+table InputPrivacyKeyPhoneNumber {
+}
+
+table InputPrivacyKeyAddedByPhone {
+}
+
+table PrivacyKeyStatusTimestamp {
+}
+
+table PrivacyKeyChatInvite {
+}
+
+table PrivacyKeyPhoneCall {
+}
+
+table PrivacyKeyPhoneP2P {
+}
+
+table PrivacyKeyForwards {
+}
+
+table PrivacyKeyProfilePhoto {
+}
+
+table PrivacyKeyPhoneNumber {
+}
+
+table PrivacyKeyAddedByPhone {
+}
+
+table InputPrivacyValueAllowContacts {
+}
+
+table InputPrivacyValueAllowAll {
+}
+
+table InputPrivacyValueAllowUsers {
+    users: [InputUser];
+}
+
+table InputPrivacyValueDisallowContacts {
+}
+
+table InputPrivacyValueDisallowAll {
+}
+
+table InputPrivacyValueDisallowUsers {
+    users: [InputUser];
+}
+
+table InputPrivacyValueAllowChatParticipants {
+    chats: [int];
+}
+
+table InputPrivacyValueDisallowChatParticipants {
+    chats: [int];
+}
+
+table PrivacyValueAllowContacts {
+}
+
+table PrivacyValueAllowAll {
+}
+
+table PrivacyValueAllowUsers {
+    users: [int];
+}
+
+table PrivacyValueDisallowContacts {
+}
+
+table PrivacyValueDisallowAll {
+}
+
+table PrivacyValueDisallowUsers {
+    users: [int];
+}
+
+table PrivacyValueAllowChatParticipants {
+    chats: [int];
+}
+
+table PrivacyValueDisallowChatParticipants {
+    chats: [int];
+}
+
+table AccountDaysTTL {
+    days: int;
+}
+
+table DocumentAttributeImageSize {
+    w: int;
+    h: int;
+}
+
+table DocumentAttributeAnimated {
+}
+
+enum DocumentAttributeStickerFlags : int (bit_flags) {
+    mask_coords = 1 << 0,
+    mask = 1 << 1,
+}
+
+table DocumentAttributeSticker {
+    flags: DocumentAttributeStickerFlags;
+    mask_coords: MaskCoords;                                // flag.0 
+    mask: bool;                                             // flag.1 
+    alt: string;
+    stickerset: InputStickerSet;
+}
+
+enum DocumentAttributeVideoFlags : int (bit_flags) {
+    round_message = 1 << 0,
+    supports_streaming = 1 << 1,
+}
+
+table DocumentAttributeVideo {
+    flags: DocumentAttributeVideoFlags;
+    round_message: bool;                                    // flag.0 
+    supports_streaming: bool;                               // flag.1 
+    duration: int;
+    w: int;
+    h: int;
+}
+
+enum DocumentAttributeAudioFlags : int (bit_flags) {
+    title = 1 << 0,
+    performer = 1 << 1,
+    waveform = 1 << 2,
+    voice = 1 << 10,
+}
+
+table DocumentAttributeAudio {
+    flags: DocumentAttributeAudioFlags;
+    title: string;                                          // flag.0 
+    performer: string;                                      // flag.1 
+    waveform: [byte];                                       // flag.2 
+    voice: bool;                                            // flag.10
+    duration: int;
+}
+
+table DocumentAttributeFilename {
+    file_name: string;
+}
+
+table DocumentAttributeHasStickers {
+}
+
+table StickerPack {
+    emoticon: string;
+    documents: [long];
+}
+
+table WebPageEmpty {
+    id: long;
+}
+
+table WebPagePending {
+    id: long;
+    date: int;
+}
+
+enum WebPageFlags : int (bit_flags) {
+    type = 1 << 0,
+    site_name = 1 << 1,
+    title = 1 << 2,
+    description = 1 << 3,
+    photo = 1 << 4,
+    embed_url = 1 << 5,
+    embed_type = 1 << 5,
+    embed_width = 1 << 6,
+    embed_height = 1 << 6,
+    duration = 1 << 7,
+    author = 1 << 8,
+    document = 1 << 9,
+    cached_page = 1 << 10,
+    attributes = 1 << 12,
+}
+
+table WebPage {
+    flags: WebPageFlags;
+    type: string;                                           // flag.0 
+    site_name: string;                                      // flag.1 
+    title: string;                                          // flag.2 
+    description: string;                                    // flag.3 
+    photo: Photo;                                           // flag.4 
+    embed_url: string;                                      // flag.5 
+    embed_type: string;                                     // flag.5 
+    embed_width: int;                                       // flag.6 
+    embed_height: int;                                      // flag.6 
+    duration: int;                                          // flag.7 
+    author: string;                                         // flag.8 
+    document: Document;                                     // flag.9 
+    cached_page: Page;                                      // flag.10
+    attributes: [WebPageAttribute];                         // flag.12
+    id: long;
+    url: string;
+    display_url: string;
+    hash: int;
+}
+
+enum WebPageNotModifiedFlags : int (bit_flags) {
+    cached_page_views = 1 << 0,
+}
+
+table WebPageNotModified {
+    flags: WebPageNotModifiedFlags;
+    cached_page_views: int;                                 // flag.0 
+}
+
+enum AuthorizationFlags : int (bit_flags) {
+    current = 1 << 0,
+    official_app = 1 << 1,
+    password_pending = 1 << 2,
+}
+
+table Authorization {
+    flags: AuthorizationFlags;
+    current: bool;                                          // flag.0 
+    official_app: bool;                                     // flag.1 
+    password_pending: bool;                                 // flag.2 
+    hash: long;
+    device_model: string;
+    platform: string;
+    system_version: string;
+    api_id: int;
+    app_name: string;
+    app_version: string;
+    date_created: int;
+    date_active: int;
+    ip: string;
+    country: string;
+    region: string;
+}
+
+table ReceivedNotifyMessage {
+    id: int;
+    flags: int;
+}
+
+table ChatInviteEmpty {
+}
+
+table ChatInviteExported {
+    link: string;
+}
+
+table ChatInviteAlready {
+    chat: Chat;
+}
+
+enum ChatInviteFlags : int (bit_flags) {
+    channel = 1 << 0,
+    broadcast = 1 << 1,
+    public = 1 << 2,
+    megagroup = 1 << 3,
+    participants = 1 << 4,
+}
+
+table ChatInvite {
+    flags: ChatInviteFlags;
+    channel: bool;                                          // flag.0 
+    broadcast: bool;                                        // flag.1 
+    public: bool;                                           // flag.2 
+    megagroup: bool;                                        // flag.3 
+    participants: [User];                                   // flag.4 
+    title: string;
+    photo: Photo;
+    participants_count: int;
+}
+
+table ChatInvitePeek {
+    chat: Chat;
+    expires: int;
+}
+
+table InputStickerSetEmpty {
+}
+
+table InputStickerSetID {
+    id: long;
+    access_hash: long;
+}
+
+table InputStickerSetShortName {
+    short_name: string;
+}
+
+table InputStickerSetAnimatedEmoji {
+}
+
+table InputStickerSetDice {
+    emoticon: string;
+}
+
+enum StickerSetFlags : int (bit_flags) {
+    installed_date = 1 << 0,
+    archived = 1 << 1,
+    official = 1 << 2,
+    masks = 1 << 3,
+    thumb = 1 << 4,
+    thumb_dc_id = 1 << 4,
+    animated = 1 << 5,
+}
+
+table StickerSet {
+    flags: StickerSetFlags;
+    installed_date: int;                                    // flag.0 
+    archived: bool;                                         // flag.1 
+    official: bool;                                         // flag.2 
+    masks: bool;                                            // flag.3 
+    thumb: PhotoSize;                                       // flag.4 
+    thumb_dc_id: int;                                       // flag.4 
+    animated: bool;                                         // flag.5 
+    id: long;
+    access_hash: long;
+    title: string;
+    short_name: string;
+    count: int;
+    hash: int;
+}
+
+table BotCommand {
+    command: string;
+    description: string;
+}
+
+table BotInfo {
+    user_id: int;
+    description: string;
+    commands: [BotCommand];
+}
+
+table KeyboardButton {
+    text: string;
+}
+
+table KeyboardButtonUrl {
+    text: string;
+    url: string;
+}
+
+enum KeyboardButtonCallbackFlags : int (bit_flags) {
+    requires_password = 1 << 0,
+}
+
+table KeyboardButtonCallback {
+    flags: KeyboardButtonCallbackFlags;
+    requires_password: bool;                                // flag.0 
+    text: string;
+    data: [byte];
+}
+
+table KeyboardButtonRequestPhone {
+    text: string;
+}
+
+table KeyboardButtonRequestGeoLocation {
+    text: string;
+}
+
+enum KeyboardButtonSwitchInlineFlags : int (bit_flags) {
+    same_peer = 1 << 0,
+}
+
+table KeyboardButtonSwitchInline {
+    flags: KeyboardButtonSwitchInlineFlags;
+    same_peer: bool;                                        // flag.0 
+    text: string;
+    query: string;
+}
+
+table KeyboardButtonGame {
+    text: string;
+}
+
+table KeyboardButtonBuy {
+    text: string;
+}
+
+enum KeyboardButtonUrlAuthFlags : int (bit_flags) {
+    fwd_text = 1 << 0,
+}
+
+table KeyboardButtonUrlAuth {
+    flags: KeyboardButtonUrlAuthFlags;
+    fwd_text: string;                                       // flag.0 
+    text: string;
+    url: string;
+    button_id: int;
+}
+
+enum InputKeyboardButtonUrlAuthFlags : int (bit_flags) {
+    request_write_access = 1 << 0,
+    fwd_text = 1 << 1,
+}
+
+table InputKeyboardButtonUrlAuth {
+    flags: InputKeyboardButtonUrlAuthFlags;
+    request_write_access: bool;                             // flag.0 
+    fwd_text: string;                                       // flag.1 
+    text: string;
+    url: string;
+    bot: InputUser;
+}
+
+enum KeyboardButtonRequestPollFlags : int (bit_flags) {
+    quiz = 1 << 0,
+}
+
+table KeyboardButtonRequestPoll {
+    flags: KeyboardButtonRequestPollFlags;
+    quiz: bool;                                             // flag.0 
+    text: string;
+}
+
+table KeyboardButtonRow {
+    buttons: [KeyboardButton];
+}
+
+enum ReplyKeyboardHideFlags : int (bit_flags) {
+    selective = 1 << 2,
+}
+
+table ReplyKeyboardHide {
+    flags: ReplyKeyboardHideFlags;
+    selective: bool;                                        // flag.2 
+}
+
+enum ReplyKeyboardForceReplyFlags : int (bit_flags) {
+    single_use = 1 << 1,
+    selective = 1 << 2,
+}
+
+table ReplyKeyboardForceReply {
+    flags: ReplyKeyboardForceReplyFlags;
+    single_use: bool;                                       // flag.1 
+    selective: bool;                                        // flag.2 
+}
+
+enum ReplyKeyboardMarkupFlags : int (bit_flags) {
+    resize = 1 << 0,
+    single_use = 1 << 1,
+    selective = 1 << 2,
+}
+
+table ReplyKeyboardMarkup {
+    flags: ReplyKeyboardMarkupFlags;
+    resize: bool;                                           // flag.0 
+    single_use: bool;                                       // flag.1 
+    selective: bool;                                        // flag.2 
+    rows: [KeyboardButtonRow];
+}
+
+table ReplyInlineMarkup {
+    rows: [KeyboardButtonRow];
+}
+
+table MessageEntityUnknown {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityMention {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityHashtag {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityBotCommand {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityUrl {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityEmail {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityBold {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityItalic {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityCode {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityPre {
+    offset: int;
+    length: int;
+    language: string;
+}
+
+table MessageEntityTextUrl {
+    offset: int;
+    length: int;
+    url: string;
+}
+
+table MessageEntityMentionName {
+    offset: int;
+    length: int;
+    user_id: int;
+}
+
+table InputMessageEntityMentionName {
+    offset: int;
+    length: int;
+    user_id: InputUser;
+}
+
+table MessageEntityPhone {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityCashtag {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityUnderline {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityStrike {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityBlockquote {
+    offset: int;
+    length: int;
+}
+
+table MessageEntityBankCard {
+    offset: int;
+    length: int;
+}
+
+table InputChannelEmpty {
+}
+
+table InputChannel {
+    channel_id: int;
+    access_hash: long;
+}
+
+table InputChannelFromMessage {
+    peer: InputPeer;
+    msg_id: int;
+    channel_id: int;
+}
+
+table MessageRange {
+    min_id: int;
+    max_id: int;
+}
+
+table ChannelMessagesFilterEmpty {
+}
+
+enum ChannelMessagesFilterFlags : int (bit_flags) {
+    exclude_new_messages = 1 << 1,
+}
+
+table ChannelMessagesFilter {
+    flags: ChannelMessagesFilterFlags;
+    exclude_new_messages: bool;                             // flag.1 
+    ranges: [MessageRange];
+}
+
+table ChannelParticipant {
+    user_id: int;
+    date: int;
+}
+
+table ChannelParticipantSelf {
+    user_id: int;
+    inviter_id: int;
+    date: int;
+}
+
+enum ChannelParticipantCreatorFlags : int (bit_flags) {
+    rank = 1 << 0,
+}
+
+table ChannelParticipantCreator {
+    flags: ChannelParticipantCreatorFlags;
+    rank: string;                                           // flag.0 
+    user_id: int;
+    admin_rights: ChatAdminRights;
+}
+
+enum ChannelParticipantAdminFlags : int (bit_flags) {
+    can_edit = 1 << 0,
+    is_self = 1 << 1,
+    inviter_id = 1 << 1,
+    rank = 1 << 2,
+}
+
+table ChannelParticipantAdmin {
+    flags: ChannelParticipantAdminFlags;
+    can_edit: bool;                                         // flag.0 
+    is_self: bool;                                          // flag.1 
+    inviter_id: int;                                        // flag.1 
+    rank: string;                                           // flag.2 
+    user_id: int;
+    promoted_by: int;
+    date: int;
+    admin_rights: ChatAdminRights;
+}
+
+enum ChannelParticipantBannedFlags : int (bit_flags) {
+    left = 1 << 0,
+}
+
+table ChannelParticipantBanned {
+    flags: ChannelParticipantBannedFlags;
+    left: bool;                                             // flag.0 
+    user_id: int;
+    kicked_by: int;
+    date: int;
+    banned_rights: ChatBannedRights;
+}
+
+table ChannelParticipantLeft {
+    user_id: int;
+}
+
+table ChannelParticipantsRecent {
+}
+
+table ChannelParticipantsAdmins {
+}
+
+table ChannelParticipantsKicked {
+    q: string;
+}
+
+table ChannelParticipantsBots {
+}
+
+table ChannelParticipantsBanned {
+    q: string;
+}
+
+table ChannelParticipantsSearch {
+    q: string;
+}
+
+table ChannelParticipantsContacts {
+    q: string;
+}
+
+enum ChannelParticipantsMentionsFlags : int (bit_flags) {
+    q = 1 << 0,
+    top_msg_id = 1 << 1,
+}
+
+table ChannelParticipantsMentions {
+    flags: ChannelParticipantsMentionsFlags;
+    q: string;                                              // flag.0 
+    top_msg_id: int;                                        // flag.1 
+}
+
+enum InputBotInlineMessageMediaAutoFlags : int (bit_flags) {
+    entities = 1 << 1,
+    reply_markup = 1 << 2,
+}
+
+table InputBotInlineMessageMediaAuto {
+    flags: InputBotInlineMessageMediaAutoFlags;
+    entities: [MessageEntity];                              // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    message: string;
+}
+
+enum InputBotInlineMessageTextFlags : int (bit_flags) {
+    no_webpage = 1 << 0,
+    entities = 1 << 1,
+    reply_markup = 1 << 2,
+}
+
+table InputBotInlineMessageText {
+    flags: InputBotInlineMessageTextFlags;
+    no_webpage: bool;                                       // flag.0 
+    entities: [MessageEntity];                              // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    message: string;
+}
+
+enum InputBotInlineMessageMediaGeoFlags : int (bit_flags) {
+    heading = 1 << 0,
+    period = 1 << 1,
+    reply_markup = 1 << 2,
+    proximity_notification_radius = 1 << 3,
+}
+
+table InputBotInlineMessageMediaGeo {
+    flags: InputBotInlineMessageMediaGeoFlags;
+    heading: int;                                           // flag.0 
+    period: int;                                            // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    proximity_notification_radius: int;                     // flag.3 
+    geo_point: InputGeoPoint;
+}
+
+enum InputBotInlineMessageMediaVenueFlags : int (bit_flags) {
+    reply_markup = 1 << 2,
+}
+
+table InputBotInlineMessageMediaVenue {
+    flags: InputBotInlineMessageMediaVenueFlags;
+    reply_markup: ReplyMarkup;                              // flag.2 
+    geo_point: InputGeoPoint;
+    title: string;
+    address: string;
+    provider: string;
+    venue_id: string;
+    venue_type: string;
+}
+
+enum InputBotInlineMessageMediaContactFlags : int (bit_flags) {
+    reply_markup = 1 << 2,
+}
+
+table InputBotInlineMessageMediaContact {
+    flags: InputBotInlineMessageMediaContactFlags;
+    reply_markup: ReplyMarkup;                              // flag.2 
+    phone_number: string;
+    first_name: string;
+    last_name: string;
+    vcard: string;
+}
+
+enum InputBotInlineMessageGameFlags : int (bit_flags) {
+    reply_markup = 1 << 2,
+}
+
+table InputBotInlineMessageGame {
+    flags: InputBotInlineMessageGameFlags;
+    reply_markup: ReplyMarkup;                              // flag.2 
+}
+
+enum InputBotInlineResultFlags : int (bit_flags) {
+    title = 1 << 1,
+    description = 1 << 2,
+    url = 1 << 3,
+    thumb = 1 << 4,
+    content = 1 << 5,
+}
+
+table InputBotInlineResult {
+    flags: InputBotInlineResultFlags;
+    title: string;                                          // flag.1 
+    description: string;                                    // flag.2 
+    url: string;                                            // flag.3 
+    thumb: InputWebDocument;                                // flag.4 
+    content: InputWebDocument;                              // flag.5 
+    id: string;
+    type: string;
+    send_message: InputBotInlineMessage;
+}
+
+table InputBotInlineResultPhoto {
+    id: string;
+    type: string;
+    photo: InputPhoto;
+    send_message: InputBotInlineMessage;
+}
+
+enum InputBotInlineResultDocumentFlags : int (bit_flags) {
+    title = 1 << 1,
+    description = 1 << 2,
+}
+
+table InputBotInlineResultDocument {
+    flags: InputBotInlineResultDocumentFlags;
+    title: string;                                          // flag.1 
+    description: string;                                    // flag.2 
+    id: string;
+    type: string;
+    document: InputDocument;
+    send_message: InputBotInlineMessage;
+}
+
+table InputBotInlineResultGame {
+    id: string;
+    short_name: string;
+    send_message: InputBotInlineMessage;
+}
+
+enum BotInlineMessageMediaAutoFlags : int (bit_flags) {
+    entities = 1 << 1,
+    reply_markup = 1 << 2,
+}
+
+table BotInlineMessageMediaAuto {
+    flags: BotInlineMessageMediaAutoFlags;
+    entities: [MessageEntity];                              // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    message: string;
+}
+
+enum BotInlineMessageTextFlags : int (bit_flags) {
+    no_webpage = 1 << 0,
+    entities = 1 << 1,
+    reply_markup = 1 << 2,
+}
+
+table BotInlineMessageText {
+    flags: BotInlineMessageTextFlags;
+    no_webpage: bool;                                       // flag.0 
+    entities: [MessageEntity];                              // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    message: string;
+}
+
+enum BotInlineMessageMediaGeoFlags : int (bit_flags) {
+    heading = 1 << 0,
+    period = 1 << 1,
+    reply_markup = 1 << 2,
+    proximity_notification_radius = 1 << 3,
+}
+
+table BotInlineMessageMediaGeo {
+    flags: BotInlineMessageMediaGeoFlags;
+    heading: int;                                           // flag.0 
+    period: int;                                            // flag.1 
+    reply_markup: ReplyMarkup;                              // flag.2 
+    proximity_notification_radius: int;                     // flag.3 
+    geo: GeoPoint;
+}
+
+enum BotInlineMessageMediaVenueFlags : int (bit_flags) {
+    reply_markup = 1 << 2,
+}
+
+table BotInlineMessageMediaVenue {
+    flags: BotInlineMessageMediaVenueFlags;
+    reply_markup: ReplyMarkup;                              // flag.2 
+    geo: GeoPoint;
+    title: string;
+    address: string;
+    provider: string;
+    venue_id: string;
+    venue_type: string;
+}
+
+enum BotInlineMessageMediaContactFlags : int (bit_flags) {
+    reply_markup = 1 << 2,
+}
+
+table BotInlineMessageMediaContact {
+    flags: BotInlineMessageMediaContactFlags;
+    reply_markup: ReplyMarkup;                              // flag.2 
+    phone_number: string;
+    first_name: string;
+    last_name: string;
+    vcard: string;
+}
+
+enum BotInlineResultFlags : int (bit_flags) {
+    title = 1 << 1,
+    description = 1 << 2,
+    url = 1 << 3,
+    thumb = 1 << 4,
+    content = 1 << 5,
+}
+
+table BotInlineResult {
+    flags: BotInlineResultFlags;
+    title: string;                                          // flag.1 
+    description: string;                                    // flag.2 
+    url: string;                                            // flag.3 
+    thumb: WebDocument;                                     // flag.4 
+    content: WebDocument;                                   // flag.5 
+    id: string;
+    type: string;
+    send_message: BotInlineMessage;
+}
+
+enum BotInlineMediaResultFlags : int (bit_flags) {
+    photo = 1 << 0,
+    document = 1 << 1,
+    title = 1 << 2,
+    description = 1 << 3,
+}
+
+table BotInlineMediaResult {
+    flags: BotInlineMediaResultFlags;
+    photo: Photo;                                           // flag.0 
+    document: Document;                                     // flag.1 
+    title: string;                                          // flag.2 
+    description: string;                                    // flag.3 
+    id: string;
+    type: string;
+    send_message: BotInlineMessage;
+}
+
+table ExportedMessageLink {
+    link: string;
+    html: string;
+}
+
+enum MessageFwdHeaderFlags : int (bit_flags) {
+    from_id = 1 << 0,
+    channel_post = 1 << 2,
+    post_author = 1 << 3,
+    saved_from_peer = 1 << 4,
+    saved_from_msg_id = 1 << 4,
+    from_name = 1 << 5,
+    psa_type = 1 << 6,
+}
+
+table MessageFwdHeader {
+    flags: MessageFwdHeaderFlags;
+    from_id: Peer;                                          // flag.0 
+    channel_post: int;                                      // flag.2 
+    post_author: string;                                    // flag.3 
+    saved_from_peer: Peer;                                  // flag.4 
+    saved_from_msg_id: int;                                 // flag.4 
+    from_name: string;                                      // flag.5 
+    psa_type: string;                                       // flag.6 
+    date: int;
+}
+
+table InputBotInlineMessageID {
+    dc_id: int;
+    id: long;
+    access_hash: long;
+}
+
+table InlineBotSwitchPM {
+    text: string;
+    start_param: string;
+}
+
+table TopPeer {
+    peer: Peer;
+    rating: double;
+}
+
+table TopPeerCategoryBotsPM {
+}
+
+table TopPeerCategoryBotsInline {
+}
+
+table TopPeerCategoryCorrespondents {
+}
+
+table TopPeerCategoryGroups {
+}
+
+table TopPeerCategoryChannels {
+}
+
+table TopPeerCategoryPhoneCalls {
+}
+
+table TopPeerCategoryForwardUsers {
+}
+
+table TopPeerCategoryForwardChats {
+}
+
+table TopPeerCategoryPeers {
+    category: TopPeerCategory;
+    count: int;
+    peers: [TopPeer];
+}
+
+enum DraftMessageEmptyFlags : int (bit_flags) {
+    date = 1 << 0,
+}
+
+table DraftMessageEmpty {
+    flags: DraftMessageEmptyFlags;
+    date: int;                                              // flag.0 
+}
+
+enum DraftMessageFlags : int (bit_flags) {
+    reply_to_msg_id = 1 << 0,
+    no_webpage = 1 << 1,
+    entities = 1 << 3,
+}
+
+table DraftMessage {
+    flags: DraftMessageFlags;
+    reply_to_msg_id: int;                                   // flag.0 
+    no_webpage: bool;                                       // flag.1 
+    entities: [MessageEntity];                              // flag.3 
+    message: string;
+    date: int;
+}
+
+table StickerSetCovered {
+    set: StickerSet;
+    cover: Document;
+}
+
+table StickerSetMultiCovered {
+    set: StickerSet;
+    covers: [Document];
+}
+
+table MaskCoords {
+    n: int;
+    x: double;
+    y: double;
+    zoom: double;
+}
+
+table InputStickeredMediaPhoto {
+    id: InputPhoto;
+}
+
+table InputStickeredMediaDocument {
+    id: InputDocument;
+}
+
+enum GameFlags : int (bit_flags) {
+    document = 1 << 0,
+}
+
+table Game {
+    flags: GameFlags;
+    document: Document;                                     // flag.0 
+    id: long;
+    access_hash: long;
+    short_name: string;
+    title: string;
+    description: string;
+    photo: Photo;
+}
+
+table InputGameID {
+    id: long;
+    access_hash: long;
+}
+
+table InputGameShortName {
+    bot_id: InputUser;
+    short_name: string;
+}
+
+table HighScore {
+    pos: int;
+    user_id: int;
+    score: int;
+}
+
+table TextEmpty {
+}
+
+table TextPlain {
+    text: string;
+}
+
+table TextBold {
+    text: RichText;
+}
+
+table TextItalic {
+    text: RichText;
+}
+
+table TextUnderline {
+    text: RichText;
+}
+
+table TextStrike {
+    text: RichText;
+}
+
+table TextFixed {
+    text: RichText;
+}
+
+table TextUrl {
+    text: RichText;
+    url: string;
+    webpage_id: long;
+}
+
+table TextEmail {
+    text: RichText;
+    email: string;
+}
+
+table TextConcat {
+    texts: [RichText];
+}
+
+table TextSubscript {
+    text: RichText;
+}
+
+table TextSuperscript {
+    text: RichText;
+}
+
+table TextMarked {
+    text: RichText;
+}
+
+table TextPhone {
+    text: RichText;
+    phone: string;
+}
+
+table TextImage {
+    document_id: long;
+    w: int;
+    h: int;
+}
+
+table TextAnchor {
+    text: RichText;
+    name: string;
+}
+
+table PageBlockUnsupported {
+}
+
+table PageBlockTitle {
+    text: RichText;
+}
+
+table PageBlockSubtitle {
+    text: RichText;
+}
+
+table PageBlockAuthorDate {
+    author: RichText;
+    published_date: int;
+}
+
+table PageBlockHeader {
+    text: RichText;
+}
+
+table PageBlockSubheader {
+    text: RichText;
+}
+
+table PageBlockParagraph {
+    text: RichText;
+}
+
+table PageBlockPreformatted {
+    text: RichText;
+    language: string;
+}
+
+table PageBlockFooter {
+    text: RichText;
+}
+
+table PageBlockDivider {
+}
+
+table PageBlockAnchor {
+    name: string;
+}
+
+table PageBlockList {
+    items: [PageListItem];
+}
+
+table PageBlockBlockquote {
+    text: RichText;
+    caption: RichText;
+}
+
+table PageBlockPullquote {
+    text: RichText;
+    caption: RichText;
+}
+
+enum PageBlockPhotoFlags : int (bit_flags) {
+    url = 1 << 0,
+    webpage_id = 1 << 0,
+}
+
+table PageBlockPhoto {
+    flags: PageBlockPhotoFlags;
+    url: string;                                            // flag.0 
+    webpage_id: long;                                       // flag.0 
+    photo_id: long;
+    caption: PageCaption;
+}
+
+enum PageBlockVideoFlags : int (bit_flags) {
+    autoplay = 1 << 0,
+    loop = 1 << 1,
+}
+
+table PageBlockVideo {
+    flags: PageBlockVideoFlags;
+    autoplay: bool;                                         // flag.0 
+    loop: bool;                                             // flag.1 
+    video_id: long;
+    caption: PageCaption;
+}
+
+table PageBlockCover {
+    cover: PageBlock;
+}
+
+enum PageBlockEmbedFlags : int (bit_flags) {
+    full_width = 1 << 0,
+    url = 1 << 1,
+    html = 1 << 2,
+    allow_scrolling = 1 << 3,
+    poster_photo_id = 1 << 4,
+    w = 1 << 5,
+    h = 1 << 5,
+}
+
+table PageBlockEmbed {
+    flags: PageBlockEmbedFlags;
+    full_width: bool;                                       // flag.0 
+    url: string;                                            // flag.1 
+    html: string;                                           // flag.2 
+    allow_scrolling: bool;                                  // flag.3 
+    poster_photo_id: long;                                  // flag.4 
+    w: int;                                                 // flag.5 
+    h: int;                                                 // flag.5 
+    caption: PageCaption;
+}
+
+table PageBlockEmbedPost {
+    url: string;
+    webpage_id: long;
+    author_photo_id: long;
+    author: string;
+    date: int;
+    blocks: [PageBlock];
+    caption: PageCaption;
+}
+
+table PageBlockCollage {
+    items: [PageBlock];
+    caption: PageCaption;
+}
+
+table PageBlockSlideshow {
+    items: [PageBlock];
+    caption: PageCaption;
+}
+
+table PageBlockChannel {
+    channel: Chat;
+}
+
+table PageBlockAudio {
+    audio_id: long;
+    caption: PageCaption;
+}
+
+table PageBlockKicker {
+    text: RichText;
+}
+
+enum PageBlockTableFlags : int (bit_flags) {
+    bordered = 1 << 0,
+    striped = 1 << 1,
+}
+
+table PageBlockTable {
+    flags: PageBlockTableFlags;
+    bordered: bool;                                         // flag.0 
+    striped: bool;                                          // flag.1 
+    title: RichText;
+    rows: [PageTableRow];
+}
+
+table PageBlockOrderedList {
+    items: [PageListOrderedItem];
+}
+
+enum PageBlockDetailsFlags : int (bit_flags) {
+    open = 1 << 0,
+}
+
+table PageBlockDetails {
+    flags: PageBlockDetailsFlags;
+    open: bool;                                             // flag.0 
+    blocks: [PageBlock];
+    title: RichText;
+}
+
+table PageBlockRelatedArticles {
+    title: RichText;
+    articles: [PageRelatedArticle];
+}
+
+table PageBlockMap {
+    geo: GeoPoint;
+    zoom: int;
+    w: int;
+    h: int;
+    caption: PageCaption;
+}
+
+table PhoneCallDiscardReasonMissed {
+}
+
+table PhoneCallDiscardReasonDisconnect {
+}
+
+table PhoneCallDiscardReasonHangup {
+}
+
+table PhoneCallDiscardReasonBusy {
+}
+
+table DataJSON {
+    data: string;
+}
+
+table LabeledPrice {
+    label: string;
+    amount: long;
+}
+
+enum InvoiceFlags : int (bit_flags) {
+    test = 1 << 0,
+    name_requested = 1 << 1,
+    phone_requested = 1 << 2,
+    email_requested = 1 << 3,
+    shipping_address_requested = 1 << 4,
+    flexible = 1 << 5,
+    phone_to_provider = 1 << 6,
+    email_to_provider = 1 << 7,
+}
+
+table Invoice {
+    flags: InvoiceFlags;
+    test: bool;                                             // flag.0 
+    name_requested: bool;                                   // flag.1 
+    phone_requested: bool;                                  // flag.2 
+    email_requested: bool;                                  // flag.3 
+    shipping_address_requested: bool;                       // flag.4 
+    flexible: bool;                                         // flag.5 
+    phone_to_provider: bool;                                // flag.6 
+    email_to_provider: bool;                                // flag.7 
+    currency: string;
+    prices: [LabeledPrice];
+}
+
+table PaymentCharge {
+    id: string;
+    provider_charge_id: string;
+}
+
+table PostAddress {
+    street_line1: string;
+    street_line2: string;
+    city: string;
+    state: string;
+    country_iso2: string;
+    post_code: string;
+}
+
+enum PaymentRequestedInfoFlags : int (bit_flags) {
+    name = 1 << 0,
+    phone = 1 << 1,
+    email = 1 << 2,
+    shipping_address = 1 << 3,
+}
+
+table PaymentRequestedInfo {
+    flags: PaymentRequestedInfoFlags;
+    name: string;                                           // flag.0 
+    phone: string;                                          // flag.1 
+    email: string;                                          // flag.2 
+    shipping_address: PostAddress;                          // flag.3 
+}
+
+table PaymentSavedCredentialsCard {
+    id: string;
+    title: string;
+}
+
+table WebDocument {
+    url: string;
+    access_hash: long;
+    size: int;
+    mime_type: string;
+    attributes: [DocumentAttribute];
+}
+
+table WebDocumentNoProxy {
+    url: string;
+    size: int;
+    mime_type: string;
+    attributes: [DocumentAttribute];
+}
+
+table InputWebDocument {
+    url: string;
+    size: int;
+    mime_type: string;
+    attributes: [DocumentAttribute];
+}
+
+table InputWebFileLocation {
+    url: string;
+    access_hash: long;
+}
+
+table InputWebFileGeoPointLocation {
+    geo_point: InputGeoPoint;
+    access_hash: long;
+    w: int;
+    h: int;
+    zoom: int;
+    scale: int;
+}
+
+table InputPaymentCredentialsSaved {
+    id: string;
+    tmp_password: [byte];
+}
+
+enum InputPaymentCredentialsFlags : int (bit_flags) {
+    save = 1 << 0,
+}
+
+table InputPaymentCredentials {
+    flags: InputPaymentCredentialsFlags;
+    save: bool;                                             // flag.0 
+    data: DataJSON;
+}
+
+table InputPaymentCredentialsApplePay {
+    payment_data: DataJSON;
+}
+
+table InputPaymentCredentialsAndroidPay {
+    payment_token: DataJSON;
+    google_transaction_id: string;
+}
+
+table ShippingOption {
+    id: string;
+    title: string;
+    prices: [LabeledPrice];
+}
+
+enum InputStickerSetItemFlags : int (bit_flags) {
+    mask_coords = 1 << 0,
+}
+
+table InputStickerSetItem {
+    flags: InputStickerSetItemFlags;
+    mask_coords: MaskCoords;                                // flag.0 
+    document: InputDocument;
+    emoji: string;
+}
+
+table InputPhoneCall {
+    id: long;
+    access_hash: long;
+}
+
+table PhoneCallEmpty {
+    id: long;
+}
+
+enum PhoneCallWaitingFlags : int (bit_flags) {
+    receive_date = 1 << 0,
+    video = 1 << 6,
+}
+
+table PhoneCallWaiting {
+    flags: PhoneCallWaitingFlags;
+    receive_date: int;                                      // flag.0 
+    video: bool;                                            // flag.6 
+    id: long;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    protocol: PhoneCallProtocol;
+}
+
+enum PhoneCallRequestedFlags : int (bit_flags) {
+    video = 1 << 6,
+}
+
+table PhoneCallRequested {
+    flags: PhoneCallRequestedFlags;
+    video: bool;                                            // flag.6 
+    id: long;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    g_a_hash: [byte];
+    protocol: PhoneCallProtocol;
+}
+
+enum PhoneCallAcceptedFlags : int (bit_flags) {
+    video = 1 << 6,
+}
+
+table PhoneCallAccepted {
+    flags: PhoneCallAcceptedFlags;
+    video: bool;                                            // flag.6 
+    id: long;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    g_b: [byte];
+    protocol: PhoneCallProtocol;
+}
+
+enum PhoneCallFlags : int (bit_flags) {
+    p2p_allowed = 1 << 5,
+    video = 1 << 6,
+}
+
+table PhoneCall {
+    flags: PhoneCallFlags;
+    p2p_allowed: bool;                                      // flag.5 
+    video: bool;                                            // flag.6 
+    id: long;
+    access_hash: long;
+    date: int;
+    admin_id: int;
+    participant_id: int;
+    g_a_or_b: [byte];
+    key_fingerprint: long;
+    protocol: PhoneCallProtocol;
+    connections: [PhoneConnection];
+    start_date: int;
+}
+
+enum PhoneCallDiscardedFlags : int (bit_flags) {
+    reason = 1 << 0,
+    duration = 1 << 1,
+    need_rating = 1 << 2,
+    need_debug = 1 << 3,
+    video = 1 << 6,
+}
+
+table PhoneCallDiscarded {
+    flags: PhoneCallDiscardedFlags;
+    reason: PhoneCallDiscardReason;                         // flag.0 
+    duration: int;                                          // flag.1 
+    need_rating: bool;                                      // flag.2 
+    need_debug: bool;                                       // flag.3 
+    video: bool;                                            // flag.6 
+    id: long;
+}
+
+table PhoneConnection {
+    id: long;
+    ip: string;
+    ipv6: string;
+    port: int;
+    peer_tag: [byte];
+}
+
+enum PhoneConnectionWebrtcFlags : int (bit_flags) {
+    turn = 1 << 0,
+    stun = 1 << 1,
+}
+
+table PhoneConnectionWebrtc {
+    flags: PhoneConnectionWebrtcFlags;
+    turn: bool;                                             // flag.0 
+    stun: bool;                                             // flag.1 
+    id: long;
+    ip: string;
+    ipv6: string;
+    port: int;
+    username: string;
+    password: string;
+}
+
+enum PhoneCallProtocolFlags : int (bit_flags) {
+    udp_p2p = 1 << 0,
+    udp_reflector = 1 << 1,
+}
+
+table PhoneCallProtocol {
+    flags: PhoneCallProtocolFlags;
+    udp_p2p: bool;                                          // flag.0 
+    udp_reflector: bool;                                    // flag.1 
+    min_layer: int;
+    max_layer: int;
+    library_versions: [string];
+}
+
+table CdnPublicKey {
+    dc_id: int;
+    public_key: string;
+}
+
+table CdnConfig {
+    public_keys: [CdnPublicKey];
+}
+
+table LangPackString {
+    key: string;
+    value: string;
+}
+
+enum LangPackStringPluralizedFlags : int (bit_flags) {
+    zero_value = 1 << 0,
+    one_value = 1 << 1,
+    two_value = 1 << 2,
+    few_value = 1 << 3,
+    many_value = 1 << 4,
+}
+
+table LangPackStringPluralized {
+    flags: LangPackStringPluralizedFlags;
+    zero_value: string;                                     // flag.0 
+    one_value: string;                                      // flag.1 
+    two_value: string;                                      // flag.2 
+    few_value: string;                                      // flag.3 
+    many_value: string;                                     // flag.4 
+    key: string;
+    other_value: string;
+}
+
+table LangPackStringDeleted {
+    key: string;
+}
+
+table LangPackDifference {
+    lang_code: string;
+    from_version: int;
+    version: int;
+    strings: [LangPackString];
+}
+
+enum LangPackLanguageFlags : int (bit_flags) {
+    official = 1 << 0,
+    base_lang_code = 1 << 1,
+    rtl = 1 << 2,
+    beta = 1 << 3,
+}
+
+table LangPackLanguage {
+    flags: LangPackLanguageFlags;
+    official: bool;                                         // flag.0 
+    base_lang_code: string;                                 // flag.1 
+    rtl: bool;                                              // flag.2 
+    beta: bool;                                             // flag.3 
+    name: string;
+    native_name: string;
+    lang_code: string;
+    plural_code: string;
+    strings_count: int;
+    translated_count: int;
+    translations_url: string;
+}
+
+table ChannelAdminLogEventActionChangeTitle {
+    prev_value: string;
+    new_value: string;
+}
+
+table ChannelAdminLogEventActionChangeAbout {
+    prev_value: string;
+    new_value: string;
+}
+
+table ChannelAdminLogEventActionChangeUsername {
+    prev_value: string;
+    new_value: string;
+}
+
+table ChannelAdminLogEventActionChangePhoto {
+    prev_photo: Photo;
+    new_photo: Photo;
+}
+
+table ChannelAdminLogEventActionToggleInvites {
+    new_value: bool;
+}
+
+table ChannelAdminLogEventActionToggleSignatures {
+    new_value: bool;
+}
+
+table ChannelAdminLogEventActionUpdatePinned {
+    message: Message;
+}
+
+table ChannelAdminLogEventActionEditMessage {
+    prev_message: Message;
+    new_message: Message;
+}
+
+table ChannelAdminLogEventActionDeleteMessage {
+    message: Message;
+}
+
+table ChannelAdminLogEventActionParticipantJoin {
+}
+
+table ChannelAdminLogEventActionParticipantLeave {
+}
+
+table ChannelAdminLogEventActionParticipantInvite {
+    participant: ChannelParticipant;
+}
+
+table ChannelAdminLogEventActionParticipantToggleBan {
+    prev_participant: ChannelParticipant;
+    new_participant: ChannelParticipant;
+}
+
+table ChannelAdminLogEventActionParticipantToggleAdmin {
+    prev_participant: ChannelParticipant;
+    new_participant: ChannelParticipant;
+}
+
+table ChannelAdminLogEventActionChangeStickerSet {
+    prev_stickerset: InputStickerSet;
+    new_stickerset: InputStickerSet;
+}
+
+table ChannelAdminLogEventActionTogglePreHistoryHidden {
+    new_value: bool;
+}
+
+table ChannelAdminLogEventActionDefaultBannedRights {
+    prev_banned_rights: ChatBannedRights;
+    new_banned_rights: ChatBannedRights;
+}
+
+table ChannelAdminLogEventActionStopPoll {
+    message: Message;
+}
+
+table ChannelAdminLogEventActionChangeLinkedChat {
+    prev_value: int;
+    new_value: int;
+}
+
+table ChannelAdminLogEventActionChangeLocation {
+    prev_value: ChannelLocation;
+    new_value: ChannelLocation;
+}
+
+table ChannelAdminLogEventActionToggleSlowMode {
+    prev_value: int;
+    new_value: int;
+}
+
+table ChannelAdminLogEvent {
+    id: long;
+    date: int;
+    user_id: int;
+    action: ChannelAdminLogEventAction;
+}
+
+enum ChannelAdminLogEventsFilterFlags : int (bit_flags) {
+    join = 1 << 0,
+    leave = 1 << 1,
+    invite = 1 << 2,
+    ban = 1 << 3,
+    unban = 1 << 4,
+    kick = 1 << 5,
+    unkick = 1 << 6,
+    promote = 1 << 7,
+    demote = 1 << 8,
+    info = 1 << 9,
+    settings = 1 << 10,
+    pinned = 1 << 11,
+    edit = 1 << 12,
+    delete = 1 << 13,
+}
+
+table ChannelAdminLogEventsFilter {
+    flags: ChannelAdminLogEventsFilterFlags;
+    join: bool;                                             // flag.0 
+    leave: bool;                                            // flag.1 
+    invite: bool;                                           // flag.2 
+    ban: bool;                                              // flag.3 
+    unban: bool;                                            // flag.4 
+    kick: bool;                                             // flag.5 
+    unkick: bool;                                           // flag.6 
+    promote: bool;                                          // flag.7 
+    demote: bool;                                           // flag.8 
+    info: bool;                                             // flag.9 
+    settings: bool;                                         // flag.10
+    pinned: bool;                                           // flag.11
+    edit: bool;                                             // flag.12
+    delete: bool;                                           // flag.13
+}
+
+table PopularContact {
+    client_id: long;
+    importers: int;
+}
+
+table RecentMeUrlUnknown {
+    url: string;
+}
+
+table RecentMeUrlUser {
+    url: string;
+    user_id: int;
+}
+
+table RecentMeUrlChat {
+    url: string;
+    chat_id: int;
+}
+
+table RecentMeUrlChatInvite {
+    url: string;
+    chat_invite: ChatInvite;
+}
+
+table RecentMeUrlStickerSet {
+    url: string;
+    set: StickerSetCovered;
+}
+
+enum InputSingleMediaFlags : int (bit_flags) {
+    entities = 1 << 0,
+}
+
+table InputSingleMedia {
+    flags: InputSingleMediaFlags;
+    entities: [MessageEntity];                              // flag.0 
+    media: InputMedia;
+    random_id: long;
+    message: string;
+}
+
+table WebAuthorization {
+    hash: long;
+    bot_id: int;
+    domain: string;
+    browser: string;
+    platform: string;
+    date_created: int;
+    date_active: int;
+    ip: string;
+    region: string;
+}
+
+table InputMessageID {
+    id: int;
+}
+
+table InputMessageReplyTo {
+    id: int;
+}
+
+table InputMessagePinned {
+}
+
+table InputMessageCallbackQuery {
+    id: int;
+    query_id: long;
+}
+
+table InputDialogPeer {
+    peer: InputPeer;
+}
+
+table InputDialogPeerFolder {
+    folder_id: int;
+}
+
+table DialogPeer {
+    peer: Peer;
+}
+
+table DialogPeerFolder {
+    folder_id: int;
+}
+
+table FileHash {
+    offset: int;
+    limit: int;
+    hash: [byte];
+}
+
+table InputClientProxy {
+    address: string;
+    port: int;
+}
+
+table InputSecureFileUploaded {
+    id: long;
+    parts: int;
+    md5_checksum: string;
+    file_hash: [byte];
+    secret: [byte];
+}
+
+table InputSecureFile {
+    id: long;
+    access_hash: long;
+}
+
+table SecureFileEmpty {
+}
+
+table SecureFile {
+    id: long;
+    access_hash: long;
+    size: int;
+    dc_id: int;
+    date: int;
+    file_hash: [byte];
+    secret: [byte];
+}
+
+table SecureData {
+    data: [byte];
+    data_hash: [byte];
+    secret: [byte];
+}
+
+table SecurePlainPhone {
+    phone: string;
+}
+
+table SecurePlainEmail {
+    email: string;
+}
+
+table SecureValueTypePersonalDetails {
+}
+
+table SecureValueTypePassport {
+}
+
+table SecureValueTypeDriverLicense {
+}
+
+table SecureValueTypeIdentityCard {
+}
+
+table SecureValueTypeInternalPassport {
+}
+
+table SecureValueTypeAddress {
+}
+
+table SecureValueTypeUtilityBill {
+}
+
+table SecureValueTypeBankStatement {
+}
+
+table SecureValueTypeRentalAgreement {
+}
+
+table SecureValueTypePassportRegistration {
+}
+
+table SecureValueTypeTemporaryRegistration {
+}
+
+table SecureValueTypePhone {
+}
+
+table SecureValueTypeEmail {
+}
+
+enum SecureValueFlags : int (bit_flags) {
+    data = 1 << 0,
+    front_side = 1 << 1,
+    reverse_side = 1 << 2,
+    selfie = 1 << 3,
+    files = 1 << 4,
+    plain_data = 1 << 5,
+    translation = 1 << 6,
+}
+
+table SecureValue {
+    flags: SecureValueFlags;
+    data: SecureData;                                       // flag.0 
+    front_side: SecureFile;                                 // flag.1 
+    reverse_side: SecureFile;                               // flag.2 
+    selfie: SecureFile;                                     // flag.3 
+    files: [SecureFile];                                    // flag.4 
+    plain_data: SecurePlainData;                            // flag.5 
+    translation: [SecureFile];                              // flag.6 
+    type: SecureValueType;
+    hash: [byte];
+}
+
+enum InputSecureValueFlags : int (bit_flags) {
+    data = 1 << 0,
+    front_side = 1 << 1,
+    reverse_side = 1 << 2,
+    selfie = 1 << 3,
+    files = 1 << 4,
+    plain_data = 1 << 5,
+    translation = 1 << 6,
+}
+
+table InputSecureValue {
+    flags: InputSecureValueFlags;
+    data: SecureData;                                       // flag.0 
+    front_side: InputSecureFile;                            // flag.1 
+    reverse_side: InputSecureFile;                          // flag.2 
+    selfie: InputSecureFile;                                // flag.3 
+    files: [InputSecureFile];                               // flag.4 
+    plain_data: SecurePlainData;                            // flag.5 
+    translation: [InputSecureFile];                         // flag.6 
+    type: SecureValueType;
+}
+
+table SecureValueHash {
+    type: SecureValueType;
+    hash: [byte];
+}
+
+table SecureValueErrorData {
+    type: SecureValueType;
+    data_hash: [byte];
+    field: string;
+    text: string;
+}
+
+table SecureValueErrorFrontSide {
+    type: SecureValueType;
+    file_hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorReverseSide {
+    type: SecureValueType;
+    file_hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorSelfie {
+    type: SecureValueType;
+    file_hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorFile {
+    type: SecureValueType;
+    file_hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorFiles {
+    type: SecureValueType;
+    file_hash: [[byte]];
+    text: string;
+}
+
+table SecureValueError {
+    type: SecureValueType;
+    hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorTranslationFile {
+    type: SecureValueType;
+    file_hash: [byte];
+    text: string;
+}
+
+table SecureValueErrorTranslationFiles {
+    type: SecureValueType;
+    file_hash: [[byte]];
+    text: string;
+}
+
+table SecureCredentialsEncrypted {
+    data: [byte];
+    hash: [byte];
+    secret: [byte];
+}
+
+table SavedPhoneContact {
+    phone: string;
+    first_name: string;
+    last_name: string;
+    date: int;
+}
+
+table PasswordKdfAlgoUnknown {
+}
+
+table PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow {
+    salt1: [byte];
+    salt2: [byte];
+    g: int;
+    p: [byte];
+}
+
+table SecurePasswordKdfAlgoUnknown {
+}
+
+table SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000 {
+    salt: [byte];
+}
+
+table SecurePasswordKdfAlgoSHA512 {
+    salt: [byte];
+}
+
+table SecureSecretSettings {
+    secure_algo: SecurePasswordKdfAlgo;
+    secure_secret: [byte];
+    secure_secret_id: long;
+}
+
+table InputCheckPasswordEmpty {
+}
+
+table InputCheckPasswordSRP {
+    srp_id: long;
+    A: [byte];
+    M1: [byte];
+}
+
+enum SecureRequiredTypeFlags : int (bit_flags) {
+    native_names = 1 << 0,
+    selfie_required = 1 << 1,
+    translation_required = 1 << 2,
+}
+
+table SecureRequiredType {
+    flags: SecureRequiredTypeFlags;
+    native_names: bool;                                     // flag.0 
+    selfie_required: bool;                                  // flag.1 
+    translation_required: bool;                             // flag.2 
+    type: SecureValueType;
+}
+
+table SecureRequiredTypeOneOf {
+    types: [SecureRequiredType];
+}
+
+table InputAppEvent {
+    time: double;
+    type: string;
+    peer: long;
+    data: JSONValue;
+}
+
+table JsonObjectValue {
+    key: string;
+    value: JSONValue;
+}
+
+table JsonNull {
+}
+
+table JsonBool {
+    value: bool;
+}
+
+table JsonNumber {
+    value: double;
+}
+
+table JsonString {
+    value: string;
+}
+
+table JsonArray {
+    value: [JSONValue];
+}
+
+table JsonObject {
+    value: [JSONObjectValue];
+}
+
+enum PageTableCellFlags : int (bit_flags) {
+    header = 1 << 0,
+    colspan = 1 << 1,
+    rowspan = 1 << 2,
+    align_center = 1 << 3,
+    align_right = 1 << 4,
+    valign_middle = 1 << 5,
+    valign_bottom = 1 << 6,
+    text = 1 << 7,
+}
+
+table PageTableCell {
+    flags: PageTableCellFlags;
+    header: bool;                                           // flag.0 
+    colspan: int;                                           // flag.1 
+    rowspan: int;                                           // flag.2 
+    align_center: bool;                                     // flag.3 
+    align_right: bool;                                      // flag.4 
+    valign_middle: bool;                                    // flag.5 
+    valign_bottom: bool;                                    // flag.6 
+    text: RichText;                                         // flag.7 
+}
+
+table PageTableRow {
+    cells: [PageTableCell];
+}
+
+table PageCaption {
+    text: RichText;
+    credit: RichText;
+}
+
+table PageListItemText {
+    text: RichText;
+}
+
+table PageListItemBlocks {
+    blocks: [PageBlock];
+}
+
+table PageListOrderedItemText {
+    num: string;
+    text: RichText;
+}
+
+table PageListOrderedItemBlocks {
+    num: string;
+    blocks: [PageBlock];
+}
+
+enum PageRelatedArticleFlags : int (bit_flags) {
+    title = 1 << 0,
+    description = 1 << 1,
+    photo_id = 1 << 2,
+    author = 1 << 3,
+    published_date = 1 << 4,
+}
+
+table PageRelatedArticle {
+    flags: PageRelatedArticleFlags;
+    title: string;                                          // flag.0 
+    description: string;                                    // flag.1 
+    photo_id: long;                                         // flag.2 
+    author: string;                                         // flag.3 
+    published_date: int;                                    // flag.4 
+    url: string;
+    webpage_id: long;
+}
+
+enum PageFlags : int (bit_flags) {
+    part = 1 << 0,
+    rtl = 1 << 1,
+    v2 = 1 << 2,
+    views = 1 << 3,
+}
+
+table Page {
+    flags: PageFlags;
+    part: bool;                                             // flag.0 
+    rtl: bool;                                              // flag.1 
+    v2: bool;                                               // flag.2 
+    views: int;                                             // flag.3 
+    url: string;
+    blocks: [PageBlock];
+    photos: [Photo];
+    documents: [Document];
+}
+
+table PollAnswer {
+    text: string;
+    option: [byte];
+}
+
+enum PollFlags : int (bit_flags) {
+    closed = 1 << 0,
+    public_voters = 1 << 1,
+    multiple_choice = 1 << 2,
+    quiz = 1 << 3,
+    close_period = 1 << 4,
+    close_date = 1 << 5,
+}
+
+table Poll {
+    flags: PollFlags;
+    closed: bool;                                           // flag.0 
+    public_voters: bool;                                    // flag.1 
+    multiple_choice: bool;                                  // flag.2 
+    quiz: bool;                                             // flag.3 
+    close_period: int;                                      // flag.4 
+    close_date: int;                                        // flag.5 
+    id: long;
+    question: string;
+    answers: [PollAnswer];
+}
+
+enum PollAnswerVotersFlags : int (bit_flags) {
+    chosen = 1 << 0,
+    correct = 1 << 1,
+}
+
+table PollAnswerVoters {
+    flags: PollAnswerVotersFlags;
+    chosen: bool;                                           // flag.0 
+    correct: bool;                                          // flag.1 
+    option: [byte];
+    voters: int;
+}
+
+enum PollResultsFlags : int (bit_flags) {
+    min = 1 << 0,
+    results = 1 << 1,
+    total_voters = 1 << 2,
+    recent_voters = 1 << 3,
+    solution = 1 << 4,
+    solution_entities = 1 << 4,
+}
+
+table PollResults {
+    flags: PollResultsFlags;
+    min: bool;                                              // flag.0 
+    results: [PollAnswerVoters];                            // flag.1 
+    total_voters: int;                                      // flag.2 
+    recent_voters: [int];                                   // flag.3 
+    solution: string;                                       // flag.4 
+    solution_entities: [MessageEntity];                     // flag.4 
+}
+
+table ChatOnlines {
+    onlines: int;
+}
+
+table StatsURL {
+    url: string;
+}
+
+enum ChatAdminRightsFlags : int (bit_flags) {
+    change_info = 1 << 0,
+    post_messages = 1 << 1,
+    edit_messages = 1 << 2,
+    delete_messages = 1 << 3,
+    ban_users = 1 << 4,
+    invite_users = 1 << 5,
+    pin_messages = 1 << 7,
+    add_admins = 1 << 9,
+    anonymous = 1 << 10,
+}
+
+table ChatAdminRights {
+    flags: ChatAdminRightsFlags;
+    change_info: bool;                                      // flag.0 
+    post_messages: bool;                                    // flag.1 
+    edit_messages: bool;                                    // flag.2 
+    delete_messages: bool;                                  // flag.3 
+    ban_users: bool;                                        // flag.4 
+    invite_users: bool;                                     // flag.5 
+    pin_messages: bool;                                     // flag.7 
+    add_admins: bool;                                       // flag.9 
+    anonymous: bool;                                        // flag.10
+}
+
+enum ChatBannedRightsFlags : int (bit_flags) {
+    view_messages = 1 << 0,
+    send_messages = 1 << 1,
+    send_media = 1 << 2,
+    send_stickers = 1 << 3,
+    send_gifs = 1 << 4,
+    send_games = 1 << 5,
+    send_inline = 1 << 6,
+    embed_links = 1 << 7,
+    send_polls = 1 << 8,
+    change_info = 1 << 10,
+    invite_users = 1 << 15,
+    pin_messages = 1 << 17,
+}
+
+table ChatBannedRights {
+    flags: ChatBannedRightsFlags;
+    view_messages: bool;                                    // flag.0 
+    send_messages: bool;                                    // flag.1 
+    send_media: bool;                                       // flag.2 
+    send_stickers: bool;                                    // flag.3 
+    send_gifs: bool;                                        // flag.4 
+    send_games: bool;                                       // flag.5 
+    send_inline: bool;                                      // flag.6 
+    embed_links: bool;                                      // flag.7 
+    send_polls: bool;                                       // flag.8 
+    change_info: bool;                                      // flag.10
+    invite_users: bool;                                     // flag.15
+    pin_messages: bool;                                     // flag.17
+    until_date: int;
+}
+
+table InputWallPaper {
+    id: long;
+    access_hash: long;
+}
+
+table InputWallPaperSlug {
+    slug: string;
+}
+
+table InputWallPaperNoFile {
+}
+
+enum CodeSettingsFlags : int (bit_flags) {
+    allow_flashcall = 1 << 0,
+    current_number = 1 << 1,
+    allow_app_hash = 1 << 4,
+}
+
+table CodeSettings {
+    flags: CodeSettingsFlags;
+    allow_flashcall: bool;                                  // flag.0 
+    current_number: bool;                                   // flag.1 
+    allow_app_hash: bool;                                   // flag.4 
+}
+
+enum WallPaperSettingsFlags : int (bit_flags) {
+    background_color = 1 << 0,
+    blur = 1 << 1,
+    motion = 1 << 2,
+    intensity = 1 << 3,
+    second_background_color = 1 << 4,
+    rotation = 1 << 4,
+}
+
+table WallPaperSettings {
+    flags: WallPaperSettingsFlags;
+    background_color: int;                                  // flag.0 
+    blur: bool;                                             // flag.1 
+    motion: bool;                                           // flag.2 
+    intensity: int;                                         // flag.3 
+    second_background_color: int;                           // flag.4 
+    rotation: int;                                          // flag.4 
+}
+
+enum AutoDownloadSettingsFlags : int (bit_flags) {
+    disabled = 1 << 0,
+    video_preload_large = 1 << 1,
+    audio_preload_next = 1 << 2,
+    phonecalls_less_data = 1 << 3,
+}
+
+table AutoDownloadSettings {
+    flags: AutoDownloadSettingsFlags;
+    disabled: bool;                                         // flag.0 
+    video_preload_large: bool;                              // flag.1 
+    audio_preload_next: bool;                               // flag.2 
+    phonecalls_less_data: bool;                             // flag.3 
+    photo_size_max: int;
+    video_size_max: int;
+    file_size_max: int;
+    video_upload_maxbitrate: int;
+}
+
+table EmojiKeyword {
+    keyword: string;
+    emoticons: [string];
+}
+
+table EmojiKeywordDeleted {
+    keyword: string;
+    emoticons: [string];
+}
+
+table EmojiKeywordsDifference {
+    lang_code: string;
+    from_version: int;
+    version: int;
+    keywords: [EmojiKeyword];
+}
+
+table EmojiURL {
+    url: string;
+}
+
+table EmojiLanguage {
+    lang_code: string;
+}
+
+table FileLocationToBeDeprecated {
+    volume_id: long;
+    local_id: int;
+}
+
+enum FolderFlags : int (bit_flags) {
+    autofill_new_broadcasts = 1 << 0,
+    autofill_public_groups = 1 << 1,
+    autofill_new_correspondents = 1 << 2,
+    photo = 1 << 3,
+}
+
+table Folder {
+    flags: FolderFlags;
+    autofill_new_broadcasts: bool;                          // flag.0 
+    autofill_public_groups: bool;                           // flag.1 
+    autofill_new_correspondents: bool;                      // flag.2 
+    photo: ChatPhoto;                                       // flag.3 
+    id: int;
+    title: string;
+}
+
+table InputFolderPeer {
+    peer: InputPeer;
+    folder_id: int;
+}
+
+table FolderPeer {
+    peer: Peer;
+    folder_id: int;
+}
+
+enum UrlAuthResultRequestFlags : int (bit_flags) {
+    request_write_access = 1 << 0,
+}
+
+table UrlAuthResultRequest {
+    flags: UrlAuthResultRequestFlags;
+    request_write_access: bool;                             // flag.0 
+    bot: User;
+    domain: string;
+}
+
+table UrlAuthResultAccepted {
+    url: string;
+}
+
+table UrlAuthResultDefault {
+}
+
+table ChannelLocationEmpty {
+}
+
+table ChannelLocation {
+    geo_point: GeoPoint;
+    address: string;
+}
+
+table PeerLocated {
+    peer: Peer;
+    expires: int;
+    distance: int;
+}
+
+table PeerSelfLocated {
+    expires: int;
+}
+
+table RestrictionReason {
+    platform: string;
+    reason: string;
+    text: string;
+}
+
+table InputTheme {
+    id: long;
+    access_hash: long;
+}
+
+table InputThemeSlug {
+    slug: string;
+}
+
+enum ThemeFlags : int (bit_flags) {
+    creator = 1 << 0,
+    default = 1 << 1,
+    document = 1 << 2,
+    settings = 1 << 3,
+}
+
+table Theme {
+    flags: ThemeFlags;
+    creator: bool;                                          // flag.0 
+    default: bool;                                          // flag.1 
+    document: Document;                                     // flag.2 
+    settings: ThemeSettings;                                // flag.3 
+    id: long;
+    access_hash: long;
+    slug: string;
+    title: string;
+    installs_count: int;
+}
+
+table BaseThemeClassic {
+}
+
+table BaseThemeDay {
+}
+
+table BaseThemeNight {
+}
+
+table BaseThemeTinted {
+}
+
+table BaseThemeArctic {
+}
+
+enum InputThemeSettingsFlags : int (bit_flags) {
+    message_top_color = 1 << 0,
+    message_bottom_color = 1 << 0,
+    wallpaper = 1 << 1,
+    wallpaper_settings = 1 << 1,
+}
+
+table InputThemeSettings {
+    flags: InputThemeSettingsFlags;
+    message_top_color: int;                                 // flag.0 
+    message_bottom_color: int;                              // flag.0 
+    wallpaper: InputWallPaper;                              // flag.1 
+    wallpaper_settings: WallPaperSettings;                  // flag.1 
+    base_theme: BaseTheme;
+    accent_color: int;
+}
+
+enum ThemeSettingsFlags : int (bit_flags) {
+    message_top_color = 1 << 0,
+    message_bottom_color = 1 << 0,
+    wallpaper = 1 << 1,
+}
+
+table ThemeSettings {
+    flags: ThemeSettingsFlags;
+    message_top_color: int;                                 // flag.0 
+    message_bottom_color: int;                              // flag.0 
+    wallpaper: WallPaper;                                   // flag.1 
+    base_theme: BaseTheme;
+    accent_color: int;
+}
+
+enum WebPageAttributeThemeFlags : int (bit_flags) {
+    documents = 1 << 0,
+    settings = 1 << 1,
+}
+
+table WebPageAttributeTheme {
+    flags: WebPageAttributeThemeFlags;
+    documents: [Document];                                  // flag.0 
+    settings: ThemeSettings;                                // flag.1 
+}
+
+table MessageUserVote {
+    user_id: int;
+    option: [byte];
+    date: int;
+}
+
+table MessageUserVoteInputOption {
+    user_id: int;
+    date: int;
+}
+
+table MessageUserVoteMultiple {
+    user_id: int;
+    options: [[byte]];
+    date: int;
+}
+
+table BankCardOpenUrl {
+    url: string;
+    name: string;
+}
+
+enum DialogFilterFlags : int (bit_flags) {
+    contacts = 1 << 0,
+    non_contacts = 1 << 1,
+    groups = 1 << 2,
+    broadcasts = 1 << 3,
+    bots = 1 << 4,
+    exclude_muted = 1 << 11,
+    exclude_read = 1 << 12,
+    exclude_archived = 1 << 13,
+    emoticon = 1 << 25,
+}
+
+table DialogFilter {
+    flags: DialogFilterFlags;
+    contacts: bool;                                         // flag.0 
+    non_contacts: bool;                                     // flag.1 
+    groups: bool;                                           // flag.2 
+    broadcasts: bool;                                       // flag.3 
+    bots: bool;                                             // flag.4 
+    exclude_muted: bool;                                    // flag.11
+    exclude_read: bool;                                     // flag.12
+    exclude_archived: bool;                                 // flag.13
+    emoticon: string;                                       // flag.25
+    id: int;
+    title: string;
+    pinned_peers: [InputPeer];
+    include_peers: [InputPeer];
+    exclude_peers: [InputPeer];
+}
+
+table DialogFilterSuggested {
+    filter: DialogFilter;
+    description: string;
+}
+
+table StatsDateRangeDays {
+    min_date: int;
+    max_date: int;
+}
+
+table StatsAbsValueAndPrev {
+    current: double;
+    previous: double;
+}
+
+table StatsPercentValue {
+    part: double;
+    total: double;
+}
+
+table StatsGraphAsync {
+    token: string;
+}
+
+table StatsGraphError {
+    error: string;
+}
+
+enum StatsGraphFlags : int (bit_flags) {
+    zoom_token = 1 << 0,
+}
+
+table StatsGraph {
+    flags: StatsGraphFlags;
+    zoom_token: string;                                     // flag.0 
+    json: DataJSON;
+}
+
+table MessageInteractionCounters {
+    msg_id: int;
+    views: int;
+    forwards: int;
+}
+
+enum VideoSizeFlags : int (bit_flags) {
+    video_start_ts = 1 << 0,
+}
+
+table VideoSize {
+    flags: VideoSizeFlags;
+    video_start_ts: double;                                 // flag.0 
+    type: string;
+    location: FileLocation;
+    w: int;
+    h: int;
+    size: int;
+}
+
+table StatsGroupTopPoster {
+    user_id: int;
+    messages: int;
+    avg_chars: int;
+}
+
+table StatsGroupTopAdmin {
+    user_id: int;
+    deleted: int;
+    kicked: int;
+    banned: int;
+}
+
+table StatsGroupTopInviter {
+    user_id: int;
+    invitations: int;
+}
+
+enum GlobalPrivacySettingsFlags : int (bit_flags) {
+    archive_and_mute_new_noncontact_peers = 1 << 0,
+}
+
+table GlobalPrivacySettings {
+    flags: GlobalPrivacySettingsFlags;
+    archive_and_mute_new_noncontact_peers: bool;            // flag.0 
+}
+
+enum MessageViewsFlags : int (bit_flags) {
+    views = 1 << 0,
+    forwards = 1 << 1,
+    replies = 1 << 2,
+}
+
+table MessageViews {
+    flags: MessageViewsFlags;
+    views: int;                                             // flag.0 
+    forwards: int;                                          // flag.1 
+    replies: MessageReplies;                                // flag.2 
+}
+
+enum MessageReplyHeaderFlags : int (bit_flags) {
+    reply_to_peer_id = 1 << 0,
+    reply_to_top_id = 1 << 1,
+}
+
+table MessageReplyHeader {
+    flags: MessageReplyHeaderFlags;
+    reply_to_peer_id: Peer;                                 // flag.0 
+    reply_to_top_id: int;                                   // flag.1 
+    reply_to_msg_id: int;
+}
+
+enum MessageRepliesFlags : int (bit_flags) {
+    comments = 1 << 0,
+    channel_id = 1 << 0,
+    recent_repliers = 1 << 1,
+    max_id = 1 << 2,
+    read_max_id = 1 << 3,
+}
+
+table MessageReplies {
+    flags: MessageRepliesFlags;
+    comments: bool;                                         // flag.0 
+    channel_id: int;                                        // flag.0 
+    recent_repliers: [Peer];                                // flag.1 
+    max_id: int;                                            // flag.2 
+    read_max_id: int;                                       // flag.3 
+    replies: int;
+    replies_pts: int;
+}
+
+table PeerBlocked {
+    peer_id: Peer;
+    date: int;
+}
+
+union Bool {
+    BoolFalse,
+    BoolTrue
+}
+
+union IpPort {
+    IpPort,
+    IpPortSecret
+}
+
+union InputPeer {
+    InputPeerEmpty,
+    InputPeerSelf,
+    InputPeerChat,
+    InputPeerUser,
+    InputPeerChannel,
+    InputPeerUserFromMessage,
+    InputPeerChannelFromMessage
+}
+
+union InputUser {
+    InputUserEmpty,
+    InputUserSelf,
+    InputUser,
+    InputUserFromMessage
+}
+
+union InputContact {
+    InputPhoneContact
+}
+
+union InputFile {
+    InputFile,
+    InputFileBig
+}
+
+union InputMedia {
+    InputMediaEmpty,
+    InputMediaUploadedPhoto,
+    InputMediaPhoto,
+    InputMediaGeoPoint,
+    InputMediaContact,
+    InputMediaUploadedDocument,
+    InputMediaDocument,
+    InputMediaVenue,
+    InputMediaPhotoExternal,
+    InputMediaDocumentExternal,
+    InputMediaGame,
+    InputMediaInvoice,
+    InputMediaGeoLive,
+    InputMediaPoll,
+    InputMediaDice
+}
+
+union InputChatPhoto {
+    InputChatPhotoEmpty,
+    InputChatUploadedPhoto,
+    InputChatPhoto
+}
+
+union InputGeoPoint {
+    InputGeoPointEmpty,
+    InputGeoPoint
+}
+
+union InputPhoto {
+    InputPhotoEmpty,
+    InputPhoto
+}
+
+union InputFileLocation {
+    InputFileLocation,
+    InputEncryptedFileLocation,
+    InputDocumentFileLocation,
+    InputSecureFileLocation,
+    InputTakeoutFileLocation,
+    InputPhotoFileLocation,
+    InputPhotoLegacyFileLocation,
+    InputPeerPhotoFileLocation,
+    InputStickerSetThumb
+}
+
+union Peer {
+    PeerUser,
+    PeerChat,
+    PeerChannel
+}
+
+union User {
+    UserEmpty,
+    User
+}
+
+union UserProfilePhoto {
+    UserProfilePhotoEmpty,
+    UserProfilePhoto
+}
+
+union UserStatus {
+    UserStatusEmpty,
+    UserStatusOnline,
+    UserStatusOffline,
+    UserStatusRecently,
+    UserStatusLastWeek,
+    UserStatusLastMonth
+}
+
+union Chat {
+    ChatEmpty,
+    Chat,
+    ChatForbidden,
+    Channel,
+    ChannelForbidden
+}
+
+union ChatFull {
+    ChatFull,
+    ChannelFull
+}
+
+union ChatParticipant {
+    ChatParticipant,
+    ChatParticipantCreator,
+    ChatParticipantAdmin
+}
+
+union ChatParticipants {
+    ChatParticipantsForbidden,
+    ChatParticipants
+}
+
+union ChatPhoto {
+    ChatPhotoEmpty,
+    ChatPhoto
+}
+
+union Message {
+    MessageEmpty,
+    Message,
+    MessageService
+}
+
+union MessageMedia {
+    MessageMediaEmpty,
+    MessageMediaPhoto,
+    MessageMediaGeo,
+    MessageMediaContact,
+    MessageMediaUnsupported,
+    MessageMediaDocument,
+    MessageMediaWebPage,
+    MessageMediaVenue,
+    MessageMediaGame,
+    MessageMediaInvoice,
+    MessageMediaGeoLive,
+    MessageMediaPoll,
+    MessageMediaDice
+}
+
+union MessageAction {
+    MessageActionEmpty,
+    MessageActionChatCreate,
+    MessageActionChatEditTitle,
+    MessageActionChatEditPhoto,
+    MessageActionChatDeletePhoto,
+    MessageActionChatAddUser,
+    MessageActionChatDeleteUser,
+    MessageActionChatJoinedByLink,
+    MessageActionChannelCreate,
+    MessageActionChatMigrateTo,
+    MessageActionChannelMigrateFrom,
+    MessageActionPinMessage,
+    MessageActionHistoryClear,
+    MessageActionGameScore,
+    MessageActionPaymentSentMe,
+    MessageActionPaymentSent,
+    MessageActionPhoneCall,
+    MessageActionScreenshotTaken,
+    MessageActionCustomAction,
+    MessageActionBotAllowed,
+    MessageActionSecureValuesSentMe,
+    MessageActionSecureValuesSent,
+    MessageActionContactSignUp,
+    MessageActionGeoProximityReached
+}
+
+union Dialog {
+    Dialog,
+    DialogFolder
+}
+
+union Photo {
+    PhotoEmpty,
+    Photo
+}
+
+union PhotoSize {
+    PhotoSizeEmpty,
+    PhotoSize,
+    PhotoCachedSize,
+    PhotoStrippedSize,
+    PhotoSizeProgressive
+}
+
+union GeoPoint {
+    GeoPointEmpty,
+    GeoPoint
+}
+
+union InputNotifyPeer {
+    InputNotifyPeer,
+    InputNotifyUsers,
+    InputNotifyChats,
+    InputNotifyBroadcasts
+}
+
+union WallPaper {
+    WallPaper,
+    WallPaperNoFile
+}
+
+union ReportReason {
+    InputReportReasonSpam,
+    InputReportReasonViolence,
+    InputReportReasonPornography,
+    InputReportReasonChildAbuse,
+    InputReportReasonOther,
+    InputReportReasonCopyright,
+    InputReportReasonGeoIrrelevant
+}
+
+union MessagesFilter {
+    InputMessagesFilterEmpty,
+    InputMessagesFilterPhotos,
+    InputMessagesFilterVideo,
+    InputMessagesFilterPhotoVideo,
+    InputMessagesFilterDocument,
+    InputMessagesFilterUrl,
+    InputMessagesFilterGif,
+    InputMessagesFilterVoice,
+    InputMessagesFilterMusic,
+    InputMessagesFilterChatPhotos,
+    InputMessagesFilterPhoneCalls,
+    InputMessagesFilterRoundVoice,
+    InputMessagesFilterRoundVideo,
+    InputMessagesFilterMyMentions,
+    InputMessagesFilterGeo,
+    InputMessagesFilterContacts,
+    InputMessagesFilterPinned
+}
+
+union Update {
+    UpdateNewMessage,
+    UpdateMessageID,
+    UpdateDeleteMessages,
+    UpdateUserTyping,
+    UpdateChatUserTyping,
+    UpdateChatParticipants,
+    UpdateUserStatus,
+    UpdateUserName,
+    UpdateUserPhoto,
+    UpdateNewEncryptedMessage,
+    UpdateEncryptedChatTyping,
+    UpdateEncryption,
+    UpdateEncryptedMessagesRead,
+    UpdateChatParticipantAdd,
+    UpdateChatParticipantDelete,
+    UpdateDcOptions,
+    UpdateNotifySettings,
+    UpdateServiceNotification,
+    UpdatePrivacy,
+    UpdateUserPhone,
+    UpdateReadHistoryInbox,
+    UpdateReadHistoryOutbox,
+    UpdateWebPage,
+    UpdateReadMessagesContents,
+    UpdateChannelTooLong,
+    UpdateChannel,
+    UpdateNewChannelMessage,
+    UpdateReadChannelInbox,
+    UpdateDeleteChannelMessages,
+    UpdateChannelMessageViews,
+    UpdateChatParticipantAdmin,
+    UpdateNewStickerSet,
+    UpdateStickerSetsOrder,
+    UpdateStickerSets,
+    UpdateSavedGifs,
+    UpdateBotInlineQuery,
+    UpdateBotInlineSend,
+    UpdateEditChannelMessage,
+    UpdateBotCallbackQuery,
+    UpdateEditMessage,
+    UpdateInlineBotCallbackQuery,
+    UpdateReadChannelOutbox,
+    UpdateDraftMessage,
+    UpdateReadFeaturedStickers,
+    UpdateRecentStickers,
+    UpdateConfig,
+    UpdatePtsChanged,
+    UpdateChannelWebPage,
+    UpdateDialogPinned,
+    UpdatePinnedDialogs,
+    UpdateBotWebhookJSON,
+    UpdateBotWebhookJSONQuery,
+    UpdateBotShippingQuery,
+    UpdateBotPrecheckoutQuery,
+    UpdatePhoneCall,
+    UpdateLangPackTooLong,
+    UpdateLangPack,
+    UpdateFavedStickers,
+    UpdateChannelReadMessagesContents,
+    UpdateContactsReset,
+    UpdateChannelAvailableMessages,
+    UpdateDialogUnreadMark,
+    UpdateMessagePoll,
+    UpdateChatDefaultBannedRights,
+    UpdateFolderPeers,
+    UpdatePeerSettings,
+    UpdatePeerLocated,
+    UpdateNewScheduledMessage,
+    UpdateDeleteScheduledMessages,
+    UpdateTheme,
+    UpdateGeoLiveViewed,
+    UpdateLoginToken,
+    UpdateMessagePollVote,
+    UpdateDialogFilter,
+    UpdateDialogFilterOrder,
+    UpdateDialogFilters,
+    UpdatePhoneCallSignalingData,
+    UpdateChannelParticipant,
+    UpdateChannelMessageForwards,
+    UpdateReadChannelDiscussionInbox,
+    UpdateReadChannelDiscussionOutbox,
+    UpdatePeerBlocked,
+    UpdateChannelUserTyping,
+    UpdatePinnedMessages,
+    UpdatePinnedChannelMessages
+}
+
+union Updates {
+    UpdatesTooLong,
+    UpdateShortMessage,
+    UpdateShortChatMessage,
+    UpdateShort,
+    UpdatesCombined,
+    Updates,
+    UpdateShortSentMessage
+}
+
+union EncryptedChat {
+    EncryptedChatEmpty,
+    EncryptedChatWaiting,
+    EncryptedChatRequested,
+    EncryptedChat,
+    EncryptedChatDiscarded
+}
+
+union EncryptedFile {
+    EncryptedFileEmpty,
+    EncryptedFile
+}
+
+union InputEncryptedFile {
+    InputEncryptedFileEmpty,
+    InputEncryptedFileUploaded,
+    InputEncryptedFile,
+    InputEncryptedFileBigUploaded
+}
+
+union EncryptedMessage {
+    EncryptedMessage,
+    EncryptedMessageService
+}
+
+union InputDocument {
+    InputDocumentEmpty,
+    InputDocument
+}
+
+union Document {
+    DocumentEmpty,
+    Document
+}
+
+union NotifyPeer {
+    NotifyPeer,
+    NotifyUsers,
+    NotifyChats,
+    NotifyBroadcasts
+}
+
+union SendMessageAction {
+    SendMessageTypingAction,
+    SendMessageCancelAction,
+    SendMessageRecordVideoAction,
+    SendMessageUploadVideoAction,
+    SendMessageRecordAudioAction,
+    SendMessageUploadAudioAction,
+    SendMessageUploadPhotoAction,
+    SendMessageUploadDocumentAction,
+    SendMessageGeoLocationAction,
+    SendMessageChooseContactAction,
+    SendMessageGamePlayAction,
+    SendMessageRecordRoundAction,
+    SendMessageUploadRoundAction
+}
+
+union InputPrivacyKey {
+    InputPrivacyKeyStatusTimestamp,
+    InputPrivacyKeyChatInvite,
+    InputPrivacyKeyPhoneCall,
+    InputPrivacyKeyPhoneP2P,
+    InputPrivacyKeyForwards,
+    InputPrivacyKeyProfilePhoto,
+    InputPrivacyKeyPhoneNumber,
+    InputPrivacyKeyAddedByPhone
+}
+
+union PrivacyKey {
+    PrivacyKeyStatusTimestamp,
+    PrivacyKeyChatInvite,
+    PrivacyKeyPhoneCall,
+    PrivacyKeyPhoneP2P,
+    PrivacyKeyForwards,
+    PrivacyKeyProfilePhoto,
+    PrivacyKeyPhoneNumber,
+    PrivacyKeyAddedByPhone
+}
+
+union InputPrivacyRule {
+    InputPrivacyValueAllowContacts,
+    InputPrivacyValueAllowAll,
+    InputPrivacyValueAllowUsers,
+    InputPrivacyValueDisallowContacts,
+    InputPrivacyValueDisallowAll,
+    InputPrivacyValueDisallowUsers,
+    InputPrivacyValueAllowChatParticipants,
+    InputPrivacyValueDisallowChatParticipants
+}
+
+union PrivacyRule {
+    PrivacyValueAllowContacts,
+    PrivacyValueAllowAll,
+    PrivacyValueAllowUsers,
+    PrivacyValueDisallowContacts,
+    PrivacyValueDisallowAll,
+    PrivacyValueDisallowUsers,
+    PrivacyValueAllowChatParticipants,
+    PrivacyValueDisallowChatParticipants
+}
+
+union DocumentAttribute {
+    DocumentAttributeImageSize,
+    DocumentAttributeAnimated,
+    DocumentAttributeSticker,
+    DocumentAttributeVideo,
+    DocumentAttributeAudio,
+    DocumentAttributeFilename,
+    DocumentAttributeHasStickers
+}
+
+union WebPage {
+    WebPageEmpty,
+    WebPagePending,
+    WebPage,
+    WebPageNotModified
+}
+
+union ExportedChatInvite {
+    ChatInviteEmpty,
+    ChatInviteExported
+}
+
+union ChatInvite {
+    ChatInviteAlready,
+    ChatInvite,
+    ChatInvitePeek
+}
+
+union InputStickerSet {
+    InputStickerSetEmpty,
+    InputStickerSetID,
+    InputStickerSetShortName,
+    InputStickerSetAnimatedEmoji,
+    InputStickerSetDice
+}
+
+union KeyboardButton {
+    KeyboardButton,
+    KeyboardButtonUrl,
+    KeyboardButtonCallback,
+    KeyboardButtonRequestPhone,
+    KeyboardButtonRequestGeoLocation,
+    KeyboardButtonSwitchInline,
+    KeyboardButtonGame,
+    KeyboardButtonBuy,
+    KeyboardButtonUrlAuth,
+    InputKeyboardButtonUrlAuth,
+    KeyboardButtonRequestPoll
+}
+
+union ReplyMarkup {
+    ReplyKeyboardHide,
+    ReplyKeyboardForceReply,
+    ReplyKeyboardMarkup,
+    ReplyInlineMarkup
+}
+
+union MessageEntity {
+    MessageEntityUnknown,
+    MessageEntityMention,
+    MessageEntityHashtag,
+    MessageEntityBotCommand,
+    MessageEntityUrl,
+    MessageEntityEmail,
+    MessageEntityBold,
+    MessageEntityItalic,
+    MessageEntityCode,
+    MessageEntityPre,
+    MessageEntityTextUrl,
+    MessageEntityMentionName,
+    InputMessageEntityMentionName,
+    MessageEntityPhone,
+    MessageEntityCashtag,
+    MessageEntityUnderline,
+    MessageEntityStrike,
+    MessageEntityBlockquote,
+    MessageEntityBankCard
+}
+
+union InputChannel {
+    InputChannelEmpty,
+    InputChannel,
+    InputChannelFromMessage
+}
+
+union ChannelMessagesFilter {
+    ChannelMessagesFilterEmpty,
+    ChannelMessagesFilter
+}
+
+union ChannelParticipant {
+    ChannelParticipant,
+    ChannelParticipantSelf,
+    ChannelParticipantCreator,
+    ChannelParticipantAdmin,
+    ChannelParticipantBanned,
+    ChannelParticipantLeft
+}
+
+union ChannelParticipantsFilter {
+    ChannelParticipantsRecent,
+    ChannelParticipantsAdmins,
+    ChannelParticipantsKicked,
+    ChannelParticipantsBots,
+    ChannelParticipantsBanned,
+    ChannelParticipantsSearch,
+    ChannelParticipantsContacts,
+    ChannelParticipantsMentions
+}
+
+union InputBotInlineMessage {
+    InputBotInlineMessageMediaAuto,
+    InputBotInlineMessageText,
+    InputBotInlineMessageMediaGeo,
+    InputBotInlineMessageMediaVenue,
+    InputBotInlineMessageMediaContact,
+    InputBotInlineMessageGame
+}
+
+union InputBotInlineResult {
+    InputBotInlineResult,
+    InputBotInlineResultPhoto,
+    InputBotInlineResultDocument,
+    InputBotInlineResultGame
+}
+
+union BotInlineMessage {
+    BotInlineMessageMediaAuto,
+    BotInlineMessageText,
+    BotInlineMessageMediaGeo,
+    BotInlineMessageMediaVenue,
+    BotInlineMessageMediaContact
+}
+
+union BotInlineResult {
+    BotInlineResult,
+    BotInlineMediaResult
+}
+
+union TopPeerCategory {
+    TopPeerCategoryBotsPM,
+    TopPeerCategoryBotsInline,
+    TopPeerCategoryCorrespondents,
+    TopPeerCategoryGroups,
+    TopPeerCategoryChannels,
+    TopPeerCategoryPhoneCalls,
+    TopPeerCategoryForwardUsers,
+    TopPeerCategoryForwardChats
+}
+
+union DraftMessage {
+    DraftMessageEmpty,
+    DraftMessage
+}
+
+union StickerSetCovered {
+    StickerSetCovered,
+    StickerSetMultiCovered
+}
+
+union InputStickeredMedia {
+    InputStickeredMediaPhoto,
+    InputStickeredMediaDocument
+}
+
+union InputGame {
+    InputGameID,
+    InputGameShortName
+}
+
+union RichText {
+    TextEmpty,
+    TextPlain,
+    TextBold,
+    TextItalic,
+    TextUnderline,
+    TextStrike,
+    TextFixed,
+    TextUrl,
+    TextEmail,
+    TextConcat,
+    TextSubscript,
+    TextSuperscript,
+    TextMarked,
+    TextPhone,
+    TextImage,
+    TextAnchor
+}
+
+union PageBlock {
+    PageBlockUnsupported,
+    PageBlockTitle,
+    PageBlockSubtitle,
+    PageBlockAuthorDate,
+    PageBlockHeader,
+    PageBlockSubheader,
+    PageBlockParagraph,
+    PageBlockPreformatted,
+    PageBlockFooter,
+    PageBlockDivider,
+    PageBlockAnchor,
+    PageBlockList,
+    PageBlockBlockquote,
+    PageBlockPullquote,
+    PageBlockPhoto,
+    PageBlockVideo,
+    PageBlockCover,
+    PageBlockEmbed,
+    PageBlockEmbedPost,
+    PageBlockCollage,
+    PageBlockSlideshow,
+    PageBlockChannel,
+    PageBlockAudio,
+    PageBlockKicker,
+    PageBlockTable,
+    PageBlockOrderedList,
+    PageBlockDetails,
+    PageBlockRelatedArticles,
+    PageBlockMap
+}
+
+union PhoneCallDiscardReason {
+    PhoneCallDiscardReasonMissed,
+    PhoneCallDiscardReasonDisconnect,
+    PhoneCallDiscardReasonHangup,
+    PhoneCallDiscardReasonBusy
+}
+
+union PaymentSavedCredentials {
+    PaymentSavedCredentialsCard
+}
+
+union WebDocument {
+    WebDocument,
+    WebDocumentNoProxy
+}
+
+union InputWebFileLocation {
+    InputWebFileLocation,
+    InputWebFileGeoPointLocation
+}
+
+union InputPaymentCredentials {
+    InputPaymentCredentialsSaved,
+    InputPaymentCredentials,
+    InputPaymentCredentialsApplePay,
+    InputPaymentCredentialsAndroidPay
+}
+
+union PhoneCall {
+    PhoneCallEmpty,
+    PhoneCallWaiting,
+    PhoneCallRequested,
+    PhoneCallAccepted,
+    PhoneCall,
+    PhoneCallDiscarded
+}
+
+union PhoneConnection {
+    PhoneConnection,
+    PhoneConnectionWebrtc
+}
+
+union LangPackString {
+    LangPackString,
+    LangPackStringPluralized,
+    LangPackStringDeleted
+}
+
+union ChannelAdminLogEventAction {
+    ChannelAdminLogEventActionChangeTitle,
+    ChannelAdminLogEventActionChangeAbout,
+    ChannelAdminLogEventActionChangeUsername,
+    ChannelAdminLogEventActionChangePhoto,
+    ChannelAdminLogEventActionToggleInvites,
+    ChannelAdminLogEventActionToggleSignatures,
+    ChannelAdminLogEventActionUpdatePinned,
+    ChannelAdminLogEventActionEditMessage,
+    ChannelAdminLogEventActionDeleteMessage,
+    ChannelAdminLogEventActionParticipantJoin,
+    ChannelAdminLogEventActionParticipantLeave,
+    ChannelAdminLogEventActionParticipantInvite,
+    ChannelAdminLogEventActionParticipantToggleBan,
+    ChannelAdminLogEventActionParticipantToggleAdmin,
+    ChannelAdminLogEventActionChangeStickerSet,
+    ChannelAdminLogEventActionTogglePreHistoryHidden,
+    ChannelAdminLogEventActionDefaultBannedRights,
+    ChannelAdminLogEventActionStopPoll,
+    ChannelAdminLogEventActionChangeLinkedChat,
+    ChannelAdminLogEventActionChangeLocation,
+    ChannelAdminLogEventActionToggleSlowMode
+}
+
+union RecentMeUrl {
+    RecentMeUrlUnknown,
+    RecentMeUrlUser,
+    RecentMeUrlChat,
+    RecentMeUrlChatInvite,
+    RecentMeUrlStickerSet
+}
+
+union InputMessage {
+    InputMessageID,
+    InputMessageReplyTo,
+    InputMessagePinned,
+    InputMessageCallbackQuery
+}
+
+union InputDialogPeer {
+    InputDialogPeer,
+    InputDialogPeerFolder
+}
+
+union DialogPeer {
+    DialogPeer,
+    DialogPeerFolder
+}
+
+union InputSecureFile {
+    InputSecureFileUploaded,
+    InputSecureFile
+}
+
+union SecureFile {
+    SecureFileEmpty,
+    SecureFile
+}
+
+union SecurePlainData {
+    SecurePlainPhone,
+    SecurePlainEmail
+}
+
+union SecureValueType {
+    SecureValueTypePersonalDetails,
+    SecureValueTypePassport,
+    SecureValueTypeDriverLicense,
+    SecureValueTypeIdentityCard,
+    SecureValueTypeInternalPassport,
+    SecureValueTypeAddress,
+    SecureValueTypeUtilityBill,
+    SecureValueTypeBankStatement,
+    SecureValueTypeRentalAgreement,
+    SecureValueTypePassportRegistration,
+    SecureValueTypeTemporaryRegistration,
+    SecureValueTypePhone,
+    SecureValueTypeEmail
+}
+
+union SecureValueError {
+    SecureValueErrorData,
+    SecureValueErrorFrontSide,
+    SecureValueErrorReverseSide,
+    SecureValueErrorSelfie,
+    SecureValueErrorFile,
+    SecureValueErrorFiles,
+    SecureValueError,
+    SecureValueErrorTranslationFile,
+    SecureValueErrorTranslationFiles
+}
+
+union SavedContact {
+    SavedPhoneContact
+}
+
+union PasswordKdfAlgo {
+    PasswordKdfAlgoUnknown,
+    PasswordKdfAlgoSHA256SHA256PBKDF2HMACSHA512iter100000SHA256ModPow
+}
+
+union SecurePasswordKdfAlgo {
+    SecurePasswordKdfAlgoUnknown,
+    SecurePasswordKdfAlgoPBKDF2HMACSHA512iter100000,
+    SecurePasswordKdfAlgoSHA512
+}
+
+union InputCheckPasswordSRP {
+    InputCheckPasswordEmpty,
+    InputCheckPasswordSRP
+}
+
+union SecureRequiredType {
+    SecureRequiredType,
+    SecureRequiredTypeOneOf
+}
+
+union JSONObjectValue {
+    JsonObjectValue
+}
+
+union JSONValue {
+    JsonNull,
+    JsonBool,
+    JsonNumber,
+    JsonString,
+    JsonArray,
+    JsonObject
+}
+
+union PageListItem {
+    PageListItemText,
+    PageListItemBlocks
+}
+
+union PageListOrderedItem {
+    PageListOrderedItemText,
+    PageListOrderedItemBlocks
+}
+
+union InputWallPaper {
+    InputWallPaper,
+    InputWallPaperSlug,
+    InputWallPaperNoFile
+}
+
+union EmojiKeyword {
+    EmojiKeyword,
+    EmojiKeywordDeleted
+}
+
+union FileLocation {
+    FileLocationToBeDeprecated
+}
+
+union UrlAuthResult {
+    UrlAuthResultRequest,
+    UrlAuthResultAccepted,
+    UrlAuthResultDefault
+}
+
+union ChannelLocation {
+    ChannelLocationEmpty,
+    ChannelLocation
+}
+
+union PeerLocated {
+    PeerLocated,
+    PeerSelfLocated
+}
+
+union InputTheme {
+    InputTheme,
+    InputThemeSlug
+}
+
+union BaseTheme {
+    BaseThemeClassic,
+    BaseThemeDay,
+    BaseThemeNight,
+    BaseThemeTinted,
+    BaseThemeArctic
+}
+
+union WebPageAttribute {
+    WebPageAttributeTheme
+}
+
+union MessageUserVote {
+    MessageUserVote,
+    MessageUserVoteInputOption,
+    MessageUserVoteMultiple
+}
+
+union StatsGraph {
+    StatsGraphAsync,
+    StatsGraphError,
+    StatsGraph
+}

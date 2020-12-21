@@ -1,0 +1,83 @@
+
+
+table ContactsNotModified {
+}
+
+table Contacts {
+    contacts: [Contact];
+    saved_count: int;
+    users: [User];
+}
+
+table ImportedContacts {
+    imported: [ImportedContact];
+    popular_invites: [PopularContact];
+    retry_contacts: [long];
+    users: [User];
+}
+
+table Blocked {
+    blocked: [PeerBlocked];
+    chats: [Chat];
+    users: [User];
+}
+
+table BlockedSlice {
+    count: int;
+    blocked: [PeerBlocked];
+    chats: [Chat];
+    users: [User];
+}
+
+table Found {
+    my_results: [Peer];
+    results: [Peer];
+    chats: [Chat];
+    users: [User];
+}
+
+table ResolvedPeer {
+    peer: Peer;
+    chats: [Chat];
+    users: [User];
+}
+
+table TopPeersNotModified {
+}
+
+table TopPeers {
+    categories: [TopPeerCategoryPeers];
+    chats: [Chat];
+    users: [User];
+}
+
+table TopPeersDisabled {
+}
+
+union Contacts {
+    contacts.ContactsNotModified,
+    contacts.Contacts
+}
+
+union ImportedContacts {
+    contacts.ImportedContacts
+}
+
+union Blocked {
+    contacts.Blocked,
+    contacts.BlockedSlice
+}
+
+union Found {
+    contacts.Found
+}
+
+union ResolvedPeer {
+    contacts.ResolvedPeer
+}
+
+union TopPeers {
+    contacts.TopPeersNotModified,
+    contacts.TopPeers,
+    contacts.TopPeersDisabled
+}

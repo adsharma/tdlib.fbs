@@ -1,0 +1,188 @@
+
+
+table PrivacyRules {
+    rules: [PrivacyRule];
+    chats: [Chat];
+    users: [User];
+}
+
+table Authorizations {
+    authorizations: [Authorization];
+}
+
+enum PasswordFlags : int (bit_flags) {
+    has_recovery = 1 << 0,
+    has_secure_values = 1 << 1,
+    has_password = 1 << 2,
+    current_algo = 1 << 2,
+    srp_B = 1 << 2,
+    srp_id = 1 << 2,
+    hint = 1 << 3,
+    email_unconfirmed_pattern = 1 << 4,
+}
+
+table Password {
+    flags: PasswordFlags;
+    has_recovery: bool;                                     // flag.0 
+    has_secure_values: bool;                                // flag.1 
+    has_password: bool;                                     // flag.2 
+    current_algo: PasswordKdfAlgo;                          // flag.2 
+    srp_B: [byte];                                          // flag.2 
+    srp_id: long;                                           // flag.2 
+    hint: string;                                           // flag.3 
+    email_unconfirmed_pattern: string;                      // flag.4 
+    new_algo: PasswordKdfAlgo;
+    new_secure_algo: SecurePasswordKdfAlgo;
+    secure_random: [byte];
+}
+
+enum PasswordSettingsFlags : int (bit_flags) {
+    email = 1 << 0,
+    secure_settings = 1 << 1,
+}
+
+table PasswordSettings {
+    flags: PasswordSettingsFlags;
+    email: string;                                          // flag.0 
+    secure_settings: SecureSecretSettings;                  // flag.1 
+}
+
+enum PasswordInputSettingsFlags : int (bit_flags) {
+    new_algo = 1 << 0,
+    new_password_hash = 1 << 0,
+    hint = 1 << 0,
+    email = 1 << 1,
+    new_secure_settings = 1 << 2,
+}
+
+table PasswordInputSettings {
+    flags: PasswordInputSettingsFlags;
+    new_algo: PasswordKdfAlgo;                              // flag.0 
+    new_password_hash: [byte];                              // flag.0 
+    hint: string;                                           // flag.0 
+    email: string;                                          // flag.1 
+    new_secure_settings: SecureSecretSettings;              // flag.2 
+}
+
+table TmpPassword {
+    tmp_password: [byte];
+    valid_until: int;
+}
+
+table WebAuthorizations {
+    authorizations: [WebAuthorization];
+    users: [User];
+}
+
+enum AuthorizationFormFlags : int (bit_flags) {
+    privacy_policy_url = 1 << 0,
+}
+
+table AuthorizationForm {
+    flags: AuthorizationFormFlags;
+    privacy_policy_url: string;                             // flag.0 
+    required_types: [SecureRequiredType];
+    values: [SecureValue];
+    errors: [SecureValueError];
+    users: [User];
+}
+
+table SentEmailCode {
+    email_pattern: string;
+    length: int;
+}
+
+table Takeout {
+    id: long;
+}
+
+table WallPapersNotModified {
+}
+
+table WallPapers {
+    hash: int;
+    wallpapers: [WallPaper];
+}
+
+table AutoDownloadSettings {
+    low: AutoDownloadSettings;
+    medium: AutoDownloadSettings;
+    high: AutoDownloadSettings;
+}
+
+table ThemesNotModified {
+}
+
+table Themes {
+    hash: int;
+    themes: [Theme];
+}
+
+enum ContentSettingsFlags : int (bit_flags) {
+    sensitive_enabled = 1 << 0,
+    sensitive_can_change = 1 << 1,
+}
+
+table ContentSettings {
+    flags: ContentSettingsFlags;
+    sensitive_enabled: bool;                                // flag.0 
+    sensitive_can_change: bool;                             // flag.1 
+}
+
+union PrivacyRules {
+    account.PrivacyRules
+}
+
+union Authorizations {
+    account.Authorizations
+}
+
+union Password {
+    account.Password
+}
+
+union PasswordSettings {
+    account.PasswordSettings
+}
+
+union PasswordInputSettings {
+    account.PasswordInputSettings
+}
+
+union TmpPassword {
+    account.TmpPassword
+}
+
+union WebAuthorizations {
+    account.WebAuthorizations
+}
+
+union AuthorizationForm {
+    account.AuthorizationForm
+}
+
+union SentEmailCode {
+    account.SentEmailCode
+}
+
+union Takeout {
+    account.Takeout
+}
+
+union WallPapers {
+    account.WallPapersNotModified,
+    account.WallPapers
+}
+
+union AutoDownloadSettings {
+    account.AutoDownloadSettings
+}
+
+union Themes {
+    account.ThemesNotModified,
+    account.Themes
+}
+
+union ContentSettings {
+    account.ContentSettings
+}

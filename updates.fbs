@@ -1,0 +1,96 @@
+
+
+table State {
+    pts: int;
+    qts: int;
+    date: int;
+    seq: int;
+    unread_count: int;
+}
+
+table DifferenceEmpty {
+    date: int;
+    seq: int;
+}
+
+table Difference {
+    new_messages: [Message];
+    new_encrypted_messages: [EncryptedMessage];
+    other_updates: [Update];
+    chats: [Chat];
+    users: [User];
+    state: updates.State;
+}
+
+table DifferenceSlice {
+    new_messages: [Message];
+    new_encrypted_messages: [EncryptedMessage];
+    other_updates: [Update];
+    chats: [Chat];
+    users: [User];
+    intermediate_state: updates.State;
+}
+
+table DifferenceTooLong {
+    pts: int;
+}
+
+enum ChannelDifferenceEmptyFlags : int (bit_flags) {
+    final = 1 << 0,
+    timeout = 1 << 1,
+}
+
+table ChannelDifferenceEmpty {
+    flags: ChannelDifferenceEmptyFlags;
+    final: bool;                                            // flag.0 
+    timeout: int;                                           // flag.1 
+    pts: int;
+}
+
+enum ChannelDifferenceTooLongFlags : int (bit_flags) {
+    final = 1 << 0,
+    timeout = 1 << 1,
+}
+
+table ChannelDifferenceTooLong {
+    flags: ChannelDifferenceTooLongFlags;
+    final: bool;                                            // flag.0 
+    timeout: int;                                           // flag.1 
+    dialog: Dialog;
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+enum ChannelDifferenceFlags : int (bit_flags) {
+    final = 1 << 0,
+    timeout = 1 << 1,
+}
+
+table ChannelDifference {
+    flags: ChannelDifferenceFlags;
+    final: bool;                                            // flag.0 
+    timeout: int;                                           // flag.1 
+    pts: int;
+    new_messages: [Message];
+    other_updates: [Update];
+    chats: [Chat];
+    users: [User];
+}
+
+union State {
+    updates.State
+}
+
+union Difference {
+    updates.DifferenceEmpty,
+    updates.Difference,
+    updates.DifferenceSlice,
+    updates.DifferenceTooLong
+}
+
+union ChannelDifference {
+    updates.ChannelDifferenceEmpty,
+    updates.ChannelDifferenceTooLong,
+    updates.ChannelDifference
+}

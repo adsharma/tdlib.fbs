@@ -1,0 +1,425 @@
+
+
+table Dialogs {
+    dialogs: [Dialog];
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+table DialogsSlice {
+    count: int;
+    dialogs: [Dialog];
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+table DialogsNotModified {
+    count: int;
+}
+
+table Messages {
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+enum MessagesSliceFlags : int (bit_flags) {
+    next_rate = 1 << 0,
+    inexact = 1 << 1,
+    offset_id_offset = 1 << 2,
+}
+
+table MessagesSlice {
+    flags: MessagesSliceFlags;
+    next_rate: int;                                         // flag.0 
+    inexact: bool;                                          // flag.1 
+    offset_id_offset: int;                                  // flag.2 
+    count: int;
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+enum ChannelMessagesFlags : int (bit_flags) {
+    inexact = 1 << 1,
+    offset_id_offset = 1 << 2,
+}
+
+table ChannelMessages {
+    flags: ChannelMessagesFlags;
+    inexact: bool;                                          // flag.1 
+    offset_id_offset: int;                                  // flag.2 
+    pts: int;
+    count: int;
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+table MessagesNotModified {
+    count: int;
+}
+
+table Chats {
+    chats: [Chat];
+}
+
+table ChatsSlice {
+    count: int;
+    chats: [Chat];
+}
+
+table ChatFull {
+    full_chat: ChatFull;
+    chats: [Chat];
+    users: [User];
+}
+
+table AffectedHistory {
+    pts: int;
+    pts_count: int;
+    offset: int;
+}
+
+table DhConfigNotModified {
+    random: [byte];
+}
+
+table DhConfig {
+    g: int;
+    p: [byte];
+    version: int;
+    random: [byte];
+}
+
+table SentEncryptedMessage {
+    date: int;
+}
+
+table SentEncryptedFile {
+    date: int;
+    file: EncryptedFile;
+}
+
+table StickersNotModified {
+}
+
+table Stickers {
+    hash: int;
+    stickers: [Document];
+}
+
+table AllStickersNotModified {
+}
+
+table AllStickers {
+    hash: int;
+    sets: [StickerSet];
+}
+
+table AffectedMessages {
+    pts: int;
+    pts_count: int;
+}
+
+table StickerSet {
+    set: StickerSet;
+    packs: [StickerPack];
+    documents: [Document];
+}
+
+table SavedGifsNotModified {
+}
+
+table SavedGifs {
+    hash: int;
+    gifs: [Document];
+}
+
+enum BotResultsFlags : int (bit_flags) {
+    gallery = 1 << 0,
+    next_offset = 1 << 1,
+    switch_pm = 1 << 2,
+}
+
+table BotResults {
+    flags: BotResultsFlags;
+    gallery: bool;                                          // flag.0 
+    next_offset: string;                                    // flag.1 
+    switch_pm: InlineBotSwitchPM;                           // flag.2 
+    query_id: long;
+    results: [BotInlineResult];
+    cache_time: int;
+    users: [User];
+}
+
+enum BotCallbackAnswerFlags : int (bit_flags) {
+    message = 1 << 0,
+    alert = 1 << 1,
+    url = 1 << 2,
+    has_url = 1 << 3,
+    native_ui = 1 << 4,
+}
+
+table BotCallbackAnswer {
+    flags: BotCallbackAnswerFlags;
+    message: string;                                        // flag.0 
+    alert: bool;                                            // flag.1 
+    url: string;                                            // flag.2 
+    has_url: bool;                                          // flag.3 
+    native_ui: bool;                                        // flag.4 
+    cache_time: int;
+}
+
+enum MessageEditDataFlags : int (bit_flags) {
+    caption = 1 << 0,
+}
+
+table MessageEditData {
+    flags: MessageEditDataFlags;
+    caption: bool;                                          // flag.0 
+}
+
+table PeerDialogs {
+    dialogs: [Dialog];
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+    state: updates.State;
+}
+
+table FeaturedStickersNotModified {
+    count: int;
+}
+
+table FeaturedStickers {
+    hash: int;
+    count: int;
+    sets: [StickerSetCovered];
+    unread: [long];
+}
+
+table RecentStickersNotModified {
+}
+
+table RecentStickers {
+    hash: int;
+    packs: [StickerPack];
+    stickers: [Document];
+    dates: [int];
+}
+
+table ArchivedStickers {
+    count: int;
+    sets: [StickerSetCovered];
+}
+
+table StickerSetInstallResultSuccess {
+}
+
+table StickerSetInstallResultArchive {
+    sets: [StickerSetCovered];
+}
+
+table HighScores {
+    scores: [HighScore];
+    users: [User];
+}
+
+table FavedStickersNotModified {
+}
+
+table FavedStickers {
+    hash: int;
+    packs: [StickerPack];
+    stickers: [Document];
+}
+
+table FoundStickerSetsNotModified {
+}
+
+table FoundStickerSets {
+    hash: int;
+    sets: [StickerSetCovered];
+}
+
+enum SearchCounterFlags : int (bit_flags) {
+    inexact = 1 << 1,
+}
+
+table SearchCounter {
+    flags: SearchCounterFlags;
+    inexact: bool;                                          // flag.1 
+    filter: MessagesFilter;
+    count: int;
+}
+
+table InactiveChats {
+    dates: [int];
+    chats: [Chat];
+    users: [User];
+}
+
+enum VotesListFlags : int (bit_flags) {
+    next_offset = 1 << 0,
+}
+
+table VotesList {
+    flags: VotesListFlags;
+    next_offset: string;                                    // flag.0 
+    count: int;
+    votes: [MessageUserVote];
+    users: [User];
+}
+
+table MessageViews {
+    views: [MessageViews];
+    chats: [Chat];
+    users: [User];
+}
+
+enum DiscussionMessageFlags : int (bit_flags) {
+    max_id = 1 << 0,
+    read_inbox_max_id = 1 << 1,
+    read_outbox_max_id = 1 << 2,
+}
+
+table DiscussionMessage {
+    flags: DiscussionMessageFlags;
+    max_id: int;                                            // flag.0 
+    read_inbox_max_id: int;                                 // flag.1 
+    read_outbox_max_id: int;                                // flag.2 
+    messages: [Message];
+    chats: [Chat];
+    users: [User];
+}
+
+union Dialogs {
+    messages.Dialogs,
+    messages.DialogsSlice,
+    messages.DialogsNotModified
+}
+
+union Messages {
+    messages.Messages,
+    messages.MessagesSlice,
+    messages.ChannelMessages,
+    messages.MessagesNotModified
+}
+
+union Chats {
+    messages.Chats,
+    messages.ChatsSlice
+}
+
+union ChatFull {
+    messages.ChatFull
+}
+
+union AffectedHistory {
+    messages.AffectedHistory
+}
+
+union DhConfig {
+    messages.DhConfigNotModified,
+    messages.DhConfig
+}
+
+union SentEncryptedMessage {
+    messages.SentEncryptedMessage,
+    messages.SentEncryptedFile
+}
+
+union Stickers {
+    messages.StickersNotModified,
+    messages.Stickers
+}
+
+union AllStickers {
+    messages.AllStickersNotModified,
+    messages.AllStickers
+}
+
+union AffectedMessages {
+    messages.AffectedMessages
+}
+
+union StickerSet {
+    messages.StickerSet
+}
+
+union SavedGifs {
+    messages.SavedGifsNotModified,
+    messages.SavedGifs
+}
+
+union BotResults {
+    messages.BotResults
+}
+
+union BotCallbackAnswer {
+    messages.BotCallbackAnswer
+}
+
+union MessageEditData {
+    messages.MessageEditData
+}
+
+union PeerDialogs {
+    messages.PeerDialogs
+}
+
+union FeaturedStickers {
+    messages.FeaturedStickersNotModified,
+    messages.FeaturedStickers
+}
+
+union RecentStickers {
+    messages.RecentStickersNotModified,
+    messages.RecentStickers
+}
+
+union ArchivedStickers {
+    messages.ArchivedStickers
+}
+
+union StickerSetInstallResult {
+    messages.StickerSetInstallResultSuccess,
+    messages.StickerSetInstallResultArchive
+}
+
+union HighScores {
+    messages.HighScores
+}
+
+union FavedStickers {
+    messages.FavedStickersNotModified,
+    messages.FavedStickers
+}
+
+union FoundStickerSets {
+    messages.FoundStickerSetsNotModified,
+    messages.FoundStickerSets
+}
+
+union SearchCounter {
+    messages.SearchCounter
+}
+
+union InactiveChats {
+    messages.InactiveChats
+}
+
+union VotesList {
+    messages.VotesList
+}
+
+union MessageViews {
+    messages.MessageViews
+}
+
+union DiscussionMessage {
+    messages.DiscussionMessage
+}

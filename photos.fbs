@@ -1,0 +1,26 @@
+
+
+table Photos {
+    photos: [Photo];
+    users: [User];
+}
+
+table PhotosSlice {
+    count: int;
+    photos: [Photo];
+    users: [User];
+}
+
+table Photo {
+    photo: Photo;
+    users: [User];
+}
+
+union Photos {
+    photos.Photos,
+    photos.PhotosSlice
+}
+
+union Photo {
+    photos.Photo
+}

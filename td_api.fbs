@@ -1,0 +1,5204 @@
+
+
+table Double {
+}
+
+table String {
+}
+
+table Int32 {
+}
+
+table Int53 {
+}
+
+table Int64 {
+}
+
+table Bytes {
+}
+
+table BoolFalse {
+}
+
+table BoolTrue {
+}
+
+table Error {
+    code: int32;
+    message: string;
+}
+
+table Ok {
+}
+
+table TdlibParameters {
+    use_test_dc: bool;
+    database_directory: string;
+    files_directory: string;
+    use_file_database: bool;
+    use_chat_info_database: bool;
+    use_message_database: bool;
+    use_secret_chats: bool;
+    api_id: int32;
+    api_hash: string;
+    system_language_code: string;
+    device_model: string;
+    system_version: string;
+    application_version: string;
+    enable_storage_optimizer: bool;
+    ignore_file_names: bool;
+}
+
+table AuthenticationCodeTypeTelegramMessage {
+    length: int32;
+}
+
+table AuthenticationCodeTypeSms {
+    length: int32;
+}
+
+table AuthenticationCodeTypeCall {
+    length: int32;
+}
+
+table AuthenticationCodeTypeFlashCall {
+    pattern: string;
+}
+
+table AuthenticationCodeInfo {
+    phone_number: string;
+    type: AuthenticationCodeType;
+    next_type: AuthenticationCodeType;
+    timeout: int32;
+}
+
+table EmailAddressAuthenticationCodeInfo {
+    email_address_pattern: string;
+    length: int32;
+}
+
+table TextEntity {
+    offset: int32;
+    length: int32;
+    type: TextEntityType;
+}
+
+table TextEntities {
+    entities: [textEntity];
+}
+
+table FormattedText {
+    text: string;
+    entities: [textEntity];
+}
+
+table TermsOfService {
+    text: formattedText;
+    min_user_age: int32;
+    show_popup: bool;
+}
+
+table AuthorizationStateWaitTdlibParameters {
+}
+
+table AuthorizationStateWaitEncryptionKey {
+    is_encrypted: bool;
+}
+
+table AuthorizationStateWaitPhoneNumber {
+}
+
+table AuthorizationStateWaitCode {
+    code_info: authenticationCodeInfo;
+}
+
+table AuthorizationStateWaitOtherDeviceConfirmation {
+    link: string;
+}
+
+table AuthorizationStateWaitRegistration {
+    terms_of_service: termsOfService;
+}
+
+table AuthorizationStateWaitPassword {
+    password_hint: string;
+    has_recovery_email_address: bool;
+    recovery_email_address_pattern: string;
+}
+
+table AuthorizationStateReady {
+}
+
+table AuthorizationStateLoggingOut {
+}
+
+table AuthorizationStateClosing {
+}
+
+table AuthorizationStateClosed {
+}
+
+table PasswordState {
+    has_password: bool;
+    password_hint: string;
+    has_recovery_email_address: bool;
+    has_passport_data: bool;
+    recovery_email_address_code_info: emailAddressAuthenticationCodeInfo;
+}
+
+table RecoveryEmailAddress {
+    recovery_email_address: string;
+}
+
+table TemporaryPasswordState {
+    has_password: bool;
+    valid_for: int32;
+}
+
+table LocalFile {
+    path: string;
+    can_be_downloaded: bool;
+    can_be_deleted: bool;
+    is_downloading_active: bool;
+    is_downloading_completed: bool;
+    download_offset: int32;
+    downloaded_prefix_size: int32;
+    downloaded_size: int32;
+}
+
+table RemoteFile {
+    id: string;
+    unique_id: string;
+    is_uploading_active: bool;
+    is_uploading_completed: bool;
+    uploaded_size: int32;
+}
+
+table File {
+    id: int32;
+    size: int32;
+    expected_size: int32;
+    local: localFile;
+    remote: remoteFile;
+}
+
+table InputFileId {
+    id: int32;
+}
+
+table InputFileRemote {
+    id: string;
+}
+
+table InputFileLocal {
+    path: string;
+}
+
+table InputFileGenerated {
+    original_path: string;
+    conversion: string;
+    expected_size: int32;
+}
+
+table PhotoSize {
+    type: string;
+    photo: file;
+    width: int32;
+    height: int32;
+    progressive_sizes: [int32];
+}
+
+table Minithumbnail {
+    width: int32;
+    height: int32;
+    data: [byte];
+}
+
+table ThumbnailFormatJpeg {
+}
+
+table ThumbnailFormatPng {
+}
+
+table ThumbnailFormatWebp {
+}
+
+table ThumbnailFormatGif {
+}
+
+table ThumbnailFormatTgs {
+}
+
+table ThumbnailFormatMpeg4 {
+}
+
+table Thumbnail {
+    format: ThumbnailFormat;
+    width: int32;
+    height: int32;
+    file: file;
+}
+
+table MaskPointForehead {
+}
+
+table MaskPointEyes {
+}
+
+table MaskPointMouth {
+}
+
+table MaskPointChin {
+}
+
+table MaskPosition {
+    point: MaskPoint;
+    x_shift: double;
+    y_shift: double;
+    scale: double;
+}
+
+table PollOption {
+    text: string;
+    voter_count: int32;
+    vote_percentage: int32;
+    is_chosen: bool;
+    is_being_chosen: bool;
+}
+
+table PollTypeRegular {
+    allow_multiple_answers: bool;
+}
+
+table PollTypeQuiz {
+    correct_option_id: int32;
+    explanation: formattedText;
+}
+
+table Animation {
+    duration: int32;
+    width: int32;
+    height: int32;
+    file_name: string;
+    mime_type: string;
+    has_stickers: bool;
+    minithumbnail: minithumbnail;
+    thumbnail: thumbnail;
+    animation: file;
+}
+
+table Audio {
+    duration: int32;
+    title: string;
+    performer: string;
+    file_name: string;
+    mime_type: string;
+    album_cover_minithumbnail: minithumbnail;
+    album_cover_thumbnail: thumbnail;
+    audio: file;
+}
+
+table Document {
+    file_name: string;
+    mime_type: string;
+    minithumbnail: minithumbnail;
+    thumbnail: thumbnail;
+    document: file;
+}
+
+table Photo {
+    has_stickers: bool;
+    minithumbnail: minithumbnail;
+    sizes: [photoSize];
+}
+
+table Sticker {
+    set_id: int64;
+    width: int32;
+    height: int32;
+    emoji: string;
+    is_animated: bool;
+    is_mask: bool;
+    mask_position: maskPosition;
+    thumbnail: thumbnail;
+    sticker: file;
+}
+
+table Video {
+    duration: int32;
+    width: int32;
+    height: int32;
+    file_name: string;
+    mime_type: string;
+    has_stickers: bool;
+    supports_streaming: bool;
+    minithumbnail: minithumbnail;
+    thumbnail: thumbnail;
+    video: file;
+}
+
+table VideoNote {
+    duration: int32;
+    length: int32;
+    minithumbnail: minithumbnail;
+    thumbnail: thumbnail;
+    video: file;
+}
+
+table VoiceNote {
+    duration: int32;
+    waveform: [byte];
+    mime_type: string;
+    voice: file;
+}
+
+table Contact {
+    phone_number: string;
+    first_name: string;
+    last_name: string;
+    vcard: string;
+    user_id: int32;
+}
+
+table Location {
+    latitude: double;
+    longitude: double;
+    horizontal_accuracy: double;
+}
+
+table Venue {
+    location: location;
+    title: string;
+    address: string;
+    provider: string;
+    id: string;
+    type: string;
+}
+
+table Game {
+    id: int64;
+    short_name: string;
+    title: string;
+    text: formattedText;
+    description: string;
+    photo: photo;
+    animation: animation;
+}
+
+table Poll {
+    id: int64;
+    question: string;
+    options: [pollOption];
+    total_voter_count: int32;
+    recent_voter_user_ids: [int32];
+    is_anonymous: bool;
+    type: PollType;
+    open_period: int32;
+    close_date: int32;
+    is_closed: bool;
+}
+
+table ProfilePhoto {
+    id: int64;
+    small: file;
+    big: file;
+    has_animation: bool;
+}
+
+table ChatPhotoInfo {
+    small: file;
+    big: file;
+    has_animation: bool;
+}
+
+table UserTypeRegular {
+}
+
+table UserTypeDeleted {
+}
+
+table UserTypeBot {
+    can_join_groups: bool;
+    can_read_all_group_messages: bool;
+    is_inline: bool;
+    inline_query_placeholder: string;
+    need_location: bool;
+}
+
+table UserTypeUnknown {
+}
+
+table BotCommand {
+    command: string;
+    description: string;
+}
+
+table BotInfo {
+    description: string;
+    commands: [botCommand];
+}
+
+table ChatLocation {
+    location: location;
+    address: string;
+}
+
+table AnimatedChatPhoto {
+    length: int32;
+    file: file;
+    main_frame_timestamp: double;
+}
+
+table ChatPhoto {
+    id: int64;
+    added_date: int32;
+    minithumbnail: minithumbnail;
+    sizes: [photoSize];
+    animation: animatedChatPhoto;
+}
+
+table ChatPhotos {
+    total_count: int32;
+    photos: [chatPhoto];
+}
+
+table InputChatPhotoPrevious {
+    chat_photo_id: int64;
+}
+
+table InputChatPhotoStatic {
+    photo: InputFile;
+}
+
+table InputChatPhotoAnimation {
+    animation: InputFile;
+    main_frame_timestamp: double;
+}
+
+table User {
+    id: int32;
+    first_name: string;
+    last_name: string;
+    username: string;
+    phone_number: string;
+    status: UserStatus;
+    profile_photo: profilePhoto;
+    is_contact: bool;
+    is_mutual_contact: bool;
+    is_verified: bool;
+    is_support: bool;
+    restriction_reason: string;
+    is_scam: bool;
+    have_access: bool;
+    type: UserType;
+    language_code: string;
+}
+
+table UserFullInfo {
+    photo: chatPhoto;
+    is_blocked: bool;
+    can_be_called: bool;
+    supports_video_calls: bool;
+    has_private_calls: bool;
+    need_phone_number_privacy_exception: bool;
+    bio: string;
+    share_text: string;
+    group_in_common_count: int32;
+    bot_info: botInfo;
+}
+
+table Users {
+    total_count: int32;
+    user_ids: [int32];
+}
+
+table ChatAdministrator {
+    user_id: int32;
+    custom_title: string;
+    is_owner: bool;
+}
+
+table ChatAdministrators {
+    administrators: [chatAdministrator];
+}
+
+table ChatPermissions {
+    can_send_messages: bool;
+    can_send_media_messages: bool;
+    can_send_polls: bool;
+    can_send_other_messages: bool;
+    can_add_web_page_previews: bool;
+    can_change_info: bool;
+    can_invite_users: bool;
+    can_pin_messages: bool;
+}
+
+table ChatMemberStatusCreator {
+    custom_title: string;
+    is_anonymous: bool;
+    is_member: bool;
+}
+
+table ChatMemberStatusAdministrator {
+    custom_title: string;
+    can_be_edited: bool;
+    can_change_info: bool;
+    can_post_messages: bool;
+    can_edit_messages: bool;
+    can_delete_messages: bool;
+    can_invite_users: bool;
+    can_restrict_members: bool;
+    can_pin_messages: bool;
+    can_promote_members: bool;
+    is_anonymous: bool;
+}
+
+table ChatMemberStatusMember {
+}
+
+table ChatMemberStatusRestricted {
+    is_member: bool;
+    restricted_until_date: int32;
+    permissions: chatPermissions;
+}
+
+table ChatMemberStatusLeft {
+}
+
+table ChatMemberStatusBanned {
+    banned_until_date: int32;
+}
+
+table ChatMember {
+    user_id: int32;
+    inviter_user_id: int32;
+    joined_chat_date: int32;
+    status: ChatMemberStatus;
+    bot_info: botInfo;
+}
+
+table ChatMembers {
+    total_count: int32;
+    members: [chatMember];
+}
+
+table ChatMembersFilterContacts {
+}
+
+table ChatMembersFilterAdministrators {
+}
+
+table ChatMembersFilterMembers {
+}
+
+table ChatMembersFilterMention {
+    message_thread_id: int53;
+}
+
+table ChatMembersFilterRestricted {
+}
+
+table ChatMembersFilterBanned {
+}
+
+table ChatMembersFilterBots {
+}
+
+table SupergroupMembersFilterRecent {
+}
+
+table SupergroupMembersFilterContacts {
+    query: string;
+}
+
+table SupergroupMembersFilterAdministrators {
+}
+
+table SupergroupMembersFilterSearch {
+    query: string;
+}
+
+table SupergroupMembersFilterRestricted {
+    query: string;
+}
+
+table SupergroupMembersFilterBanned {
+    query: string;
+}
+
+table SupergroupMembersFilterMention {
+    query: string;
+    message_thread_id: int53;
+}
+
+table SupergroupMembersFilterBots {
+}
+
+table BasicGroup {
+    id: int32;
+    member_count: int32;
+    status: ChatMemberStatus;
+    is_active: bool;
+    upgraded_to_supergroup_id: int32;
+}
+
+table BasicGroupFullInfo {
+    photo: chatPhoto;
+    description: string;
+    creator_user_id: int32;
+    members: [chatMember];
+    invite_link: string;
+}
+
+table Supergroup {
+    id: int32;
+    username: string;
+    date: int32;
+    status: ChatMemberStatus;
+    member_count: int32;
+    has_linked_chat: bool;
+    has_location: bool;
+    sign_messages: bool;
+    is_slow_mode_enabled: bool;
+    is_channel: bool;
+    is_verified: bool;
+    restriction_reason: string;
+    is_scam: bool;
+}
+
+table SupergroupFullInfo {
+    photo: chatPhoto;
+    description: string;
+    member_count: int32;
+    administrator_count: int32;
+    restricted_count: int32;
+    banned_count: int32;
+    linked_chat_id: int53;
+    slow_mode_delay: int32;
+    slow_mode_delay_expires_in: double;
+    can_get_members: bool;
+    can_set_username: bool;
+    can_set_sticker_set: bool;
+    can_set_location: bool;
+    can_get_statistics: bool;
+    is_all_history_available: bool;
+    sticker_set_id: int64;
+    location: chatLocation;
+    invite_link: string;
+    upgraded_from_basic_group_id: int32;
+    upgraded_from_max_message_id: int53;
+}
+
+table SecretChatStatePending {
+}
+
+table SecretChatStateReady {
+}
+
+table SecretChatStateClosed {
+}
+
+table SecretChat {
+    id: int32;
+    user_id: int32;
+    state: SecretChatState;
+    is_outbound: bool;
+    ttl: int32;
+    key_hash: [byte];
+    layer: int32;
+}
+
+table MessageSenderUser {
+    user_id: int32;
+}
+
+table MessageSenderChat {
+    chat_id: int53;
+}
+
+table MessageSenders {
+    total_count: int32;
+    senders: [MessageSender];
+}
+
+table MessageForwardOriginUser {
+    sender_user_id: int32;
+}
+
+table MessageForwardOriginChat {
+    sender_chat_id: int53;
+    author_signature: string;
+}
+
+table MessageForwardOriginHiddenUser {
+    sender_name: string;
+}
+
+table MessageForwardOriginChannel {
+    chat_id: int53;
+    message_id: int53;
+    author_signature: string;
+}
+
+table MessageForwardInfo {
+    origin: MessageForwardOrigin;
+    date: int32;
+    public_service_announcement_type: string;
+    from_chat_id: int53;
+    from_message_id: int53;
+}
+
+table MessageReplyInfo {
+    reply_count: int32;
+    recent_repliers: [MessageSender];
+    last_read_inbox_message_id: int53;
+    last_read_outbox_message_id: int53;
+    last_message_id: int53;
+}
+
+table MessageInteractionInfo {
+    view_count: int32;
+    forward_count: int32;
+    reply_info: messageReplyInfo;
+}
+
+table MessageSendingStatePending {
+}
+
+table MessageSendingStateFailed {
+    error_code: int32;
+    error_message: string;
+    can_retry: bool;
+    retry_after: double;
+}
+
+table Message {
+    id: int53;
+    sender: MessageSender;
+    chat_id: int53;
+    sending_state: MessageSendingState;
+    scheduling_state: MessageSchedulingState;
+    is_outgoing: bool;
+    is_pinned: bool;
+    can_be_edited: bool;
+    can_be_forwarded: bool;
+    can_be_deleted_only_for_self: bool;
+    can_be_deleted_for_all_users: bool;
+    can_get_statistics: bool;
+    can_get_message_thread: bool;
+    is_channel_post: bool;
+    contains_unread_mention: bool;
+    date: int32;
+    edit_date: int32;
+    forward_info: messageForwardInfo;
+    interaction_info: messageInteractionInfo;
+    reply_in_chat_id: int53;
+    reply_to_message_id: int53;
+    message_thread_id: int53;
+    ttl: int32;
+    ttl_expires_in: double;
+    via_bot_user_id: int32;
+    author_signature: string;
+    media_album_id: int64;
+    restriction_reason: string;
+    content: MessageContent;
+    reply_markup: ReplyMarkup;
+}
+
+table Messages {
+    total_count: int32;
+    messages: [message];
+}
+
+table FoundMessages {
+    total_count: int32;
+    messages: [message];
+    next_offset: string;
+}
+
+table NotificationSettingsScopePrivateChats {
+}
+
+table NotificationSettingsScopeGroupChats {
+}
+
+table NotificationSettingsScopeChannelChats {
+}
+
+table ChatNotificationSettings {
+    use_default_mute_for: bool;
+    mute_for: int32;
+    use_default_sound: bool;
+    sound: string;
+    use_default_show_preview: bool;
+    show_preview: bool;
+    use_default_disable_pinned_message_notifications: bool;
+    disable_pinned_message_notifications: bool;
+    use_default_disable_mention_notifications: bool;
+    disable_mention_notifications: bool;
+}
+
+table ScopeNotificationSettings {
+    mute_for: int32;
+    sound: string;
+    show_preview: bool;
+    disable_pinned_message_notifications: bool;
+    disable_mention_notifications: bool;
+}
+
+table DraftMessage {
+    reply_to_message_id: int53;
+    date: int32;
+    input_message_text: InputMessageContent;
+}
+
+table ChatTypePrivate {
+    user_id: int32;
+}
+
+table ChatTypeBasicGroup {
+    basic_group_id: int32;
+}
+
+table ChatTypeSupergroup {
+    supergroup_id: int32;
+    is_channel: bool;
+}
+
+table ChatTypeSecret {
+    secret_chat_id: int32;
+    user_id: int32;
+}
+
+table ChatFilter {
+    title: string;
+    icon_name: string;
+    pinned_chat_ids: [int53];
+    included_chat_ids: [int53];
+    excluded_chat_ids: [int53];
+    exclude_muted: bool;
+    exclude_read: bool;
+    exclude_archived: bool;
+    include_contacts: bool;
+    include_non_contacts: bool;
+    include_bots: bool;
+    include_groups: bool;
+    include_channels: bool;
+}
+
+table ChatFilterInfo {
+    id: int32;
+    title: string;
+    icon_name: string;
+}
+
+table RecommendedChatFilter {
+    filter: chatFilter;
+    description: string;
+}
+
+table RecommendedChatFilters {
+    chat_filters: [recommendedChatFilter];
+}
+
+table ChatListMain {
+}
+
+table ChatListArchive {
+}
+
+table ChatListFilter {
+    chat_filter_id: int32;
+}
+
+table ChatLists {
+    chat_lists: [ChatList];
+}
+
+table ChatSourceMtprotoProxy {
+}
+
+table ChatSourcePublicServiceAnnouncement {
+    type: string;
+    text: string;
+}
+
+table ChatPosition {
+    list: ChatList;
+    order: int64;
+    is_pinned: bool;
+    source: ChatSource;
+}
+
+table Chat {
+    id: int53;
+    type: ChatType;
+    title: string;
+    photo: chatPhotoInfo;
+    permissions: chatPermissions;
+    last_message: message;
+    positions: [chatPosition];
+    is_marked_as_unread: bool;
+    is_blocked: bool;
+    has_scheduled_messages: bool;
+    can_be_deleted_only_for_self: bool;
+    can_be_deleted_for_all_users: bool;
+    can_be_reported: bool;
+    default_disable_notification: bool;
+    unread_count: int32;
+    last_read_inbox_message_id: int53;
+    last_read_outbox_message_id: int53;
+    unread_mention_count: int32;
+    notification_settings: chatNotificationSettings;
+    action_bar: ChatActionBar;
+    reply_markup_message_id: int53;
+    draft_message: draftMessage;
+    client_data: string;
+}
+
+table Chats {
+    total_count: int32;
+    chat_ids: [int53];
+}
+
+table ChatNearby {
+    chat_id: int53;
+    distance: int32;
+}
+
+table ChatsNearby {
+    users_nearby: [chatNearby];
+    supergroups_nearby: [chatNearby];
+}
+
+table ChatInviteLink {
+    invite_link: string;
+}
+
+table ChatInviteLinkInfo {
+    chat_id: int53;
+    accessible_for: int32;
+    type: ChatType;
+    title: string;
+    photo: chatPhotoInfo;
+    member_count: int32;
+    member_user_ids: [int32];
+    is_public: bool;
+}
+
+table PublicChatTypeHasUsername {
+}
+
+table PublicChatTypeIsLocationBased {
+}
+
+table ChatActionBarReportSpam {
+    can_unarchive: bool;
+}
+
+table ChatActionBarReportUnrelatedLocation {
+}
+
+table ChatActionBarReportAddBlock {
+    can_unarchive: bool;
+    distance: int32;
+}
+
+table ChatActionBarAddContact {
+}
+
+table ChatActionBarSharePhoneNumber {
+}
+
+table KeyboardButtonTypeText {
+}
+
+table KeyboardButtonTypeRequestPhoneNumber {
+}
+
+table KeyboardButtonTypeRequestLocation {
+}
+
+table KeyboardButtonTypeRequestPoll {
+    force_regular: bool;
+    force_quiz: bool;
+}
+
+table KeyboardButton {
+    text: string;
+    type: KeyboardButtonType;
+}
+
+table InlineKeyboardButtonTypeUrl {
+    url: string;
+}
+
+table InlineKeyboardButtonTypeLoginUrl {
+    url: string;
+    id: int32;
+    forward_text: string;
+}
+
+table InlineKeyboardButtonTypeCallback {
+    data: [byte];
+}
+
+table InlineKeyboardButtonTypeCallbackWithPassword {
+    data: [byte];
+}
+
+table InlineKeyboardButtonTypeCallbackGame {
+}
+
+table InlineKeyboardButtonTypeSwitchInline {
+    query: string;
+    in_current_chat: bool;
+}
+
+table InlineKeyboardButtonTypeBuy {
+}
+
+table InlineKeyboardButton {
+    text: string;
+    type: InlineKeyboardButtonType;
+}
+
+table ReplyMarkupRemoveKeyboard {
+    is_personal: bool;
+}
+
+table ReplyMarkupForceReply {
+    is_personal: bool;
+}
+
+table ReplyMarkupShowKeyboard {
+    rows: [vecto];
+    resize_keyboard: bool;
+    one_time: bool;
+    is_personal: bool;
+}
+
+table ReplyMarkupInlineKeyboard {
+    rows: [vecto];
+}
+
+table LoginUrlInfoOpen {
+    url: string;
+    skip_confirm: bool;
+}
+
+table LoginUrlInfoRequestConfirmation {
+    url: string;
+    domain: string;
+    bot_user_id: int32;
+    request_write_access: bool;
+}
+
+table MessageThreadInfo {
+    chat_id: int53;
+    message_thread_id: int53;
+    reply_info: messageReplyInfo;
+    messages: [message];
+    draft_message: draftMessage;
+}
+
+table RichTextPlain {
+    text: string;
+}
+
+table RichTextBold {
+    text: RichText;
+}
+
+table RichTextItalic {
+    text: RichText;
+}
+
+table RichTextUnderline {
+    text: RichText;
+}
+
+table RichTextStrikethrough {
+    text: RichText;
+}
+
+table RichTextFixed {
+    text: RichText;
+}
+
+table RichTextUrl {
+    text: RichText;
+    url: string;
+    is_cached: bool;
+}
+
+table RichTextEmailAddress {
+    text: RichText;
+    email_address: string;
+}
+
+table RichTextSubscript {
+    text: RichText;
+}
+
+table RichTextSuperscript {
+    text: RichText;
+}
+
+table RichTextMarked {
+    text: RichText;
+}
+
+table RichTextPhoneNumber {
+    text: RichText;
+    phone_number: string;
+}
+
+table RichTextIcon {
+    document: document;
+    width: int32;
+    height: int32;
+}
+
+table RichTextReference {
+    text: RichText;
+    anchor_name: string;
+    url: string;
+}
+
+table RichTextAnchor {
+    name: string;
+}
+
+table RichTextAnchorLink {
+    text: RichText;
+    anchor_name: string;
+    url: string;
+}
+
+table RichTexts {
+    texts: [RichText];
+}
+
+table PageBlockCaption {
+    text: RichText;
+    credit: RichText;
+}
+
+table PageBlockListItem {
+    label: string;
+    page_blocks: [PageBlock];
+}
+
+table PageBlockHorizontalAlignmentLeft {
+}
+
+table PageBlockHorizontalAlignmentCenter {
+}
+
+table PageBlockHorizontalAlignmentRight {
+}
+
+table PageBlockVerticalAlignmentTop {
+}
+
+table PageBlockVerticalAlignmentMiddle {
+}
+
+table PageBlockVerticalAlignmentBottom {
+}
+
+table PageBlockTableCell {
+    text: RichText;
+    is_header: bool;
+    colspan: int32;
+    rowspan: int32;
+    align: PageBlockHorizontalAlignment;
+    valign: PageBlockVerticalAlignment;
+}
+
+table PageBlockRelatedArticle {
+    url: string;
+    title: string;
+    description: string;
+    photo: photo;
+    author: string;
+    publish_date: int32;
+}
+
+table PageBlockTitle {
+    title: RichText;
+}
+
+table PageBlockSubtitle {
+    subtitle: RichText;
+}
+
+table PageBlockAuthorDate {
+    author: RichText;
+    publish_date: int32;
+}
+
+table PageBlockHeader {
+    header: RichText;
+}
+
+table PageBlockSubheader {
+    subheader: RichText;
+}
+
+table PageBlockKicker {
+    kicker: RichText;
+}
+
+table PageBlockParagraph {
+    text: RichText;
+}
+
+table PageBlockPreformatted {
+    text: RichText;
+    language: string;
+}
+
+table PageBlockFooter {
+    footer: RichText;
+}
+
+table PageBlockDivider {
+}
+
+table PageBlockAnchor {
+    name: string;
+}
+
+table PageBlockList {
+    items: [pageBlockListItem];
+}
+
+table PageBlockBlockQuote {
+    text: RichText;
+    credit: RichText;
+}
+
+table PageBlockPullQuote {
+    text: RichText;
+    credit: RichText;
+}
+
+table PageBlockAnimation {
+    animation: animation;
+    caption: pageBlockCaption;
+    need_autoplay: bool;
+}
+
+table PageBlockAudio {
+    audio: audio;
+    caption: pageBlockCaption;
+}
+
+table PageBlockPhoto {
+    photo: photo;
+    caption: pageBlockCaption;
+    url: string;
+}
+
+table PageBlockVideo {
+    video: video;
+    caption: pageBlockCaption;
+    need_autoplay: bool;
+    is_looped: bool;
+}
+
+table PageBlockVoiceNote {
+    voice_note: voiceNote;
+    caption: pageBlockCaption;
+}
+
+table PageBlockCover {
+    cover: PageBlock;
+}
+
+table PageBlockEmbedded {
+    url: string;
+    html: string;
+    poster_photo: photo;
+    width: int32;
+    height: int32;
+    caption: pageBlockCaption;
+    is_full_width: bool;
+    allow_scrolling: bool;
+}
+
+table PageBlockEmbeddedPost {
+    url: string;
+    author: string;
+    author_photo: photo;
+    date: int32;
+    page_blocks: [PageBlock];
+    caption: pageBlockCaption;
+}
+
+table PageBlockCollage {
+    page_blocks: [PageBlock];
+    caption: pageBlockCaption;
+}
+
+table PageBlockSlideshow {
+    page_blocks: [PageBlock];
+    caption: pageBlockCaption;
+}
+
+table PageBlockChatLink {
+    title: string;
+    photo: chatPhotoInfo;
+    username: string;
+}
+
+table PageBlockTable {
+    caption: RichText;
+    cells: [vecto];
+    is_bordered: bool;
+    is_striped: bool;
+}
+
+table PageBlockDetails {
+    header: RichText;
+    page_blocks: [PageBlock];
+    is_open: bool;
+}
+
+table PageBlockRelatedArticles {
+    header: RichText;
+    articles: [pageBlockRelatedArticle];
+}
+
+table PageBlockMap {
+    location: location;
+    zoom: int32;
+    width: int32;
+    height: int32;
+    caption: pageBlockCaption;
+}
+
+table WebPageInstantView {
+    page_blocks: [PageBlock];
+    view_count: int32;
+    version: int32;
+    is_rtl: bool;
+    is_full: bool;
+}
+
+table WebPage {
+    url: string;
+    display_url: string;
+    type: string;
+    site_name: string;
+    title: string;
+    description: formattedText;
+    photo: photo;
+    embed_url: string;
+    embed_type: string;
+    embed_width: int32;
+    embed_height: int32;
+    duration: int32;
+    author: string;
+    animation: animation;
+    audio: audio;
+    document: document;
+    sticker: sticker;
+    video: video;
+    video_note: videoNote;
+    voice_note: voiceNote;
+    instant_view_version: int32;
+}
+
+table CountryInfo {
+    country_code: string;
+    name: string;
+    english_name: string;
+    is_hidden: bool;
+    calling_codes: [string];
+}
+
+table Countries {
+    countries: [countryInfo];
+}
+
+table PhoneNumberInfo {
+    country: countryInfo;
+    country_calling_code: string;
+    formatted_phone_number: string;
+}
+
+table BankCardActionOpenUrl {
+    text: string;
+    url: string;
+}
+
+table BankCardInfo {
+    title: string;
+    actions: [bankCardActionOpenUrl];
+}
+
+table Address {
+    country_code: string;
+    state: string;
+    city: string;
+    street_line1: string;
+    street_line2: string;
+    postal_code: string;
+}
+
+table LabeledPricePart {
+    label: string;
+    amount: int53;
+}
+
+table Invoice {
+    currency: string;
+    price_parts: [labeledPricePart];
+    is_test: bool;
+    need_name: bool;
+    need_phone_number: bool;
+    need_email_address: bool;
+    need_shipping_address: bool;
+    send_phone_number_to_provider: bool;
+    send_email_address_to_provider: bool;
+    is_flexible: bool;
+}
+
+table OrderInfo {
+    name: string;
+    phone_number: string;
+    email_address: string;
+    shipping_address: address;
+}
+
+table ShippingOption {
+    id: string;
+    title: string;
+    price_parts: [labeledPricePart];
+}
+
+table SavedCredentials {
+    id: string;
+    title: string;
+}
+
+table InputCredentialsSaved {
+    saved_credentials_id: string;
+}
+
+table InputCredentialsNew {
+    data: string;
+    allow_save: bool;
+}
+
+table InputCredentialsAndroidPay {
+    data: string;
+}
+
+table InputCredentialsApplePay {
+    data: string;
+}
+
+table PaymentsProviderStripe {
+    publishable_key: string;
+    need_country: bool;
+    need_postal_code: bool;
+    need_cardholder_name: bool;
+}
+
+table PaymentForm {
+    invoice: invoice;
+    url: string;
+    payments_provider: paymentsProviderStripe;
+    saved_order_info: orderInfo;
+    saved_credentials: savedCredentials;
+    can_save_credentials: bool;
+    need_password: bool;
+}
+
+table ValidatedOrderInfo {
+    order_info_id: string;
+    shipping_options: [shippingOption];
+}
+
+table PaymentResult {
+    success: bool;
+    verification_url: string;
+}
+
+table PaymentReceipt {
+    date: int32;
+    payments_provider_user_id: int32;
+    invoice: invoice;
+    order_info: orderInfo;
+    shipping_option: shippingOption;
+    credentials_title: string;
+}
+
+table DatedFile {
+    file: file;
+    date: int32;
+}
+
+table PassportElementTypePersonalDetails {
+}
+
+table PassportElementTypePassport {
+}
+
+table PassportElementTypeDriverLicense {
+}
+
+table PassportElementTypeIdentityCard {
+}
+
+table PassportElementTypeInternalPassport {
+}
+
+table PassportElementTypeAddress {
+}
+
+table PassportElementTypeUtilityBill {
+}
+
+table PassportElementTypeBankStatement {
+}
+
+table PassportElementTypeRentalAgreement {
+}
+
+table PassportElementTypePassportRegistration {
+}
+
+table PassportElementTypeTemporaryRegistration {
+}
+
+table PassportElementTypePhoneNumber {
+}
+
+table PassportElementTypeEmailAddress {
+}
+
+table Date {
+    day: int32;
+    month: int32;
+    year: int32;
+}
+
+table PersonalDetails {
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    native_first_name: string;
+    native_middle_name: string;
+    native_last_name: string;
+    birthdate: date;
+    gender: string;
+    country_code: string;
+    residence_country_code: string;
+}
+
+table IdentityDocument {
+    number: string;
+    expiry_date: date;
+    front_side: datedFile;
+    reverse_side: datedFile;
+    selfie: datedFile;
+    translation: [datedFile];
+}
+
+table InputIdentityDocument {
+    number: string;
+    expiry_date: date;
+    front_side: InputFile;
+    reverse_side: InputFile;
+    selfie: InputFile;
+    translation: [InputFile];
+}
+
+table PersonalDocument {
+    files: [datedFile];
+    translation: [datedFile];
+}
+
+table InputPersonalDocument {
+    files: [InputFile];
+    translation: [InputFile];
+}
+
+table PassportElementPersonalDetails {
+    personal_details: personalDetails;
+}
+
+table PassportElementPassport {
+    passport: identityDocument;
+}
+
+table PassportElementDriverLicense {
+    driver_license: identityDocument;
+}
+
+table PassportElementIdentityCard {
+    identity_card: identityDocument;
+}
+
+table PassportElementInternalPassport {
+    internal_passport: identityDocument;
+}
+
+table PassportElementAddress {
+    address: address;
+}
+
+table PassportElementUtilityBill {
+    utility_bill: personalDocument;
+}
+
+table PassportElementBankStatement {
+    bank_statement: personalDocument;
+}
+
+table PassportElementRentalAgreement {
+    rental_agreement: personalDocument;
+}
+
+table PassportElementPassportRegistration {
+    passport_registration: personalDocument;
+}
+
+table PassportElementTemporaryRegistration {
+    temporary_registration: personalDocument;
+}
+
+table PassportElementPhoneNumber {
+    phone_number: string;
+}
+
+table PassportElementEmailAddress {
+    email_address: string;
+}
+
+table InputPassportElementPersonalDetails {
+    personal_details: personalDetails;
+}
+
+table InputPassportElementPassport {
+    passport: inputIdentityDocument;
+}
+
+table InputPassportElementDriverLicense {
+    driver_license: inputIdentityDocument;
+}
+
+table InputPassportElementIdentityCard {
+    identity_card: inputIdentityDocument;
+}
+
+table InputPassportElementInternalPassport {
+    internal_passport: inputIdentityDocument;
+}
+
+table InputPassportElementAddress {
+    address: address;
+}
+
+table InputPassportElementUtilityBill {
+    utility_bill: inputPersonalDocument;
+}
+
+table InputPassportElementBankStatement {
+    bank_statement: inputPersonalDocument;
+}
+
+table InputPassportElementRentalAgreement {
+    rental_agreement: inputPersonalDocument;
+}
+
+table InputPassportElementPassportRegistration {
+    passport_registration: inputPersonalDocument;
+}
+
+table InputPassportElementTemporaryRegistration {
+    temporary_registration: inputPersonalDocument;
+}
+
+table InputPassportElementPhoneNumber {
+    phone_number: string;
+}
+
+table InputPassportElementEmailAddress {
+    email_address: string;
+}
+
+table PassportElements {
+    elements: [PassportElement];
+}
+
+table PassportElementErrorSourceUnspecified {
+}
+
+table PassportElementErrorSourceDataField {
+    field_name: string;
+}
+
+table PassportElementErrorSourceFrontSide {
+}
+
+table PassportElementErrorSourceReverseSide {
+}
+
+table PassportElementErrorSourceSelfie {
+}
+
+table PassportElementErrorSourceTranslationFile {
+    file_index: int32;
+}
+
+table PassportElementErrorSourceTranslationFiles {
+}
+
+table PassportElementErrorSourceFile {
+    file_index: int32;
+}
+
+table PassportElementErrorSourceFiles {
+}
+
+table PassportElementError {
+    type: PassportElementType;
+    message: string;
+    source: PassportElementErrorSource;
+}
+
+table PassportSuitableElement {
+    type: PassportElementType;
+    is_selfie_required: bool;
+    is_translation_required: bool;
+    is_native_name_required: bool;
+}
+
+table PassportRequiredElement {
+    suitable_elements: [passportSuitableElement];
+}
+
+table PassportAuthorizationForm {
+    id: int32;
+    required_elements: [passportRequiredElement];
+    privacy_policy_url: string;
+}
+
+table PassportElementsWithErrors {
+    elements: [PassportElement];
+    errors: [passportElementError];
+}
+
+table EncryptedCredentials {
+    data: [byte];
+    hash: [byte];
+    secret: [byte];
+}
+
+table EncryptedPassportElement {
+    type: PassportElementType;
+    data: [byte];
+    front_side: datedFile;
+    reverse_side: datedFile;
+    selfie: datedFile;
+    translation: [datedFile];
+    files: [datedFile];
+    value: string;
+    hash: string;
+}
+
+table InputPassportElementErrorSourceUnspecified {
+    element_hash: [byte];
+}
+
+table InputPassportElementErrorSourceDataField {
+    field_name: string;
+    data_hash: [byte];
+}
+
+table InputPassportElementErrorSourceFrontSide {
+    file_hash: [byte];
+}
+
+table InputPassportElementErrorSourceReverseSide {
+    file_hash: [byte];
+}
+
+table InputPassportElementErrorSourceSelfie {
+    file_hash: [byte];
+}
+
+table InputPassportElementErrorSourceTranslationFile {
+    file_hash: [byte];
+}
+
+table InputPassportElementErrorSourceTranslationFiles {
+    file_hashes: [[byte]];
+}
+
+table InputPassportElementErrorSourceFile {
+    file_hash: [byte];
+}
+
+table InputPassportElementErrorSourceFiles {
+    file_hashes: [[byte]];
+}
+
+table InputPassportElementError {
+    type: PassportElementType;
+    message: string;
+    source: InputPassportElementErrorSource;
+}
+
+table MessageText {
+    text: formattedText;
+    web_page: webPage;
+}
+
+table MessageAnimation {
+    animation: animation;
+    caption: formattedText;
+    is_secret: bool;
+}
+
+table MessageAudio {
+    audio: audio;
+    caption: formattedText;
+}
+
+table MessageDocument {
+    document: document;
+    caption: formattedText;
+}
+
+table MessagePhoto {
+    photo: photo;
+    caption: formattedText;
+    is_secret: bool;
+}
+
+table MessageExpiredPhoto {
+}
+
+table MessageSticker {
+    sticker: sticker;
+}
+
+table MessageVideo {
+    video: video;
+    caption: formattedText;
+    is_secret: bool;
+}
+
+table MessageExpiredVideo {
+}
+
+table MessageVideoNote {
+    video_note: videoNote;
+    is_viewed: bool;
+    is_secret: bool;
+}
+
+table MessageVoiceNote {
+    voice_note: voiceNote;
+    caption: formattedText;
+    is_listened: bool;
+}
+
+table MessageLocation {
+    location: location;
+    live_period: int32;
+    expires_in: int32;
+    heading: int32;
+    proximity_alert_radius: int32;
+}
+
+table MessageVenue {
+    venue: venue;
+}
+
+table MessageContact {
+    contact: contact;
+}
+
+table MessageDice {
+    initial_state: DiceStickers;
+    final_state: DiceStickers;
+    emoji: string;
+    value: int32;
+    success_animation_frame_number: int32;
+}
+
+table MessageGame {
+    game: game;
+}
+
+table MessagePoll {
+    poll: poll;
+}
+
+table MessageInvoice {
+    title: string;
+    description: string;
+    photo: photo;
+    currency: string;
+    total_amount: int53;
+    start_parameter: string;
+    is_test: bool;
+    need_shipping_address: bool;
+    receipt_message_id: int53;
+}
+
+table MessageCall {
+    is_video: bool;
+    discard_reason: CallDiscardReason;
+    duration: int32;
+}
+
+table MessageBasicGroupChatCreate {
+    title: string;
+    member_user_ids: [int32];
+}
+
+table MessageSupergroupChatCreate {
+    title: string;
+}
+
+table MessageChatChangeTitle {
+    title: string;
+}
+
+table MessageChatChangePhoto {
+    photo: chatPhoto;
+}
+
+table MessageChatDeletePhoto {
+}
+
+table MessageChatAddMembers {
+    member_user_ids: [int32];
+}
+
+table MessageChatJoinByLink {
+}
+
+table MessageChatDeleteMember {
+    user_id: int32;
+}
+
+table MessageChatUpgradeTo {
+    supergroup_id: int32;
+}
+
+table MessageChatUpgradeFrom {
+    title: string;
+    basic_group_id: int32;
+}
+
+table MessagePinMessage {
+    message_id: int53;
+}
+
+table MessageScreenshotTaken {
+}
+
+table MessageChatSetTtl {
+    ttl: int32;
+}
+
+table MessageCustomServiceAction {
+    text: string;
+}
+
+table MessageGameScore {
+    game_message_id: int53;
+    game_id: int64;
+    score: int32;
+}
+
+table MessagePaymentSuccessful {
+    invoice_message_id: int53;
+    currency: string;
+    total_amount: int53;
+}
+
+table MessagePaymentSuccessfulBot {
+    invoice_message_id: int53;
+    currency: string;
+    total_amount: int53;
+    invoice_payload: [byte];
+    shipping_option_id: string;
+    order_info: orderInfo;
+    telegram_payment_charge_id: string;
+    provider_payment_charge_id: string;
+}
+
+table MessageContactRegistered {
+}
+
+table MessageWebsiteConnected {
+    domain_name: string;
+}
+
+table MessagePassportDataSent {
+    types: [PassportElementType];
+}
+
+table MessagePassportDataReceived {
+    elements: [encryptedPassportElement];
+    credentials: encryptedCredentials;
+}
+
+table MessageProximityAlertTriggered {
+    traveler: MessageSender;
+    watcher: MessageSender;
+    distance: int32;
+}
+
+table MessageUnsupported {
+}
+
+table TextEntityTypeMention {
+}
+
+table TextEntityTypeHashtag {
+}
+
+table TextEntityTypeCashtag {
+}
+
+table TextEntityTypeBotCommand {
+}
+
+table TextEntityTypeUrl {
+}
+
+table TextEntityTypeEmailAddress {
+}
+
+table TextEntityTypePhoneNumber {
+}
+
+table TextEntityTypeBankCardNumber {
+}
+
+table TextEntityTypeBold {
+}
+
+table TextEntityTypeItalic {
+}
+
+table TextEntityTypeUnderline {
+}
+
+table TextEntityTypeStrikethrough {
+}
+
+table TextEntityTypeCode {
+}
+
+table TextEntityTypePre {
+}
+
+table TextEntityTypePreCode {
+    language: string;
+}
+
+table TextEntityTypeTextUrl {
+    url: string;
+}
+
+table TextEntityTypeMentionName {
+    user_id: int32;
+}
+
+table InputThumbnail {
+    thumbnail: InputFile;
+    width: int32;
+    height: int32;
+}
+
+table MessageSchedulingStateSendAtDate {
+    send_date: int32;
+}
+
+table MessageSchedulingStateSendWhenOnline {
+}
+
+table MessageSendOptions {
+    disable_notification: bool;
+    from_background: bool;
+    scheduling_state: MessageSchedulingState;
+}
+
+table MessageCopyOptions {
+    send_copy: bool;
+    replace_caption: bool;
+    new_caption: formattedText;
+}
+
+table InputMessageText {
+    text: formattedText;
+    disable_web_page_preview: bool;
+    clear_draft: bool;
+}
+
+table InputMessageAnimation {
+    animation: InputFile;
+    thumbnail: inputThumbnail;
+    added_sticker_file_ids: [int32];
+    duration: int32;
+    width: int32;
+    height: int32;
+    caption: formattedText;
+}
+
+table InputMessageAudio {
+    audio: InputFile;
+    album_cover_thumbnail: inputThumbnail;
+    duration: int32;
+    title: string;
+    performer: string;
+    caption: formattedText;
+}
+
+table InputMessageDocument {
+    document: InputFile;
+    thumbnail: inputThumbnail;
+    disable_content_type_detection: bool;
+    caption: formattedText;
+}
+
+table InputMessagePhoto {
+    photo: InputFile;
+    thumbnail: inputThumbnail;
+    added_sticker_file_ids: [int32];
+    width: int32;
+    height: int32;
+    caption: formattedText;
+    ttl: int32;
+}
+
+table InputMessageSticker {
+    sticker: InputFile;
+    thumbnail: inputThumbnail;
+    width: int32;
+    height: int32;
+}
+
+table InputMessageVideo {
+    video: InputFile;
+    thumbnail: inputThumbnail;
+    added_sticker_file_ids: [int32];
+    duration: int32;
+    width: int32;
+    height: int32;
+    supports_streaming: bool;
+    caption: formattedText;
+    ttl: int32;
+}
+
+table InputMessageVideoNote {
+    video_note: InputFile;
+    thumbnail: inputThumbnail;
+    duration: int32;
+    length: int32;
+}
+
+table InputMessageVoiceNote {
+    voice_note: InputFile;
+    duration: int32;
+    waveform: [byte];
+    caption: formattedText;
+}
+
+table InputMessageLocation {
+    location: location;
+    live_period: int32;
+    heading: int32;
+    proximity_alert_radius: int32;
+}
+
+table InputMessageVenue {
+    venue: venue;
+}
+
+table InputMessageContact {
+    contact: contact;
+}
+
+table InputMessageDice {
+    emoji: string;
+    clear_draft: bool;
+}
+
+table InputMessageGame {
+    bot_user_id: int32;
+    game_short_name: string;
+}
+
+table InputMessageInvoice {
+    invoice: invoice;
+    title: string;
+    description: string;
+    photo_url: string;
+    photo_size: int32;
+    photo_width: int32;
+    photo_height: int32;
+    payload: [byte];
+    provider_token: string;
+    provider_data: string;
+    start_parameter: string;
+}
+
+table InputMessagePoll {
+    question: string;
+    options: [string];
+    is_anonymous: bool;
+    type: PollType;
+    open_period: int32;
+    close_date: int32;
+    is_closed: bool;
+}
+
+table InputMessageForwarded {
+    from_chat_id: int53;
+    message_id: int53;
+    in_game_share: bool;
+    copy_options: messageCopyOptions;
+}
+
+table SearchMessagesFilterEmpty {
+}
+
+table SearchMessagesFilterAnimation {
+}
+
+table SearchMessagesFilterAudio {
+}
+
+table SearchMessagesFilterDocument {
+}
+
+table SearchMessagesFilterPhoto {
+}
+
+table SearchMessagesFilterVideo {
+}
+
+table SearchMessagesFilterVoiceNote {
+}
+
+table SearchMessagesFilterPhotoAndVideo {
+}
+
+table SearchMessagesFilterUrl {
+}
+
+table SearchMessagesFilterChatPhoto {
+}
+
+table SearchMessagesFilterCall {
+}
+
+table SearchMessagesFilterMissedCall {
+}
+
+table SearchMessagesFilterVideoNote {
+}
+
+table SearchMessagesFilterVoiceAndVideoNote {
+}
+
+table SearchMessagesFilterMention {
+}
+
+table SearchMessagesFilterUnreadMention {
+}
+
+table SearchMessagesFilterFailedToSend {
+}
+
+table SearchMessagesFilterPinned {
+}
+
+table ChatActionTyping {
+}
+
+table ChatActionRecordingVideo {
+}
+
+table ChatActionUploadingVideo {
+    progress: int32;
+}
+
+table ChatActionRecordingVoiceNote {
+}
+
+table ChatActionUploadingVoiceNote {
+    progress: int32;
+}
+
+table ChatActionUploadingPhoto {
+    progress: int32;
+}
+
+table ChatActionUploadingDocument {
+    progress: int32;
+}
+
+table ChatActionChoosingLocation {
+}
+
+table ChatActionChoosingContact {
+}
+
+table ChatActionStartPlayingGame {
+}
+
+table ChatActionRecordingVideoNote {
+}
+
+table ChatActionUploadingVideoNote {
+    progress: int32;
+}
+
+table ChatActionCancel {
+}
+
+table UserStatusEmpty {
+}
+
+table UserStatusOnline {
+    expires: int32;
+}
+
+table UserStatusOffline {
+    was_online: int32;
+}
+
+table UserStatusRecently {
+}
+
+table UserStatusLastWeek {
+}
+
+table UserStatusLastMonth {
+}
+
+table Stickers {
+    stickers: [sticker];
+}
+
+table Emojis {
+    emojis: [string];
+}
+
+table StickerSet {
+    id: int64;
+    title: string;
+    name: string;
+    thumbnail: thumbnail;
+    is_installed: bool;
+    is_archived: bool;
+    is_official: bool;
+    is_animated: bool;
+    is_masks: bool;
+    is_viewed: bool;
+    stickers: [sticker];
+    emojis: [emojis];
+}
+
+table StickerSetInfo {
+    id: int64;
+    title: string;
+    name: string;
+    thumbnail: thumbnail;
+    is_installed: bool;
+    is_archived: bool;
+    is_official: bool;
+    is_animated: bool;
+    is_masks: bool;
+    is_viewed: bool;
+    size: int32;
+    covers: [sticker];
+}
+
+table StickerSets {
+    total_count: int32;
+    sets: [stickerSetInfo];
+}
+
+table CallDiscardReasonEmpty {
+}
+
+table CallDiscardReasonMissed {
+}
+
+table CallDiscardReasonDeclined {
+}
+
+table CallDiscardReasonDisconnected {
+}
+
+table CallDiscardReasonHungUp {
+}
+
+table CallProtocol {
+    udp_p2p: bool;
+    udp_reflector: bool;
+    min_layer: int32;
+    max_layer: int32;
+    library_versions: [string];
+}
+
+table CallServerTypeTelegramReflector {
+    peer_tag: [byte];
+}
+
+table CallServerTypeWebrtc {
+    username: string;
+    password: string;
+    supports_turn: bool;
+    supports_stun: bool;
+}
+
+table CallServer {
+    id: int64;
+    ip_address: string;
+    ipv6_address: string;
+    port: int32;
+    type: CallServerType;
+}
+
+table CallId {
+    id: int32;
+}
+
+table CallStatePending {
+    is_created: bool;
+    is_received: bool;
+}
+
+table CallStateExchangingKeys {
+}
+
+table CallStateReady {
+    protocol: callProtocol;
+    servers: [callServer];
+    config: string;
+    encryption_key: [byte];
+    emojis: [string];
+    allow_p2p: bool;
+}
+
+table CallStateHangingUp {
+}
+
+table CallStateDiscarded {
+    reason: CallDiscardReason;
+    need_rating: bool;
+    need_debug_information: bool;
+}
+
+table CallStateError {
+    error: error;
+}
+
+table CallProblemEcho {
+}
+
+table CallProblemNoise {
+}
+
+table CallProblemInterruptions {
+}
+
+table CallProblemDistortedSpeech {
+}
+
+table CallProblemSilentLocal {
+}
+
+table CallProblemSilentRemote {
+}
+
+table CallProblemDropped {
+}
+
+table CallProblemDistortedVideo {
+}
+
+table CallProblemPixelatedVideo {
+}
+
+table Call {
+    id: int32;
+    user_id: int32;
+    is_outgoing: bool;
+    is_video: bool;
+    state: CallState;
+}
+
+table PhoneNumberAuthenticationSettings {
+    allow_flash_call: bool;
+    is_current_phone_number: bool;
+    allow_sms_retriever_api: bool;
+}
+
+table Animations {
+    animations: [animation];
+}
+
+table DiceStickersRegular {
+    sticker: sticker;
+}
+
+table DiceStickersSlotMachine {
+    background: sticker;
+    lever: sticker;
+    left_reel: sticker;
+    center_reel: sticker;
+    right_reel: sticker;
+}
+
+table ImportedContacts {
+    user_ids: [int32];
+    importer_count: [int32];
+}
+
+table HttpUrl {
+    url: string;
+}
+
+table InputInlineQueryResultAnimation {
+    id: string;
+    title: string;
+    thumbnail_url: string;
+    thumbnail_mime_type: string;
+    video_url: string;
+    video_mime_type: string;
+    video_duration: int32;
+    video_width: int32;
+    video_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultArticle {
+    id: string;
+    url: string;
+    hide_url: bool;
+    title: string;
+    description: string;
+    thumbnail_url: string;
+    thumbnail_width: int32;
+    thumbnail_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultAudio {
+    id: string;
+    title: string;
+    performer: string;
+    audio_url: string;
+    audio_duration: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultContact {
+    id: string;
+    contact: contact;
+    thumbnail_url: string;
+    thumbnail_width: int32;
+    thumbnail_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultDocument {
+    id: string;
+    title: string;
+    description: string;
+    document_url: string;
+    mime_type: string;
+    thumbnail_url: string;
+    thumbnail_width: int32;
+    thumbnail_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultGame {
+    id: string;
+    game_short_name: string;
+    reply_markup: ReplyMarkup;
+}
+
+table InputInlineQueryResultLocation {
+    id: string;
+    location: location;
+    live_period: int32;
+    title: string;
+    thumbnail_url: string;
+    thumbnail_width: int32;
+    thumbnail_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultPhoto {
+    id: string;
+    title: string;
+    description: string;
+    thumbnail_url: string;
+    photo_url: string;
+    photo_width: int32;
+    photo_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultSticker {
+    id: string;
+    thumbnail_url: string;
+    sticker_url: string;
+    sticker_width: int32;
+    sticker_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultVenue {
+    id: string;
+    venue: venue;
+    thumbnail_url: string;
+    thumbnail_width: int32;
+    thumbnail_height: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultVideo {
+    id: string;
+    title: string;
+    description: string;
+    thumbnail_url: string;
+    video_url: string;
+    mime_type: string;
+    video_width: int32;
+    video_height: int32;
+    video_duration: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InputInlineQueryResultVoiceNote {
+    id: string;
+    title: string;
+    voice_note_url: string;
+    voice_note_duration: int32;
+    reply_markup: ReplyMarkup;
+    input_message_content: InputMessageContent;
+}
+
+table InlineQueryResultArticle {
+    id: string;
+    url: string;
+    hide_url: bool;
+    title: string;
+    description: string;
+    thumbnail: thumbnail;
+}
+
+table InlineQueryResultContact {
+    id: string;
+    contact: contact;
+    thumbnail: thumbnail;
+}
+
+table InlineQueryResultLocation {
+    id: string;
+    location: location;
+    title: string;
+    thumbnail: thumbnail;
+}
+
+table InlineQueryResultVenue {
+    id: string;
+    venue: venue;
+    thumbnail: thumbnail;
+}
+
+table InlineQueryResultGame {
+    id: string;
+    game: game;
+}
+
+table InlineQueryResultAnimation {
+    id: string;
+    animation: animation;
+    title: string;
+}
+
+table InlineQueryResultAudio {
+    id: string;
+    audio: audio;
+}
+
+table InlineQueryResultDocument {
+    id: string;
+    document: document;
+    title: string;
+    description: string;
+}
+
+table InlineQueryResultPhoto {
+    id: string;
+    photo: photo;
+    title: string;
+    description: string;
+}
+
+table InlineQueryResultSticker {
+    id: string;
+    sticker: sticker;
+}
+
+table InlineQueryResultVideo {
+    id: string;
+    video: video;
+    title: string;
+    description: string;
+}
+
+table InlineQueryResultVoiceNote {
+    id: string;
+    voice_note: voiceNote;
+    title: string;
+}
+
+table InlineQueryResults {
+    inline_query_id: int64;
+    next_offset: string;
+    results: [InlineQueryResult];
+    switch_pm_text: string;
+    switch_pm_parameter: string;
+}
+
+table CallbackQueryPayloadData {
+    data: [byte];
+}
+
+table CallbackQueryPayloadDataWithPassword {
+    password: string;
+    data: [byte];
+}
+
+table CallbackQueryPayloadGame {
+    game_short_name: string;
+}
+
+table CallbackQueryAnswer {
+    text: string;
+    show_alert: bool;
+    url: string;
+}
+
+table CustomRequestResult {
+    result: string;
+}
+
+table GameHighScore {
+    position: int32;
+    user_id: int32;
+    score: int32;
+}
+
+table GameHighScores {
+    scores: [gameHighScore];
+}
+
+table ChatEventMessageEdited {
+    old_message: message;
+    new_message: message;
+}
+
+table ChatEventMessageDeleted {
+    message: message;
+}
+
+table ChatEventPollStopped {
+    message: message;
+}
+
+table ChatEventMessagePinned {
+    message: message;
+}
+
+table ChatEventMessageUnpinned {
+    message: message;
+}
+
+table ChatEventMemberJoined {
+}
+
+table ChatEventMemberLeft {
+}
+
+table ChatEventMemberInvited {
+    user_id: int32;
+    status: ChatMemberStatus;
+}
+
+table ChatEventMemberPromoted {
+    user_id: int32;
+    old_status: ChatMemberStatus;
+    new_status: ChatMemberStatus;
+}
+
+table ChatEventMemberRestricted {
+    user_id: int32;
+    old_status: ChatMemberStatus;
+    new_status: ChatMemberStatus;
+}
+
+table ChatEventTitleChanged {
+    old_title: string;
+    new_title: string;
+}
+
+table ChatEventPermissionsChanged {
+    old_permissions: chatPermissions;
+    new_permissions: chatPermissions;
+}
+
+table ChatEventDescriptionChanged {
+    old_description: string;
+    new_description: string;
+}
+
+table ChatEventUsernameChanged {
+    old_username: string;
+    new_username: string;
+}
+
+table ChatEventPhotoChanged {
+    old_photo: chatPhoto;
+    new_photo: chatPhoto;
+}
+
+table ChatEventInvitesToggled {
+    can_invite_users: bool;
+}
+
+table ChatEventLinkedChatChanged {
+    old_linked_chat_id: int53;
+    new_linked_chat_id: int53;
+}
+
+table ChatEventSlowModeDelayChanged {
+    old_slow_mode_delay: int32;
+    new_slow_mode_delay: int32;
+}
+
+table ChatEventSignMessagesToggled {
+    sign_messages: bool;
+}
+
+table ChatEventStickerSetChanged {
+    old_sticker_set_id: int64;
+    new_sticker_set_id: int64;
+}
+
+table ChatEventLocationChanged {
+    old_location: chatLocation;
+    new_location: chatLocation;
+}
+
+table ChatEventIsAllHistoryAvailableToggled {
+    is_all_history_available: bool;
+}
+
+table ChatEvent {
+    id: int64;
+    date: int32;
+    user_id: int32;
+    action: ChatEventAction;
+}
+
+table ChatEvents {
+    events: [chatEvent];
+}
+
+table ChatEventLogFilters {
+    message_edits: bool;
+    message_deletions: bool;
+    message_pins: bool;
+    member_joins: bool;
+    member_leaves: bool;
+    member_invites: bool;
+    member_promotions: bool;
+    member_restrictions: bool;
+    info_changes: bool;
+    setting_changes: bool;
+}
+
+table LanguagePackStringValueOrdinary {
+    value: string;
+}
+
+table LanguagePackStringValuePluralized {
+    zero_value: string;
+    one_value: string;
+    two_value: string;
+    few_value: string;
+    many_value: string;
+    other_value: string;
+}
+
+table LanguagePackStringValueDeleted {
+}
+
+table LanguagePackString {
+    key: string;
+    value: LanguagePackStringValue;
+}
+
+table LanguagePackStrings {
+    strings: [languagePackString];
+}
+
+table LanguagePackInfo {
+    id: string;
+    base_language_pack_id: string;
+    name: string;
+    native_name: string;
+    plural_code: string;
+    is_official: bool;
+    is_rtl: bool;
+    is_beta: bool;
+    is_installed: bool;
+    total_string_count: int32;
+    translated_string_count: int32;
+    local_string_count: int32;
+    translation_url: string;
+}
+
+table LocalizationTargetInfo {
+    language_packs: [languagePackInfo];
+}
+
+table DeviceTokenFirebaseCloudMessaging {
+    token: string;
+    encrypt: bool;
+}
+
+table DeviceTokenApplePush {
+    device_token: string;
+    is_app_sandbox: bool;
+}
+
+table DeviceTokenApplePushVoIP {
+    device_token: string;
+    is_app_sandbox: bool;
+    encrypt: bool;
+}
+
+table DeviceTokenWindowsPush {
+    access_token: string;
+}
+
+table DeviceTokenMicrosoftPush {
+    channel_uri: string;
+}
+
+table DeviceTokenMicrosoftPushVoIP {
+    channel_uri: string;
+}
+
+table DeviceTokenWebPush {
+    endpoint: string;
+    p256dh_base64url: string;
+    auth_base64url: string;
+}
+
+table DeviceTokenSimplePush {
+    endpoint: string;
+}
+
+table DeviceTokenUbuntuPush {
+    token: string;
+}
+
+table DeviceTokenBlackBerryPush {
+    token: string;
+}
+
+table DeviceTokenTizenPush {
+    reg_id: string;
+}
+
+table PushReceiverId {
+    id: int64;
+}
+
+table BackgroundFillSolid {
+    color: int32;
+}
+
+table BackgroundFillGradient {
+    top_color: int32;
+    bottom_color: int32;
+    rotation_angle: int32;
+}
+
+table BackgroundTypeWallpaper {
+    is_blurred: bool;
+    is_moving: bool;
+}
+
+table BackgroundTypePattern {
+    fill: BackgroundFill;
+    intensity: int32;
+    is_moving: bool;
+}
+
+table BackgroundTypeFill {
+    fill: BackgroundFill;
+}
+
+table Background {
+    id: int64;
+    is_default: bool;
+    is_dark: bool;
+    name: string;
+    document: document;
+    type: BackgroundType;
+}
+
+table Backgrounds {
+    backgrounds: [background];
+}
+
+table InputBackgroundLocal {
+    background: InputFile;
+}
+
+table InputBackgroundRemote {
+    background_id: int64;
+}
+
+table Hashtags {
+    hashtags: [string];
+}
+
+table CanTransferOwnershipResultOk {
+}
+
+table CanTransferOwnershipResultPasswordNeeded {
+}
+
+table CanTransferOwnershipResultPasswordTooFresh {
+    retry_after: int32;
+}
+
+table CanTransferOwnershipResultSessionTooFresh {
+    retry_after: int32;
+}
+
+table CheckChatUsernameResultOk {
+}
+
+table CheckChatUsernameResultUsernameInvalid {
+}
+
+table CheckChatUsernameResultUsernameOccupied {
+}
+
+table CheckChatUsernameResultPublicChatsTooMuch {
+}
+
+table CheckChatUsernameResultPublicGroupsUnavailable {
+}
+
+table PushMessageContentHidden {
+    is_pinned: bool;
+}
+
+table PushMessageContentAnimation {
+    animation: animation;
+    caption: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentAudio {
+    audio: audio;
+    is_pinned: bool;
+}
+
+table PushMessageContentContact {
+    name: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentContactRegistered {
+}
+
+table PushMessageContentDocument {
+    document: document;
+    is_pinned: bool;
+}
+
+table PushMessageContentGame {
+    title: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentGameScore {
+    title: string;
+    score: int32;
+    is_pinned: bool;
+}
+
+table PushMessageContentInvoice {
+    price: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentLocation {
+    is_live: bool;
+    is_pinned: bool;
+}
+
+table PushMessageContentPhoto {
+    photo: photo;
+    caption: string;
+    is_secret: bool;
+    is_pinned: bool;
+}
+
+table PushMessageContentPoll {
+    question: string;
+    is_regular: bool;
+    is_pinned: bool;
+}
+
+table PushMessageContentScreenshotTaken {
+}
+
+table PushMessageContentSticker {
+    sticker: sticker;
+    emoji: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentText {
+    text: string;
+    is_pinned: bool;
+}
+
+table PushMessageContentVideo {
+    video: video;
+    caption: string;
+    is_secret: bool;
+    is_pinned: bool;
+}
+
+table PushMessageContentVideoNote {
+    video_note: videoNote;
+    is_pinned: bool;
+}
+
+table PushMessageContentVoiceNote {
+    voice_note: voiceNote;
+    is_pinned: bool;
+}
+
+table PushMessageContentBasicGroupChatCreate {
+}
+
+table PushMessageContentChatAddMembers {
+    member_name: string;
+    is_current_user: bool;
+    is_returned: bool;
+}
+
+table PushMessageContentChatChangePhoto {
+}
+
+table PushMessageContentChatChangeTitle {
+    title: string;
+}
+
+table PushMessageContentChatDeleteMember {
+    member_name: string;
+    is_current_user: bool;
+    is_left: bool;
+}
+
+table PushMessageContentChatJoinByLink {
+}
+
+table PushMessageContentMessageForwards {
+    total_count: int32;
+}
+
+table PushMessageContentMediaAlbum {
+    total_count: int32;
+    has_photos: bool;
+    has_videos: bool;
+    has_audios: bool;
+    has_documents: bool;
+}
+
+table NotificationTypeNewMessage {
+    message: message;
+}
+
+table NotificationTypeNewSecretChat {
+}
+
+table NotificationTypeNewCall {
+    call_id: int32;
+}
+
+table NotificationTypeNewPushMessage {
+    message_id: int53;
+    sender: MessageSender;
+    sender_name: string;
+    is_outgoing: bool;
+    content: PushMessageContent;
+}
+
+table NotificationGroupTypeMessages {
+}
+
+table NotificationGroupTypeMentions {
+}
+
+table NotificationGroupTypeSecretChat {
+}
+
+table NotificationGroupTypeCalls {
+}
+
+table Notification {
+    id: int32;
+    date: int32;
+    is_silent: bool;
+    type: NotificationType;
+}
+
+table NotificationGroup {
+    id: int32;
+    type: NotificationGroupType;
+    chat_id: int53;
+    total_count: int32;
+    notifications: [notification];
+}
+
+table OptionValueBoolean {
+    value: bool;
+}
+
+table OptionValueEmpty {
+}
+
+table OptionValueInteger {
+    value: int64;
+}
+
+table OptionValueString {
+    value: string;
+}
+
+table JsonObjectMember {
+    key: string;
+    value: JsonValue;
+}
+
+table JsonValueNull {
+}
+
+table JsonValueBoolean {
+    value: bool;
+}
+
+table JsonValueNumber {
+    value: double;
+}
+
+table JsonValueString {
+    value: string;
+}
+
+table JsonValueArray {
+    values: [JsonValue];
+}
+
+table JsonValueObject {
+    members: [jsonObjectMember];
+}
+
+table UserPrivacySettingRuleAllowAll {
+}
+
+table UserPrivacySettingRuleAllowContacts {
+}
+
+table UserPrivacySettingRuleAllowUsers {
+    user_ids: [int32];
+}
+
+table UserPrivacySettingRuleAllowChatMembers {
+    chat_ids: [int53];
+}
+
+table UserPrivacySettingRuleRestrictAll {
+}
+
+table UserPrivacySettingRuleRestrictContacts {
+}
+
+table UserPrivacySettingRuleRestrictUsers {
+    user_ids: [int32];
+}
+
+table UserPrivacySettingRuleRestrictChatMembers {
+    chat_ids: [int53];
+}
+
+table UserPrivacySettingRules {
+    rules: [UserPrivacySettingRule];
+}
+
+table UserPrivacySettingShowStatus {
+}
+
+table UserPrivacySettingShowProfilePhoto {
+}
+
+table UserPrivacySettingShowLinkInForwardedMessages {
+}
+
+table UserPrivacySettingShowPhoneNumber {
+}
+
+table UserPrivacySettingAllowChatInvites {
+}
+
+table UserPrivacySettingAllowCalls {
+}
+
+table UserPrivacySettingAllowPeerToPeerCalls {
+}
+
+table UserPrivacySettingAllowFindingByPhoneNumber {
+}
+
+table AccountTtl {
+    days: int32;
+}
+
+table Session {
+    id: int64;
+    is_current: bool;
+    is_password_pending: bool;
+    api_id: int32;
+    application_name: string;
+    application_version: string;
+    is_official_application: bool;
+    device_model: string;
+    platform: string;
+    system_version: string;
+    log_in_date: int32;
+    last_active_date: int32;
+    ip: string;
+    country: string;
+    region: string;
+}
+
+table Sessions {
+    sessions: [session];
+}
+
+table ConnectedWebsite {
+    id: int64;
+    domain_name: string;
+    bot_user_id: int32;
+    browser: string;
+    platform: string;
+    log_in_date: int32;
+    last_active_date: int32;
+    ip: string;
+    location: string;
+}
+
+table ConnectedWebsites {
+    websites: [connectedWebsite];
+}
+
+table ChatReportReasonSpam {
+}
+
+table ChatReportReasonViolence {
+}
+
+table ChatReportReasonPornography {
+}
+
+table ChatReportReasonChildAbuse {
+}
+
+table ChatReportReasonCopyright {
+}
+
+table ChatReportReasonUnrelatedLocation {
+}
+
+table ChatReportReasonCustom {
+    text: string;
+}
+
+table MessageLink {
+    link: string;
+    is_public: bool;
+}
+
+table MessageLinkInfo {
+    is_public: bool;
+    chat_id: int53;
+    message: message;
+    for_album: bool;
+    for_comment: bool;
+}
+
+table FilePart {
+    data: [byte];
+}
+
+table FileTypeNone {
+}
+
+table FileTypeAnimation {
+}
+
+table FileTypeAudio {
+}
+
+table FileTypeDocument {
+}
+
+table FileTypePhoto {
+}
+
+table FileTypeProfilePhoto {
+}
+
+table FileTypeSecret {
+}
+
+table FileTypeSecretThumbnail {
+}
+
+table FileTypeSecure {
+}
+
+table FileTypeSticker {
+}
+
+table FileTypeThumbnail {
+}
+
+table FileTypeUnknown {
+}
+
+table FileTypeVideo {
+}
+
+table FileTypeVideoNote {
+}
+
+table FileTypeVoiceNote {
+}
+
+table FileTypeWallpaper {
+}
+
+table StorageStatisticsByFileType {
+    file_type: FileType;
+    size: int53;
+    count: int32;
+}
+
+table StorageStatisticsByChat {
+    chat_id: int53;
+    size: int53;
+    count: int32;
+    by_file_type: [storageStatisticsByFileType];
+}
+
+table StorageStatistics {
+    size: int53;
+    count: int32;
+    by_chat: [storageStatisticsByChat];
+}
+
+table StorageStatisticsFast {
+    files_size: int53;
+    file_count: int32;
+    database_size: int53;
+    language_pack_database_size: int53;
+    log_size: int53;
+}
+
+table DatabaseStatistics {
+    statistics: string;
+}
+
+table NetworkTypeNone {
+}
+
+table NetworkTypeMobile {
+}
+
+table NetworkTypeMobileRoaming {
+}
+
+table NetworkTypeWiFi {
+}
+
+table NetworkTypeOther {
+}
+
+table NetworkStatisticsEntryFile {
+    file_type: FileType;
+    network_type: NetworkType;
+    sent_bytes: int53;
+    received_bytes: int53;
+}
+
+table NetworkStatisticsEntryCall {
+    network_type: NetworkType;
+    sent_bytes: int53;
+    received_bytes: int53;
+    duration: double;
+}
+
+table NetworkStatistics {
+    since_date: int32;
+    entries: [NetworkStatisticsEntry];
+}
+
+table AutoDownloadSettings {
+    is_auto_download_enabled: bool;
+    max_photo_file_size: int32;
+    max_video_file_size: int32;
+    max_other_file_size: int32;
+    video_upload_bitrate: int32;
+    preload_large_videos: bool;
+    preload_next_audio: bool;
+    use_less_data_for_calls: bool;
+}
+
+table AutoDownloadSettingsPresets {
+    low: autoDownloadSettings;
+    medium: autoDownloadSettings;
+    high: autoDownloadSettings;
+}
+
+table ConnectionStateWaitingForNetwork {
+}
+
+table ConnectionStateConnectingToProxy {
+}
+
+table ConnectionStateConnecting {
+}
+
+table ConnectionStateUpdating {
+}
+
+table ConnectionStateReady {
+}
+
+table TopChatCategoryUsers {
+}
+
+table TopChatCategoryBots {
+}
+
+table TopChatCategoryGroups {
+}
+
+table TopChatCategoryChannels {
+}
+
+table TopChatCategoryInlineBots {
+}
+
+table TopChatCategoryCalls {
+}
+
+table TopChatCategoryForwardChats {
+}
+
+table TMeUrlTypeUser {
+    user_id: int32;
+}
+
+table TMeUrlTypeSupergroup {
+    supergroup_id: int53;
+}
+
+table TMeUrlTypeChatInvite {
+    info: chatInviteLinkInfo;
+}
+
+table TMeUrlTypeStickerSet {
+    sticker_set_id: int64;
+}
+
+table TMeUrl {
+    url: string;
+    type: TMeUrlType;
+}
+
+table TMeUrls {
+    urls: [tMeUrl];
+}
+
+table SuggestedActionEnableArchiveAndMuteNewChats {
+}
+
+table SuggestedActionCheckPhoneNumber {
+}
+
+table Count {
+    count: int32;
+}
+
+table Text {
+    text: string;
+}
+
+table Seconds {
+    seconds: double;
+}
+
+table DeepLinkInfo {
+    text: formattedText;
+    need_update_application: bool;
+}
+
+table TextParseModeMarkdown {
+    version: int32;
+}
+
+table TextParseModeHTML {
+}
+
+table ProxyTypeSocks5 {
+    username: string;
+    password: string;
+}
+
+table ProxyTypeHttp {
+    username: string;
+    password: string;
+    http_only: bool;
+}
+
+table ProxyTypeMtproto {
+    secret: string;
+}
+
+table Proxy {
+    id: int32;
+    server: string;
+    port: int32;
+    last_used_date: int32;
+    is_enabled: bool;
+    type: ProxyType;
+}
+
+table Proxies {
+    proxies: [proxy];
+}
+
+table InputStickerStatic {
+    sticker: InputFile;
+    emojis: string;
+    mask_position: maskPosition;
+}
+
+table InputStickerAnimated {
+    sticker: InputFile;
+    emojis: string;
+}
+
+table DateRange {
+    start_date: int32;
+    end_date: int32;
+}
+
+table StatisticalValue {
+    value: double;
+    previous_value: double;
+    growth_rate_percentage: double;
+}
+
+table StatisticalGraphData {
+    json_data: string;
+    zoom_token: string;
+}
+
+table StatisticalGraphAsync {
+    token: string;
+}
+
+table StatisticalGraphError {
+    error_message: string;
+}
+
+table ChatStatisticsMessageInteractionInfo {
+    message_id: int53;
+    view_count: int32;
+    forward_count: int32;
+}
+
+table ChatStatisticsMessageSenderInfo {
+    user_id: int32;
+    sent_message_count: int32;
+    average_character_count: int32;
+}
+
+table ChatStatisticsAdministratorActionsInfo {
+    user_id: int32;
+    deleted_message_count: int32;
+    banned_user_count: int32;
+    restricted_user_count: int32;
+}
+
+table ChatStatisticsInviterInfo {
+    user_id: int32;
+    added_member_count: int32;
+}
+
+table ChatStatisticsSupergroup {
+    period: dateRange;
+    member_count: statisticalValue;
+    message_count: statisticalValue;
+    viewer_count: statisticalValue;
+    sender_count: statisticalValue;
+    member_count_graph: StatisticalGraph;
+    join_graph: StatisticalGraph;
+    join_by_source_graph: StatisticalGraph;
+    language_graph: StatisticalGraph;
+    message_content_graph: StatisticalGraph;
+    action_graph: StatisticalGraph;
+    day_graph: StatisticalGraph;
+    week_graph: StatisticalGraph;
+    top_senders: [chatStatisticsMessageSenderInfo];
+    top_administrators: [chatStatisticsAdministratorActionsInfo];
+    top_inviters: [chatStatisticsInviterInfo];
+}
+
+table ChatStatisticsChannel {
+    period: dateRange;
+    member_count: statisticalValue;
+    mean_view_count: statisticalValue;
+    mean_share_count: statisticalValue;
+    enabled_notifications_percentage: double;
+    member_count_graph: StatisticalGraph;
+    join_graph: StatisticalGraph;
+    mute_graph: StatisticalGraph;
+    view_count_by_hour_graph: StatisticalGraph;
+    view_count_by_source_graph: StatisticalGraph;
+    join_by_source_graph: StatisticalGraph;
+    language_graph: StatisticalGraph;
+    message_interaction_graph: StatisticalGraph;
+    instant_view_interaction_graph: StatisticalGraph;
+    recent_message_interactions: [chatStatisticsMessageInteractionInfo];
+}
+
+table MessageStatistics {
+    message_interaction_graph: StatisticalGraph;
+}
+
+table UpdateAuthorizationState {
+    authorization_state: AuthorizationState;
+}
+
+table UpdateNewMessage {
+    message: message;
+}
+
+table UpdateMessageSendAcknowledged {
+    chat_id: int53;
+    message_id: int53;
+}
+
+table UpdateMessageSendSucceeded {
+    message: message;
+    old_message_id: int53;
+}
+
+table UpdateMessageSendFailed {
+    message: message;
+    old_message_id: int53;
+    error_code: int32;
+    error_message: string;
+}
+
+table UpdateMessageContent {
+    chat_id: int53;
+    message_id: int53;
+    new_content: MessageContent;
+}
+
+table UpdateMessageEdited {
+    chat_id: int53;
+    message_id: int53;
+    edit_date: int32;
+    reply_markup: ReplyMarkup;
+}
+
+table UpdateMessageIsPinned {
+    chat_id: int53;
+    message_id: int53;
+    is_pinned: bool;
+}
+
+table UpdateMessageInteractionInfo {
+    chat_id: int53;
+    message_id: int53;
+    interaction_info: messageInteractionInfo;
+}
+
+table UpdateMessageContentOpened {
+    chat_id: int53;
+    message_id: int53;
+}
+
+table UpdateMessageMentionRead {
+    chat_id: int53;
+    message_id: int53;
+    unread_mention_count: int32;
+}
+
+table UpdateMessageLiveLocationViewed {
+    chat_id: int53;
+    message_id: int53;
+}
+
+table UpdateNewChat {
+    chat: chat;
+}
+
+table UpdateChatTitle {
+    chat_id: int53;
+    title: string;
+}
+
+table UpdateChatPhoto {
+    chat_id: int53;
+    photo: chatPhotoInfo;
+}
+
+table UpdateChatPermissions {
+    chat_id: int53;
+    permissions: chatPermissions;
+}
+
+table UpdateChatLastMessage {
+    chat_id: int53;
+    last_message: message;
+    positions: [chatPosition];
+}
+
+table UpdateChatPosition {
+    chat_id: int53;
+    position: chatPosition;
+}
+
+table UpdateChatIsMarkedAsUnread {
+    chat_id: int53;
+    is_marked_as_unread: bool;
+}
+
+table UpdateChatIsBlocked {
+    chat_id: int53;
+    is_blocked: bool;
+}
+
+table UpdateChatHasScheduledMessages {
+    chat_id: int53;
+    has_scheduled_messages: bool;
+}
+
+table UpdateChatDefaultDisableNotification {
+    chat_id: int53;
+    default_disable_notification: bool;
+}
+
+table UpdateChatReadInbox {
+    chat_id: int53;
+    last_read_inbox_message_id: int53;
+    unread_count: int32;
+}
+
+table UpdateChatReadOutbox {
+    chat_id: int53;
+    last_read_outbox_message_id: int53;
+}
+
+table UpdateChatUnreadMentionCount {
+    chat_id: int53;
+    unread_mention_count: int32;
+}
+
+table UpdateChatNotificationSettings {
+    chat_id: int53;
+    notification_settings: chatNotificationSettings;
+}
+
+table UpdateScopeNotificationSettings {
+    scope: NotificationSettingsScope;
+    notification_settings: scopeNotificationSettings;
+}
+
+table UpdateChatActionBar {
+    chat_id: int53;
+    action_bar: ChatActionBar;
+}
+
+table UpdateChatReplyMarkup {
+    chat_id: int53;
+    reply_markup_message_id: int53;
+}
+
+table UpdateChatDraftMessage {
+    chat_id: int53;
+    draft_message: draftMessage;
+    positions: [chatPosition];
+}
+
+table UpdateChatFilters {
+    chat_filters: [chatFilterInfo];
+}
+
+table UpdateChatOnlineMemberCount {
+    chat_id: int53;
+    online_member_count: int32;
+}
+
+table UpdateNotification {
+    notification_group_id: int32;
+    notification: notification;
+}
+
+table UpdateNotificationGroup {
+    notification_group_id: int32;
+    type: NotificationGroupType;
+    chat_id: int53;
+    notification_settings_chat_id: int53;
+    is_silent: bool;
+    total_count: int32;
+    added_notifications: [notification];
+    removed_notification_ids: [int32];
+}
+
+table UpdateActiveNotifications {
+    groups: [notificationGroup];
+}
+
+table UpdateHavePendingNotifications {
+    have_delayed_notifications: bool;
+    have_unreceived_notifications: bool;
+}
+
+table UpdateDeleteMessages {
+    chat_id: int53;
+    message_ids: [int53];
+    is_permanent: bool;
+    from_cache: bool;
+}
+
+table UpdateUserChatAction {
+    chat_id: int53;
+    message_thread_id: int53;
+    user_id: int32;
+    action: ChatAction;
+}
+
+table UpdateUserStatus {
+    user_id: int32;
+    status: UserStatus;
+}
+
+table UpdateUser {
+    user: user;
+}
+
+table UpdateBasicGroup {
+    basic_group: basicGroup;
+}
+
+table UpdateSupergroup {
+    supergroup: supergroup;
+}
+
+table UpdateSecretChat {
+    secret_chat: secretChat;
+}
+
+table UpdateUserFullInfo {
+    user_id: int32;
+    user_full_info: userFullInfo;
+}
+
+table UpdateBasicGroupFullInfo {
+    basic_group_id: int32;
+    basic_group_full_info: basicGroupFullInfo;
+}
+
+table UpdateSupergroupFullInfo {
+    supergroup_id: int32;
+    supergroup_full_info: supergroupFullInfo;
+}
+
+table UpdateServiceNotification {
+    type: string;
+    content: MessageContent;
+}
+
+table UpdateFile {
+    file: file;
+}
+
+table UpdateFileGenerationStart {
+    generation_id: int64;
+    original_path: string;
+    destination_path: string;
+    conversion: string;
+}
+
+table UpdateFileGenerationStop {
+    generation_id: int64;
+}
+
+table UpdateCall {
+    call: call;
+}
+
+table UpdateNewCallSignalingData {
+    call_id: int32;
+    data: [byte];
+}
+
+table UpdateUserPrivacySettingRules {
+    setting: UserPrivacySetting;
+    rules: userPrivacySettingRules;
+}
+
+table UpdateUnreadMessageCount {
+    chat_list: ChatList;
+    unread_count: int32;
+    unread_unmuted_count: int32;
+}
+
+table UpdateUnreadChatCount {
+    chat_list: ChatList;
+    total_count: int32;
+    unread_count: int32;
+    unread_unmuted_count: int32;
+    marked_as_unread_count: int32;
+    marked_as_unread_unmuted_count: int32;
+}
+
+table UpdateOption {
+    name: string;
+    value: OptionValue;
+}
+
+table UpdateStickerSet {
+    sticker_set: stickerSet;
+}
+
+table UpdateInstalledStickerSets {
+    is_masks: bool;
+    sticker_set_ids: [int64];
+}
+
+table UpdateTrendingStickerSets {
+    sticker_sets: stickerSets;
+}
+
+table UpdateRecentStickers {
+    is_attached: bool;
+    sticker_ids: [int32];
+}
+
+table UpdateFavoriteStickers {
+    sticker_ids: [int32];
+}
+
+table UpdateSavedAnimations {
+    animation_ids: [int32];
+}
+
+table UpdateSelectedBackground {
+    for_dark_theme: bool;
+    background: background;
+}
+
+table UpdateLanguagePackStrings {
+    localization_target: string;
+    language_pack_id: string;
+    strings: [languagePackString];
+}
+
+table UpdateConnectionState {
+    state: ConnectionState;
+}
+
+table UpdateTermsOfService {
+    terms_of_service_id: string;
+    terms_of_service: termsOfService;
+}
+
+table UpdateUsersNearby {
+    users_nearby: [chatNearby];
+}
+
+table UpdateDiceEmojis {
+    emojis: [string];
+}
+
+table UpdateAnimationSearchParameters {
+    provider: string;
+    emojis: [string];
+}
+
+table UpdateSuggestedActions {
+    added_actions: [SuggestedAction];
+    removed_actions: [SuggestedAction];
+}
+
+table UpdateNewInlineQuery {
+    id: int64;
+    sender_user_id: int32;
+    user_location: location;
+    query: string;
+    offset: string;
+}
+
+table UpdateNewChosenInlineResult {
+    sender_user_id: int32;
+    user_location: location;
+    query: string;
+    result_id: string;
+    inline_message_id: string;
+}
+
+table UpdateNewCallbackQuery {
+    id: int64;
+    sender_user_id: int32;
+    chat_id: int53;
+    message_id: int53;
+    chat_instance: int64;
+    payload: CallbackQueryPayload;
+}
+
+table UpdateNewInlineCallbackQuery {
+    id: int64;
+    sender_user_id: int32;
+    inline_message_id: string;
+    chat_instance: int64;
+    payload: CallbackQueryPayload;
+}
+
+table UpdateNewShippingQuery {
+    id: int64;
+    sender_user_id: int32;
+    invoice_payload: string;
+    shipping_address: address;
+}
+
+table UpdateNewPreCheckoutQuery {
+    id: int64;
+    sender_user_id: int32;
+    currency: string;
+    total_amount: int53;
+    invoice_payload: [byte];
+    shipping_option_id: string;
+    order_info: orderInfo;
+}
+
+table UpdateNewCustomEvent {
+    event: string;
+}
+
+table UpdateNewCustomQuery {
+    id: int64;
+    data: string;
+    timeout: int32;
+}
+
+table UpdatePoll {
+    poll: poll;
+}
+
+table UpdatePollAnswer {
+    poll_id: int64;
+    user_id: int32;
+    option_ids: [int32];
+}
+
+table Updates {
+    updates: [Update];
+}
+
+table LogStreamDefault {
+}
+
+table LogStreamFile {
+    path: string;
+    max_file_size: int53;
+    redirect_stderr: bool;
+}
+
+table LogStreamEmpty {
+}
+
+table LogVerbosityLevel {
+    verbosity_level: int32;
+}
+
+table LogTags {
+    tags: [string];
+}
+
+table TestInt {
+    value: int32;
+}
+
+table TestString {
+    value: string;
+}
+
+table TestBytes {
+    value: [byte];
+}
+
+table TestVectorInt {
+    value: [int32];
+}
+
+table TestVectorIntObject {
+    value: [testInt];
+}
+
+table TestVectorString {
+    value: [string];
+}
+
+table TestVectorStringObject {
+    value: [testString];
+}
+
+union Bool {
+    BoolFalse,
+    BoolTrue
+}
+
+union AuthenticationCodeType {
+    AuthenticationCodeTypeTelegramMessage,
+    AuthenticationCodeTypeSms,
+    AuthenticationCodeTypeCall,
+    AuthenticationCodeTypeFlashCall
+}
+
+union AuthorizationState {
+    AuthorizationStateWaitTdlibParameters,
+    AuthorizationStateWaitEncryptionKey,
+    AuthorizationStateWaitPhoneNumber,
+    AuthorizationStateWaitCode,
+    AuthorizationStateWaitOtherDeviceConfirmation,
+    AuthorizationStateWaitRegistration,
+    AuthorizationStateWaitPassword,
+    AuthorizationStateReady,
+    AuthorizationStateLoggingOut,
+    AuthorizationStateClosing,
+    AuthorizationStateClosed
+}
+
+union InputFile {
+    InputFileId,
+    InputFileRemote,
+    InputFileLocal,
+    InputFileGenerated
+}
+
+union ThumbnailFormat {
+    ThumbnailFormatJpeg,
+    ThumbnailFormatPng,
+    ThumbnailFormatWebp,
+    ThumbnailFormatGif,
+    ThumbnailFormatTgs,
+    ThumbnailFormatMpeg4
+}
+
+union MaskPoint {
+    MaskPointForehead,
+    MaskPointEyes,
+    MaskPointMouth,
+    MaskPointChin
+}
+
+union PollType {
+    PollTypeRegular,
+    PollTypeQuiz
+}
+
+union UserType {
+    UserTypeRegular,
+    UserTypeDeleted,
+    UserTypeBot,
+    UserTypeUnknown
+}
+
+union InputChatPhoto {
+    InputChatPhotoPrevious,
+    InputChatPhotoStatic,
+    InputChatPhotoAnimation
+}
+
+union ChatMemberStatus {
+    ChatMemberStatusCreator,
+    ChatMemberStatusAdministrator,
+    ChatMemberStatusMember,
+    ChatMemberStatusRestricted,
+    ChatMemberStatusLeft,
+    ChatMemberStatusBanned
+}
+
+union ChatMembersFilter {
+    ChatMembersFilterContacts,
+    ChatMembersFilterAdministrators,
+    ChatMembersFilterMembers,
+    ChatMembersFilterMention,
+    ChatMembersFilterRestricted,
+    ChatMembersFilterBanned,
+    ChatMembersFilterBots
+}
+
+union SupergroupMembersFilter {
+    SupergroupMembersFilterRecent,
+    SupergroupMembersFilterContacts,
+    SupergroupMembersFilterAdministrators,
+    SupergroupMembersFilterSearch,
+    SupergroupMembersFilterRestricted,
+    SupergroupMembersFilterBanned,
+    SupergroupMembersFilterMention,
+    SupergroupMembersFilterBots
+}
+
+union SecretChatState {
+    SecretChatStatePending,
+    SecretChatStateReady,
+    SecretChatStateClosed
+}
+
+union MessageSender {
+    MessageSenderUser,
+    MessageSenderChat
+}
+
+union MessageForwardOrigin {
+    MessageForwardOriginUser,
+    MessageForwardOriginChat,
+    MessageForwardOriginHiddenUser,
+    MessageForwardOriginChannel
+}
+
+union MessageSendingState {
+    MessageSendingStatePending,
+    MessageSendingStateFailed
+}
+
+union NotificationSettingsScope {
+    NotificationSettingsScopePrivateChats,
+    NotificationSettingsScopeGroupChats,
+    NotificationSettingsScopeChannelChats
+}
+
+union ChatType {
+    ChatTypePrivate,
+    ChatTypeBasicGroup,
+    ChatTypeSupergroup,
+    ChatTypeSecret
+}
+
+union ChatList {
+    ChatListMain,
+    ChatListArchive,
+    ChatListFilter
+}
+
+union ChatSource {
+    ChatSourceMtprotoProxy,
+    ChatSourcePublicServiceAnnouncement
+}
+
+union PublicChatType {
+    PublicChatTypeHasUsername,
+    PublicChatTypeIsLocationBased
+}
+
+union ChatActionBar {
+    ChatActionBarReportSpam,
+    ChatActionBarReportUnrelatedLocation,
+    ChatActionBarReportAddBlock,
+    ChatActionBarAddContact,
+    ChatActionBarSharePhoneNumber
+}
+
+union KeyboardButtonType {
+    KeyboardButtonTypeText,
+    KeyboardButtonTypeRequestPhoneNumber,
+    KeyboardButtonTypeRequestLocation,
+    KeyboardButtonTypeRequestPoll
+}
+
+union InlineKeyboardButtonType {
+    InlineKeyboardButtonTypeUrl,
+    InlineKeyboardButtonTypeLoginUrl,
+    InlineKeyboardButtonTypeCallback,
+    InlineKeyboardButtonTypeCallbackWithPassword,
+    InlineKeyboardButtonTypeCallbackGame,
+    InlineKeyboardButtonTypeSwitchInline,
+    InlineKeyboardButtonTypeBuy
+}
+
+union ReplyMarkup {
+    ReplyMarkupRemoveKeyboard,
+    ReplyMarkupForceReply,
+    ReplyMarkupShowKeyboard,
+    ReplyMarkupInlineKeyboard
+}
+
+union LoginUrlInfo {
+    LoginUrlInfoOpen,
+    LoginUrlInfoRequestConfirmation
+}
+
+union RichText {
+    RichTextPlain,
+    RichTextBold,
+    RichTextItalic,
+    RichTextUnderline,
+    RichTextStrikethrough,
+    RichTextFixed,
+    RichTextUrl,
+    RichTextEmailAddress,
+    RichTextSubscript,
+    RichTextSuperscript,
+    RichTextMarked,
+    RichTextPhoneNumber,
+    RichTextIcon,
+    RichTextReference,
+    RichTextAnchor,
+    RichTextAnchorLink,
+    RichTexts
+}
+
+union PageBlockHorizontalAlignment {
+    PageBlockHorizontalAlignmentLeft,
+    PageBlockHorizontalAlignmentCenter,
+    PageBlockHorizontalAlignmentRight
+}
+
+union PageBlockVerticalAlignment {
+    PageBlockVerticalAlignmentTop,
+    PageBlockVerticalAlignmentMiddle,
+    PageBlockVerticalAlignmentBottom
+}
+
+union PageBlock {
+    PageBlockTitle,
+    PageBlockSubtitle,
+    PageBlockAuthorDate,
+    PageBlockHeader,
+    PageBlockSubheader,
+    PageBlockKicker,
+    PageBlockParagraph,
+    PageBlockPreformatted,
+    PageBlockFooter,
+    PageBlockDivider,
+    PageBlockAnchor,
+    PageBlockList,
+    PageBlockBlockQuote,
+    PageBlockPullQuote,
+    PageBlockAnimation,
+    PageBlockAudio,
+    PageBlockPhoto,
+    PageBlockVideo,
+    PageBlockVoiceNote,
+    PageBlockCover,
+    PageBlockEmbedded,
+    PageBlockEmbeddedPost,
+    PageBlockCollage,
+    PageBlockSlideshow,
+    PageBlockChatLink,
+    PageBlockTable,
+    PageBlockDetails,
+    PageBlockRelatedArticles,
+    PageBlockMap
+}
+
+union InputCredentials {
+    InputCredentialsSaved,
+    InputCredentialsNew,
+    InputCredentialsAndroidPay,
+    InputCredentialsApplePay
+}
+
+union PassportElementType {
+    PassportElementTypePersonalDetails,
+    PassportElementTypePassport,
+    PassportElementTypeDriverLicense,
+    PassportElementTypeIdentityCard,
+    PassportElementTypeInternalPassport,
+    PassportElementTypeAddress,
+    PassportElementTypeUtilityBill,
+    PassportElementTypeBankStatement,
+    PassportElementTypeRentalAgreement,
+    PassportElementTypePassportRegistration,
+    PassportElementTypeTemporaryRegistration,
+    PassportElementTypePhoneNumber,
+    PassportElementTypeEmailAddress
+}
+
+union PassportElement {
+    PassportElementPersonalDetails,
+    PassportElementPassport,
+    PassportElementDriverLicense,
+    PassportElementIdentityCard,
+    PassportElementInternalPassport,
+    PassportElementAddress,
+    PassportElementUtilityBill,
+    PassportElementBankStatement,
+    PassportElementRentalAgreement,
+    PassportElementPassportRegistration,
+    PassportElementTemporaryRegistration,
+    PassportElementPhoneNumber,
+    PassportElementEmailAddress
+}
+
+union InputPassportElement {
+    InputPassportElementPersonalDetails,
+    InputPassportElementPassport,
+    InputPassportElementDriverLicense,
+    InputPassportElementIdentityCard,
+    InputPassportElementInternalPassport,
+    InputPassportElementAddress,
+    InputPassportElementUtilityBill,
+    InputPassportElementBankStatement,
+    InputPassportElementRentalAgreement,
+    InputPassportElementPassportRegistration,
+    InputPassportElementTemporaryRegistration,
+    InputPassportElementPhoneNumber,
+    InputPassportElementEmailAddress
+}
+
+union PassportElementErrorSource {
+    PassportElementErrorSourceUnspecified,
+    PassportElementErrorSourceDataField,
+    PassportElementErrorSourceFrontSide,
+    PassportElementErrorSourceReverseSide,
+    PassportElementErrorSourceSelfie,
+    PassportElementErrorSourceTranslationFile,
+    PassportElementErrorSourceTranslationFiles,
+    PassportElementErrorSourceFile,
+    PassportElementErrorSourceFiles
+}
+
+union InputPassportElementErrorSource {
+    InputPassportElementErrorSourceUnspecified,
+    InputPassportElementErrorSourceDataField,
+    InputPassportElementErrorSourceFrontSide,
+    InputPassportElementErrorSourceReverseSide,
+    InputPassportElementErrorSourceSelfie,
+    InputPassportElementErrorSourceTranslationFile,
+    InputPassportElementErrorSourceTranslationFiles,
+    InputPassportElementErrorSourceFile,
+    InputPassportElementErrorSourceFiles
+}
+
+union MessageContent {
+    MessageText,
+    MessageAnimation,
+    MessageAudio,
+    MessageDocument,
+    MessagePhoto,
+    MessageExpiredPhoto,
+    MessageSticker,
+    MessageVideo,
+    MessageExpiredVideo,
+    MessageVideoNote,
+    MessageVoiceNote,
+    MessageLocation,
+    MessageVenue,
+    MessageContact,
+    MessageDice,
+    MessageGame,
+    MessagePoll,
+    MessageInvoice,
+    MessageCall,
+    MessageBasicGroupChatCreate,
+    MessageSupergroupChatCreate,
+    MessageChatChangeTitle,
+    MessageChatChangePhoto,
+    MessageChatDeletePhoto,
+    MessageChatAddMembers,
+    MessageChatJoinByLink,
+    MessageChatDeleteMember,
+    MessageChatUpgradeTo,
+    MessageChatUpgradeFrom,
+    MessagePinMessage,
+    MessageScreenshotTaken,
+    MessageChatSetTtl,
+    MessageCustomServiceAction,
+    MessageGameScore,
+    MessagePaymentSuccessful,
+    MessagePaymentSuccessfulBot,
+    MessageContactRegistered,
+    MessageWebsiteConnected,
+    MessagePassportDataSent,
+    MessagePassportDataReceived,
+    MessageProximityAlertTriggered,
+    MessageUnsupported
+}
+
+union TextEntityType {
+    TextEntityTypeMention,
+    TextEntityTypeHashtag,
+    TextEntityTypeCashtag,
+    TextEntityTypeBotCommand,
+    TextEntityTypeUrl,
+    TextEntityTypeEmailAddress,
+    TextEntityTypePhoneNumber,
+    TextEntityTypeBankCardNumber,
+    TextEntityTypeBold,
+    TextEntityTypeItalic,
+    TextEntityTypeUnderline,
+    TextEntityTypeStrikethrough,
+    TextEntityTypeCode,
+    TextEntityTypePre,
+    TextEntityTypePreCode,
+    TextEntityTypeTextUrl,
+    TextEntityTypeMentionName
+}
+
+union MessageSchedulingState {
+    MessageSchedulingStateSendAtDate,
+    MessageSchedulingStateSendWhenOnline
+}
+
+union InputMessageContent {
+    InputMessageText,
+    InputMessageAnimation,
+    InputMessageAudio,
+    InputMessageDocument,
+    InputMessagePhoto,
+    InputMessageSticker,
+    InputMessageVideo,
+    InputMessageVideoNote,
+    InputMessageVoiceNote,
+    InputMessageLocation,
+    InputMessageVenue,
+    InputMessageContact,
+    InputMessageDice,
+    InputMessageGame,
+    InputMessageInvoice,
+    InputMessagePoll,
+    InputMessageForwarded
+}
+
+union SearchMessagesFilter {
+    SearchMessagesFilterEmpty,
+    SearchMessagesFilterAnimation,
+    SearchMessagesFilterAudio,
+    SearchMessagesFilterDocument,
+    SearchMessagesFilterPhoto,
+    SearchMessagesFilterVideo,
+    SearchMessagesFilterVoiceNote,
+    SearchMessagesFilterPhotoAndVideo,
+    SearchMessagesFilterUrl,
+    SearchMessagesFilterChatPhoto,
+    SearchMessagesFilterCall,
+    SearchMessagesFilterMissedCall,
+    SearchMessagesFilterVideoNote,
+    SearchMessagesFilterVoiceAndVideoNote,
+    SearchMessagesFilterMention,
+    SearchMessagesFilterUnreadMention,
+    SearchMessagesFilterFailedToSend,
+    SearchMessagesFilterPinned
+}
+
+union ChatAction {
+    ChatActionTyping,
+    ChatActionRecordingVideo,
+    ChatActionUploadingVideo,
+    ChatActionRecordingVoiceNote,
+    ChatActionUploadingVoiceNote,
+    ChatActionUploadingPhoto,
+    ChatActionUploadingDocument,
+    ChatActionChoosingLocation,
+    ChatActionChoosingContact,
+    ChatActionStartPlayingGame,
+    ChatActionRecordingVideoNote,
+    ChatActionUploadingVideoNote,
+    ChatActionCancel
+}
+
+union UserStatus {
+    UserStatusEmpty,
+    UserStatusOnline,
+    UserStatusOffline,
+    UserStatusRecently,
+    UserStatusLastWeek,
+    UserStatusLastMonth
+}
+
+union CallDiscardReason {
+    CallDiscardReasonEmpty,
+    CallDiscardReasonMissed,
+    CallDiscardReasonDeclined,
+    CallDiscardReasonDisconnected,
+    CallDiscardReasonHungUp
+}
+
+union CallServerType {
+    CallServerTypeTelegramReflector,
+    CallServerTypeWebrtc
+}
+
+union CallState {
+    CallStatePending,
+    CallStateExchangingKeys,
+    CallStateReady,
+    CallStateHangingUp,
+    CallStateDiscarded,
+    CallStateError
+}
+
+union CallProblem {
+    CallProblemEcho,
+    CallProblemNoise,
+    CallProblemInterruptions,
+    CallProblemDistortedSpeech,
+    CallProblemSilentLocal,
+    CallProblemSilentRemote,
+    CallProblemDropped,
+    CallProblemDistortedVideo,
+    CallProblemPixelatedVideo
+}
+
+union DiceStickers {
+    DiceStickersRegular,
+    DiceStickersSlotMachine
+}
+
+union InputInlineQueryResult {
+    InputInlineQueryResultAnimation,
+    InputInlineQueryResultArticle,
+    InputInlineQueryResultAudio,
+    InputInlineQueryResultContact,
+    InputInlineQueryResultDocument,
+    InputInlineQueryResultGame,
+    InputInlineQueryResultLocation,
+    InputInlineQueryResultPhoto,
+    InputInlineQueryResultSticker,
+    InputInlineQueryResultVenue,
+    InputInlineQueryResultVideo,
+    InputInlineQueryResultVoiceNote
+}
+
+union InlineQueryResult {
+    InlineQueryResultArticle,
+    InlineQueryResultContact,
+    InlineQueryResultLocation,
+    InlineQueryResultVenue,
+    InlineQueryResultGame,
+    InlineQueryResultAnimation,
+    InlineQueryResultAudio,
+    InlineQueryResultDocument,
+    InlineQueryResultPhoto,
+    InlineQueryResultSticker,
+    InlineQueryResultVideo,
+    InlineQueryResultVoiceNote
+}
+
+union CallbackQueryPayload {
+    CallbackQueryPayloadData,
+    CallbackQueryPayloadDataWithPassword,
+    CallbackQueryPayloadGame
+}
+
+union ChatEventAction {
+    ChatEventMessageEdited,
+    ChatEventMessageDeleted,
+    ChatEventPollStopped,
+    ChatEventMessagePinned,
+    ChatEventMessageUnpinned,
+    ChatEventMemberJoined,
+    ChatEventMemberLeft,
+    ChatEventMemberInvited,
+    ChatEventMemberPromoted,
+    ChatEventMemberRestricted,
+    ChatEventTitleChanged,
+    ChatEventPermissionsChanged,
+    ChatEventDescriptionChanged,
+    ChatEventUsernameChanged,
+    ChatEventPhotoChanged,
+    ChatEventInvitesToggled,
+    ChatEventLinkedChatChanged,
+    ChatEventSlowModeDelayChanged,
+    ChatEventSignMessagesToggled,
+    ChatEventStickerSetChanged,
+    ChatEventLocationChanged,
+    ChatEventIsAllHistoryAvailableToggled
+}
+
+union LanguagePackStringValue {
+    LanguagePackStringValueOrdinary,
+    LanguagePackStringValuePluralized,
+    LanguagePackStringValueDeleted
+}
+
+union DeviceToken {
+    DeviceTokenFirebaseCloudMessaging,
+    DeviceTokenApplePush,
+    DeviceTokenApplePushVoIP,
+    DeviceTokenWindowsPush,
+    DeviceTokenMicrosoftPush,
+    DeviceTokenMicrosoftPushVoIP,
+    DeviceTokenWebPush,
+    DeviceTokenSimplePush,
+    DeviceTokenUbuntuPush,
+    DeviceTokenBlackBerryPush,
+    DeviceTokenTizenPush
+}
+
+union BackgroundFill {
+    BackgroundFillSolid,
+    BackgroundFillGradient
+}
+
+union BackgroundType {
+    BackgroundTypeWallpaper,
+    BackgroundTypePattern,
+    BackgroundTypeFill
+}
+
+union InputBackground {
+    InputBackgroundLocal,
+    InputBackgroundRemote
+}
+
+union CanTransferOwnershipResult {
+    CanTransferOwnershipResultOk,
+    CanTransferOwnershipResultPasswordNeeded,
+    CanTransferOwnershipResultPasswordTooFresh,
+    CanTransferOwnershipResultSessionTooFresh
+}
+
+union CheckChatUsernameResult {
+    CheckChatUsernameResultOk,
+    CheckChatUsernameResultUsernameInvalid,
+    CheckChatUsernameResultUsernameOccupied,
+    CheckChatUsernameResultPublicChatsTooMuch,
+    CheckChatUsernameResultPublicGroupsUnavailable
+}
+
+union PushMessageContent {
+    PushMessageContentHidden,
+    PushMessageContentAnimation,
+    PushMessageContentAudio,
+    PushMessageContentContact,
+    PushMessageContentContactRegistered,
+    PushMessageContentDocument,
+    PushMessageContentGame,
+    PushMessageContentGameScore,
+    PushMessageContentInvoice,
+    PushMessageContentLocation,
+    PushMessageContentPhoto,
+    PushMessageContentPoll,
+    PushMessageContentScreenshotTaken,
+    PushMessageContentSticker,
+    PushMessageContentText,
+    PushMessageContentVideo,
+    PushMessageContentVideoNote,
+    PushMessageContentVoiceNote,
+    PushMessageContentBasicGroupChatCreate,
+    PushMessageContentChatAddMembers,
+    PushMessageContentChatChangePhoto,
+    PushMessageContentChatChangeTitle,
+    PushMessageContentChatDeleteMember,
+    PushMessageContentChatJoinByLink,
+    PushMessageContentMessageForwards,
+    PushMessageContentMediaAlbum
+}
+
+union NotificationType {
+    NotificationTypeNewMessage,
+    NotificationTypeNewSecretChat,
+    NotificationTypeNewCall,
+    NotificationTypeNewPushMessage
+}
+
+union NotificationGroupType {
+    NotificationGroupTypeMessages,
+    NotificationGroupTypeMentions,
+    NotificationGroupTypeSecretChat,
+    NotificationGroupTypeCalls
+}
+
+union OptionValue {
+    OptionValueBoolean,
+    OptionValueEmpty,
+    OptionValueInteger,
+    OptionValueString
+}
+
+union JsonValue {
+    JsonValueNull,
+    JsonValueBoolean,
+    JsonValueNumber,
+    JsonValueString,
+    JsonValueArray,
+    JsonValueObject
+}
+
+union UserPrivacySettingRule {
+    UserPrivacySettingRuleAllowAll,
+    UserPrivacySettingRuleAllowContacts,
+    UserPrivacySettingRuleAllowUsers,
+    UserPrivacySettingRuleAllowChatMembers,
+    UserPrivacySettingRuleRestrictAll,
+    UserPrivacySettingRuleRestrictContacts,
+    UserPrivacySettingRuleRestrictUsers,
+    UserPrivacySettingRuleRestrictChatMembers
+}
+
+union UserPrivacySetting {
+    UserPrivacySettingShowStatus,
+    UserPrivacySettingShowProfilePhoto,
+    UserPrivacySettingShowLinkInForwardedMessages,
+    UserPrivacySettingShowPhoneNumber,
+    UserPrivacySettingAllowChatInvites,
+    UserPrivacySettingAllowCalls,
+    UserPrivacySettingAllowPeerToPeerCalls,
+    UserPrivacySettingAllowFindingByPhoneNumber
+}
+
+union ChatReportReason {
+    ChatReportReasonSpam,
+    ChatReportReasonViolence,
+    ChatReportReasonPornography,
+    ChatReportReasonChildAbuse,
+    ChatReportReasonCopyright,
+    ChatReportReasonUnrelatedLocation,
+    ChatReportReasonCustom
+}
+
+union FileType {
+    FileTypeNone,
+    FileTypeAnimation,
+    FileTypeAudio,
+    FileTypeDocument,
+    FileTypePhoto,
+    FileTypeProfilePhoto,
+    FileTypeSecret,
+    FileTypeSecretThumbnail,
+    FileTypeSecure,
+    FileTypeSticker,
+    FileTypeThumbnail,
+    FileTypeUnknown,
+    FileTypeVideo,
+    FileTypeVideoNote,
+    FileTypeVoiceNote,
+    FileTypeWallpaper
+}
+
+union NetworkType {
+    NetworkTypeNone,
+    NetworkTypeMobile,
+    NetworkTypeMobileRoaming,
+    NetworkTypeWiFi,
+    NetworkTypeOther
+}
+
+union NetworkStatisticsEntry {
+    NetworkStatisticsEntryFile,
+    NetworkStatisticsEntryCall
+}
+
+union ConnectionState {
+    ConnectionStateWaitingForNetwork,
+    ConnectionStateConnectingToProxy,
+    ConnectionStateConnecting,
+    ConnectionStateUpdating,
+    ConnectionStateReady
+}
+
+union TopChatCategory {
+    TopChatCategoryUsers,
+    TopChatCategoryBots,
+    TopChatCategoryGroups,
+    TopChatCategoryChannels,
+    TopChatCategoryInlineBots,
+    TopChatCategoryCalls,
+    TopChatCategoryForwardChats
+}
+
+union TMeUrlType {
+    TMeUrlTypeUser,
+    TMeUrlTypeSupergroup,
+    TMeUrlTypeChatInvite,
+    TMeUrlTypeStickerSet
+}
+
+union SuggestedAction {
+    SuggestedActionEnableArchiveAndMuteNewChats,
+    SuggestedActionCheckPhoneNumber
+}
+
+union TextParseMode {
+    TextParseModeMarkdown,
+    TextParseModeHTML
+}
+
+union ProxyType {
+    ProxyTypeSocks5,
+    ProxyTypeHttp,
+    ProxyTypeMtproto
+}
+
+union InputSticker {
+    InputStickerStatic,
+    InputStickerAnimated
+}
+
+union StatisticalGraph {
+    StatisticalGraphData,
+    StatisticalGraphAsync,
+    StatisticalGraphError
+}
+
+union ChatStatistics {
+    ChatStatisticsSupergroup,
+    ChatStatisticsChannel
+}
+
+union Update {
+    UpdateAuthorizationState,
+    UpdateNewMessage,
+    UpdateMessageSendAcknowledged,
+    UpdateMessageSendSucceeded,
+    UpdateMessageSendFailed,
+    UpdateMessageContent,
+    UpdateMessageEdited,
+    UpdateMessageIsPinned,
+    UpdateMessageInteractionInfo,
+    UpdateMessageContentOpened,
+    UpdateMessageMentionRead,
+    UpdateMessageLiveLocationViewed,
+    UpdateNewChat,
+    UpdateChatTitle,
+    UpdateChatPhoto,
+    UpdateChatPermissions,
+    UpdateChatLastMessage,
+    UpdateChatPosition,
+    UpdateChatIsMarkedAsUnread,
+    UpdateChatIsBlocked,
+    UpdateChatHasScheduledMessages,
+    UpdateChatDefaultDisableNotification,
+    UpdateChatReadInbox,
+    UpdateChatReadOutbox,
+    UpdateChatUnreadMentionCount,
+    UpdateChatNotificationSettings,
+    UpdateScopeNotificationSettings,
+    UpdateChatActionBar,
+    UpdateChatReplyMarkup,
+    UpdateChatDraftMessage,
+    UpdateChatFilters,
+    UpdateChatOnlineMemberCount,
+    UpdateNotification,
+    UpdateNotificationGroup,
+    UpdateActiveNotifications,
+    UpdateHavePendingNotifications,
+    UpdateDeleteMessages,
+    UpdateUserChatAction,
+    UpdateUserStatus,
+    UpdateUser,
+    UpdateBasicGroup,
+    UpdateSupergroup,
+    UpdateSecretChat,
+    UpdateUserFullInfo,
+    UpdateBasicGroupFullInfo,
+    UpdateSupergroupFullInfo,
+    UpdateServiceNotification,
+    UpdateFile,
+    UpdateFileGenerationStart,
+    UpdateFileGenerationStop,
+    UpdateCall,
+    UpdateNewCallSignalingData,
+    UpdateUserPrivacySettingRules,
+    UpdateUnreadMessageCount,
+    UpdateUnreadChatCount,
+    UpdateOption,
+    UpdateStickerSet,
+    UpdateInstalledStickerSets,
+    UpdateTrendingStickerSets,
+    UpdateRecentStickers,
+    UpdateFavoriteStickers,
+    UpdateSavedAnimations,
+    UpdateSelectedBackground,
+    UpdateLanguagePackStrings,
+    UpdateConnectionState,
+    UpdateTermsOfService,
+    UpdateUsersNearby,
+    UpdateDiceEmojis,
+    UpdateAnimationSearchParameters,
+    UpdateSuggestedActions,
+    UpdateNewInlineQuery,
+    UpdateNewChosenInlineResult,
+    UpdateNewCallbackQuery,
+    UpdateNewInlineCallbackQuery,
+    UpdateNewShippingQuery,
+    UpdateNewPreCheckoutQuery,
+    UpdateNewCustomEvent,
+    UpdateNewCustomQuery,
+    UpdatePoll,
+    UpdatePollAnswer
+}
+
+union LogStream {
+    LogStreamDefault,
+    LogStreamFile,
+    LogStreamEmpty
+}

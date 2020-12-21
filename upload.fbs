@@ -1,0 +1,45 @@
+
+
+table File {
+    type: storage.FileType;
+    mtime: int;
+    bytes: [byte];
+}
+
+table FileCdnRedirect {
+    dc_id: int;
+    file_token: [byte];
+    encryption_key: [byte];
+    encryption_iv: [byte];
+    file_hashes: [FileHash];
+}
+
+table WebFile {
+    size: int;
+    mime_type: string;
+    file_type: storage.FileType;
+    mtime: int;
+    bytes: [byte];
+}
+
+table CdnFileReuploadNeeded {
+    request_token: [byte];
+}
+
+table CdnFile {
+    bytes: [byte];
+}
+
+union File {
+    upload.File,
+    upload.FileCdnRedirect
+}
+
+union WebFile {
+    upload.WebFile
+}
+
+union CdnFile {
+    upload.CdnFileReuploadNeeded,
+    upload.CdnFile
+}

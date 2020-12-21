@@ -1,0 +1,224 @@
+
+
+table ConfigSimple {
+    date: int;
+    expires: int;
+    rules: [AccessPointRule];
+}
+
+enum AppUpdateFlags : int (bit_flags) {
+    can_not_skip = 1 << 0,
+    document = 1 << 1,
+    url = 1 << 2,
+}
+
+table AppUpdate {
+    flags: AppUpdateFlags;
+    can_not_skip: bool;                                     // flag.0 
+    document: Document;                                     // flag.1 
+    url: string;                                            // flag.2 
+    id: int;
+    version: string;
+    text: string;
+    entities: [MessageEntity];
+}
+
+table NoAppUpdate {
+}
+
+table InviteText {
+    message: string;
+}
+
+table Support {
+    phone_number: string;
+    user: User;
+}
+
+enum TermsOfServiceFlags : int (bit_flags) {
+    popup = 1 << 0,
+    min_age_confirm = 1 << 1,
+}
+
+table TermsOfService {
+    flags: TermsOfServiceFlags;
+    popup: bool;                                            // flag.0 
+    min_age_confirm: int;                                   // flag.1 
+    id: DataJSON;
+    text: string;
+    entities: [MessageEntity];
+}
+
+table RecentMeUrls {
+    urls: [RecentMeUrl];
+    chats: [Chat];
+    users: [User];
+}
+
+table TermsOfServiceUpdateEmpty {
+    expires: int;
+}
+
+table TermsOfServiceUpdate {
+    expires: int;
+    terms_of_service: help.TermsOfService;
+}
+
+table DeepLinkInfoEmpty {
+}
+
+enum DeepLinkInfoFlags : int (bit_flags) {
+    update_app = 1 << 0,
+    entities = 1 << 1,
+}
+
+table DeepLinkInfo {
+    flags: DeepLinkInfoFlags;
+    update_app: bool;                                       // flag.0 
+    entities: [MessageEntity];                              // flag.1 
+    message: string;
+}
+
+table PassportConfigNotModified {
+}
+
+table PassportConfig {
+    hash: int;
+    countries_langs: DataJSON;
+}
+
+table SupportName {
+    name: string;
+}
+
+table UserInfoEmpty {
+}
+
+table UserInfo {
+    message: string;
+    entities: [MessageEntity];
+    author: string;
+    date: int;
+}
+
+table PromoDataEmpty {
+    expires: int;
+}
+
+enum PromoDataFlags : int (bit_flags) {
+    proxy = 1 << 0,
+    psa_type = 1 << 1,
+    psa_message = 1 << 2,
+}
+
+table PromoData {
+    flags: PromoDataFlags;
+    proxy: bool;                                            // flag.0 
+    psa_type: string;                                       // flag.1 
+    psa_message: string;                                    // flag.2 
+    expires: int;
+    peer: Peer;
+    chats: [Chat];
+    users: [User];
+}
+
+enum CountryCodeFlags : int (bit_flags) {
+    prefixes = 1 << 0,
+    patterns = 1 << 1,
+}
+
+table CountryCode {
+    flags: CountryCodeFlags;
+    prefixes: [string];                                     // flag.0 
+    patterns: [string];                                     // flag.1 
+    country_code: string;
+}
+
+enum CountryFlags : int (bit_flags) {
+    hidden = 1 << 0,
+    name = 1 << 1,
+}
+
+table Country {
+    flags: CountryFlags;
+    hidden: bool;                                           // flag.0 
+    name: string;                                           // flag.1 
+    iso2: string;
+    default_name: string;
+    country_codes: [help.CountryCode];
+}
+
+table CountriesListNotModified {
+}
+
+table CountriesList {
+    countries: [help.Country];
+    hash: int;
+}
+
+union ConfigSimple {
+    help.ConfigSimple
+}
+
+union AppUpdate {
+    help.AppUpdate,
+    help.NoAppUpdate
+}
+
+union InviteText {
+    help.InviteText
+}
+
+union Support {
+    help.Support
+}
+
+union TermsOfService {
+    help.TermsOfService
+}
+
+union RecentMeUrls {
+    help.RecentMeUrls
+}
+
+union TermsOfServiceUpdate {
+    help.TermsOfServiceUpdateEmpty,
+    help.TermsOfServiceUpdate
+}
+
+union DeepLinkInfo {
+    help.DeepLinkInfoEmpty,
+    help.DeepLinkInfo
+}
+
+union PassportConfig {
+    help.PassportConfigNotModified,
+    help.PassportConfig
+}
+
+union SupportName {
+    help.SupportName
+}
+
+union UserInfo {
+    help.UserInfoEmpty,
+    help.UserInfo
+}
+
+union PromoData {
+    help.PromoDataEmpty,
+    help.PromoData
+}
+
+union CountryCode {
+    help.CountryCode
+}
+
+union Country {
+    help.Country
+}
+
+union CountriesList {
+    help.CountriesListNotModified,
+    help.CountriesList
+}

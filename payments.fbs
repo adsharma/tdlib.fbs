@@ -1,0 +1,104 @@
+
+
+enum PaymentFormFlags : int (bit_flags) {
+    saved_info = 1 << 0,
+    saved_credentials = 1 << 1,
+    can_save_credentials = 1 << 2,
+    password_missing = 1 << 3,
+    native_provider = 1 << 4,
+    native_params = 1 << 4,
+}
+
+table PaymentForm {
+    flags: PaymentFormFlags;
+    saved_info: PaymentRequestedInfo;                       // flag.0 
+    saved_credentials: PaymentSavedCredentials;             // flag.1 
+    can_save_credentials: bool;                             // flag.2 
+    password_missing: bool;                                 // flag.3 
+    native_provider: string;                                // flag.4 
+    native_params: DataJSON;                                // flag.4 
+    bot_id: int;
+    invoice: Invoice;
+    provider_id: int;
+    url: string;
+    users: [User];
+}
+
+enum ValidatedRequestedInfoFlags : int (bit_flags) {
+    id = 1 << 0,
+    shipping_options = 1 << 1,
+}
+
+table ValidatedRequestedInfo {
+    flags: ValidatedRequestedInfoFlags;
+    id: string;                                             // flag.0 
+    shipping_options: [ShippingOption];                     // flag.1 
+}
+
+table PaymentResult {
+    updates: Updates;
+}
+
+table PaymentVerificationNeeded {
+    url: string;
+}
+
+enum PaymentReceiptFlags : int (bit_flags) {
+    info = 1 << 0,
+    shipping = 1 << 1,
+}
+
+table PaymentReceipt {
+    flags: PaymentReceiptFlags;
+    info: PaymentRequestedInfo;                             // flag.0 
+    shipping: ShippingOption;                               // flag.1 
+    date: int;
+    bot_id: int;
+    invoice: Invoice;
+    provider_id: int;
+    currency: string;
+    total_amount: long;
+    credentials_title: string;
+    users: [User];
+}
+
+enum SavedInfoFlags : int (bit_flags) {
+    saved_info = 1 << 0,
+    has_saved_credentials = 1 << 1,
+}
+
+table SavedInfo {
+    flags: SavedInfoFlags;
+    saved_info: PaymentRequestedInfo;                       // flag.0 
+    has_saved_credentials: bool;                            // flag.1 
+}
+
+table BankCardData {
+    title: string;
+    open_urls: [BankCardOpenUrl];
+}
+
+union PaymentForm {
+    payments.PaymentForm
+}
+
+union ValidatedRequestedInfo {
+    payments.ValidatedRequestedInfo
+}
+
+union PaymentResult {
+    payments.PaymentResult,
+    payments.PaymentVerificationNeeded
+}
+
+union PaymentReceipt {
+    payments.PaymentReceipt
+}
+
+union SavedInfo {
+    payments.SavedInfo
+}
+
+union BankCardData {
+    payments.BankCardData
+}

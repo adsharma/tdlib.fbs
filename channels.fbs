@@ -1,0 +1,34 @@
+
+
+table ChannelParticipants {
+    count: int;
+    participants: [ChannelParticipant];
+    users: [User];
+}
+
+table ChannelParticipantsNotModified {
+}
+
+table ChannelParticipant {
+    participant: ChannelParticipant;
+    users: [User];
+}
+
+table AdminLogResults {
+    events: [ChannelAdminLogEvent];
+    chats: [Chat];
+    users: [User];
+}
+
+union ChannelParticipants {
+    channels.ChannelParticipants,
+    channels.ChannelParticipantsNotModified
+}
+
+union ChannelParticipant {
+    channels.ChannelParticipant
+}
+
+union AdminLogResults {
+    channels.AdminLogResults
+}
